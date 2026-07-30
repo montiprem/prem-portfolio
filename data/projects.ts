@@ -1,30 +1,28 @@
-export interface Project {
-  title: string;
-  description: string;
-  tags: string[];
-  company: string;
-  demoUrl?: string;
-  accent: "blue" | "cyan" | "indigo";
-}
+import { Project } from "@/types";
 
 export const projects: Project[] = [
   {
+    id: "employee-attrition",
     title: "Employee Attrition Dashboard",
     description:
       "Tracks and analyzes workforce attrition trends across departments, supporting data-driven retention and management decisions.",
     tags: ["Power BI", "DAX", "HR Analytics"],
     company: "Utkarsh India Limited",
     accent: "blue",
+    featured: true,
   },
   {
+    id: "weekly-mis-mom",
     title: "Weekly MIS & MOM Dashboard",
     description:
       "Single-page dashboard consolidating weekly reports submitted by all department HODs into one consistent view.",
     tags: ["Power BI", "Power Query"],
     company: "Utkarsh India Limited",
     accent: "cyan",
+    featured: true,
   },
   {
+    id: "auction-sales",
     title: "Auction Sales Dashboard",
     description:
       "Week-wise dashboard analyzing buyer-wise purchase volumes and tea variety-wise margins to guide pricing decisions for upcoming auctions.",
@@ -33,6 +31,7 @@ export const projects: Project[] = [
     accent: "indigo",
   },
   {
+    id: "import-export-analysis",
     title: "Import/Export Analysis Dashboard",
     description:
       "Global market insights dashboard built on data sourced and scraped from Volza for import/export trend analysis.",
@@ -41,6 +40,7 @@ export const projects: Project[] = [
     accent: "blue",
   },
   {
+    id: "sales-analysis",
     title: "Sales Analysis Dashboard",
     description:
       "Week-wise, month-wise and yearly sales insights built from raw Excel data, published to Power BI Service with Row Level Security.",
@@ -49,6 +49,7 @@ export const projects: Project[] = [
     accent: "cyan",
   },
   {
+    id: "vehicle-track-weigh",
     title: "Vehicle Track & Weigh Dashboard",
     description:
       "Monitors weekly vehicle turnaround time and weight discrepancies for operational tracking.",

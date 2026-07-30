@@ -1,34 +1,35 @@
-import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Skills from "@/components/sections/Skills";
 import Projects from "@/components/sections/Projects";
+import Testimonials from "@/components/sections/Testimonials";
+import FAQSection from "@/components/sections/FAQSection";
 import Contact from "@/components/sections/Contact";
-import Footer from "@/components/layout/Footer";
-import ScrollReveal from "@/components/animations/ScrollReveal"; // <-- Updated path
+
+import ScrollReveal from "@/components/animations/ScrollReveal";
 
 export default function Home() {
   return (
-    <>
-      <Navbar />
-      <main>
-        <Hero />
-        <ScrollReveal>
-          <About />
-        </ScrollReveal>
-        <ScrollReveal delay={0.1}>
-          <Skills />
-        </ScrollReveal>
-        <ScrollReveal delay={0.1}>
-          <Projects />
-        </ScrollReveal>
-        <ScrollReveal>
-          <Contact />
-        </ScrollReveal>
-      </main>
-      <Footer />
-      {/* Jab tak ChatWidget.tsx file ban nahi jati, tab tak isko comment rakhein */}
-      {/* <ChatWidget /> */}
-    </>
+    <main>
+      <Hero />
+      <ScrollReveal>
+        <About />
+      </ScrollReveal>
+      <ScrollReveal delay={0.1}>
+        <Skills />
+      </ScrollReveal>
+      <ScrollReveal delay={0.1}>
+        <Projects />
+      </ScrollReveal>
+      <ScrollReveal delay={0.1}>
+        <Testimonials />
+      </ScrollReveal>
+      <ScrollReveal delay={0.1}>
+        <FAQSection />
+      </ScrollReveal>
+      <ScrollReveal>
+        <Contact />
+      </ScrollReveal>
+    </main>
   );
 }

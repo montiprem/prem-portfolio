@@ -12,21 +12,29 @@ import {
   Layers,
   Wrench,
   LineChart,
+  FileSpreadsheet,
+  Workflow,
+  ShieldCheck,
   type LucideIcon,
 } from "lucide-react";
 import Container from "../ui/Container";
 import { skills, skillCategories } from "@/data/skills";
 
-// Type-safe Icon Mapper
+// Smart Icon Mapper with better keyword matching
 const iconMap: Record<string, LucideIcon> = {
-  "Power BI": BarChart3,
   SQL: Database,
-  DAX: LineChart,
-  "Power Query": Layers,
-  "Microsoft Fabric": Cloud,
-  Azure: Cpu,
   Python: Code2,
-  Excel: Terminal,
+  "Power BI (Desktop & Service)": BarChart3,
+  DAX: LineChart,
+  Tableau: BarChart3,
+  "Advanced Excel": FileSpreadsheet,
+  "Power Query": Layers,
+  "Star / Snowflake Schema": Database,
+  "Row Level Security (RLS)": ShieldCheck,
+  "ETL & Data Cleaning": Workflow,
+  "Microsoft Fabric": Cloud,
+  "Power Automate": Cpu,
+  VBA: Terminal,
   default: Wrench,
 };
 
@@ -111,7 +119,7 @@ export default function Skills() {
                           </div>
 
                           {/* Animated Bar Background */}
-                          <div className="h-2.5 rounded-full bg-white/10 overflow-hidden p-1px relative">
+                          <div className="h-2.5 rounded-full bg-white/10 overflow-hidden relative">
                             {/* Framer Motion Animated Progress Fill */}
                             <motion.div
                               initial={{ width: 0 }}

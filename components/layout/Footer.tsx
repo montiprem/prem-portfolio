@@ -1,6 +1,18 @@
 "use client";
 
-import { Mail, BarChart3, ArrowUp, Sparkles } from "lucide-react";
+import { useState } from "react";
+import {
+  Mail,
+  BarChart3,
+  ArrowUp,
+  Sparkles,
+  Send,
+  UserX,
+  X,
+  CheckCircle,
+  Loader2,
+} from "lucide-react";
+import Link from "next/link";
 import Container from "../ui/Container";
 import { GithubIcon, LinkedinIcon } from "../ui/BrandIcons";
 
@@ -25,6 +37,91 @@ const socials = [
 export default function Footer() {
   const year = new Date().getFullYear();
 
+  // Subscription States
+  const [subEmail, setSubEmail] = useState("");
+  const [subLoading, setSubLoading] = useState(false);
+  const [subMessage, setSubMessage] = useState("");
+
+  // Unsubscribe Modal States
+  const [unsubOpen, setUnsubOpen] = useState(false);
+  const [unsubEmail, setUnsubEmail] = useState("");
+  const [unsubLoading, setUnsubLoading] = useState(false);
+  const [unsubMessage, setUnsubMessage] = useState("");
+
+  // Handle Subscribe Submission
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!subEmail) return;
+
+    setSubLoading(true);
+    setSubMessage("");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "YOUR_ACCESS_KEY_HERE",
+          subject: "New Newsletter Subscriber",
+          from_name: "Portfolio Newsletter",
+          email: subEmail,
+          action: "Subscribe",
+        }),
+      });
+
+      if (response.ok) {
+        setSubMessage("Subscribed successfully!");
+        setSubEmail("");
+      } else {
+        setSubMessage("Something went wrong. Try again!");
+      }
+    } catch {
+      setSubMessage("Error sending request.");
+    } finally {
+      setSubLoading(false);
+    }
+  };
+
+  // Handle Unsubscribe Submission
+  const handleUnsubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!unsubEmail) return;
+
+    setUnsubLoading(true);
+    setUnsubMessage("");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "e1125910-94f6-40b5-9375-a504ecd93df4",
+          subject: "Newsletter Unsubscribe Request",
+          from_name: "Portfolio Newsletter",
+          email: unsubEmail,
+          action: "Unsubscribe",
+        }),
+      });
+
+      if (response.ok) {
+        setUnsubMessage("You have been unsubscribed successfully.");
+        setUnsubEmail("");
+      } else {
+        setUnsubMessage("Failed to process. Please try again.");
+      }
+    } catch {
+      setUnsubMessage("Error submitting request.");
+    } finally {
+      setUnsubLoading(false);
+    }
+  };
+
   return (
     <footer className="relative bg-background border-t border-white/10 pt-20 pb-10 overflow-hidden text-white">
       {/* Ambient Mesh Glows */}
@@ -35,22 +132,24 @@ export default function Footer() {
       <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 h-80 w-80 rounded-full bg-blue-500/15 blur-[140px] pointer-events-none" />
 
       <Container className="relative z-10">
-        <div className="flex flex-col md:flex-row justify-between gap-12">
-          
+        {/* TOP SECTION: Brand Info & Navigation */}
+        <div className="flex flex-col md:flex-row justify-between gap-12 mb-16">
           {/* Brand Info */}
           <div className="max-w-md">
-            <a
-              href="#home"
+            <Link
+              href="/#home"
               className="inline-flex items-center gap-2 text-2xl font-black tracking-tight"
             >
               <span className="bg-linear-to-r from-blue-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent">
                 Prem Mandal
               </span>
               <Sparkles className="w-4 h-4 text-cyan-400" />
-            </a>
+            </Link>
 
             <p className="mt-4 text-gray-300 text-sm leading-relaxed">
-              Senior BI Developer & Data Engineer crafting enterprise dashboards, scalable semantic models, and automated data pipelines that drive strategic decision-making.
+              Senior BI Developer &amp; Data Engineer crafting enterprise
+              dashboards, scalable semantic models, and automated data
+              pipelines that drive strategic decision-making.
             </p>
 
             <a
@@ -84,57 +183,81 @@ export default function Footer() {
           <div className="flex flex-wrap sm:flex-nowrap gap-16 md:gap-24">
             <div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-blue-400 mb-4">
-                Navigation
+                Pages &amp; Navigation
               </h4>
               <ul className="space-y-3 text-sm text-gray-300 font-medium">
                 <li>
-                  <a
-                    href="#home"
+                  <Link
+                    href="/"
                     className="hover:text-blue-400 transition-colors"
                   >
                     Home
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="#about"
-                    className="hover:text-blue-400 transition-colors"
-                  >
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#skills"
-                    className="hover:text-blue-400 transition-colors"
-                  >
-                    Skills
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#projects"
+                  <Link
+                    href="/projects"
                     className="hover:text-blue-400 transition-colors"
                   >
                     Projects
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="#contact"
+                  <Link
+                    href="/services"
+                    className="hover:text-blue-400 transition-colors"
+                  >
+                    Services
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/store"
+                    className="hover:text-blue-400 transition-colors"
+                  >
+                    Store
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/blog"
+                    className="hover:text-blue-400 transition-colors"
+                  >
+                    Blog
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/contact"
                     className="hover:text-blue-400 transition-colors"
                   >
                     Contact
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
 
             <div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-blue-400 mb-4">
-                Resources
+                Quick Sections
               </h4>
               <ul className="space-y-3 text-sm text-gray-300 font-medium">
+                <li>
+                  <Link
+                    href="/#about"
+                    className="hover:text-blue-400 transition-colors"
+                  >
+                    About Me
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/#skills"
+                    className="hover:text-blue-400 transition-colors"
+                  >
+                    Skills &amp; Tech
+                  </Link>
+                </li>
                 <li>
                   <a
                     href="/resume/resume.pdf"
@@ -154,37 +277,201 @@ export default function Footer() {
                     LinkedIn Profile
                   </a>
                 </li>
-                <li>
-                  <a
-                    href="https://public.tableau.com/app/profile/premmandal/vizzes"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-blue-400 transition-colors"
-                  >
-                    Tableau Work
-                  </a>
-                </li>
               </ul>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-gray-400 flex items-center gap-1.5">
-            © {year} Prem Mandal. Built with Next.js, Tailwind CSS & Framer Motion.
-          </p>
+        {/* MIDDLE SECTION: Newsletter Subscription Box */}
+        <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 sm:p-8 mb-12 shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
 
-          <a
-            href="#home"
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6 relative z-10">
+            <div className="max-w-xl text-center lg:text-left">
+              <h3 className="text-lg font-black tracking-tight text-white flex items-center justify-center lg:justify-start gap-2">
+                <span>Subscribe to Newsletter</span>
+                <Sparkles size={16} className="text-cyan-400" />
+              </h3>
+              <p className="text-xs text-gray-300 mt-1 leading-relaxed">
+                Get notified when new Power BI templates, DAX cheat sheets, or
+                data engineering blogs are published. Zero spam.
+              </p>
+            </div>
+
+            <div className="w-full lg:w-auto">
+              <form
+                onSubmit={handleSubscribe}
+                className="flex flex-col sm:flex-row items-center gap-2 max-w-md w-full"
+              >
+                <div className="relative w-full">
+                  <Mail className="w-4 h-4 text-gray-400 absolute left-3.5 top-3" />
+                  <input
+                    type="email"
+                    required
+                    value={subEmail}
+                    onChange={(e) => setSubEmail(e.target.value)}
+                    placeholder="Enter your email address"
+                    className="w-full bg-white/5 border border-white/15 rounded-xl pl-10 pr-4 py-2.5 text-xs text-white placeholder-gray-400 focus:outline-none focus:border-cyan-500 transition-colors"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={subLoading}
+                  className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-bold text-white shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2 shrink-0"
+                >
+                  {subLoading ? (
+                    <Loader2 size={14} className="animate-spin" />
+                  ) : (
+                    <>
+                      <span>Subscribe</span>
+                      <Send size={12} />
+                    </>
+                  )}
+                </button>
+              </form>
+
+              {subMessage && (
+                <p className="text-[11px] text-cyan-400 mt-2 font-medium text-center lg:text-left">
+                  {subMessage}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* BOTTOM BAR: Legal Links & Copyright */}
+        <div className="pt-8 border-t border-white/10 flex flex-col lg:flex-row items-center justify-between gap-6 text-center lg:text-left">
+          {/* Copyright & Tagline */}
+          <div className="space-y-1">
+            <p className="text-xs text-gray-300">
+              © {year} Prem Mandal. All rights reserved.
+            </p>
+            <p className="text-xs text-gray-400">Designed with ❤️ by Prem</p>
+          </div>
+
+          {/* Policy & Unsubscribe Links */}
+          <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-medium text-gray-400">
+            <Link
+              href="/privacy-policy"
+              className="hover:text-blue-400 transition-colors"
+            >
+              Privacy Policy
+            </Link>
+            <span className="text-white/20">•</span>
+            <Link
+              href="/terms-of-service"
+              className="hover:text-blue-400 transition-colors"
+            >
+              Terms of Service
+            </Link>
+            <span className="text-white/20">•</span>
+            <Link
+              href="/cookie-policy"
+              className="hover:text-blue-400 transition-colors"
+            >
+              Cookie Policy
+            </Link>
+            <span className="text-white/20">•</span>
+            {/* Unsubscribe Button Trigger */}
+            <button
+              onClick={() => setUnsubOpen(true)}
+              className="text-gray-400 hover:text-red-400 transition-colors flex items-center gap-1 font-semibold"
+            >
+              <UserX size={12} />
+              <span>Unsubscribe</span>
+            </button>
+          </div>
+
+          {/* Back to Top */}
+          <Link
+            href="/#home"
             aria-label="Back to top"
             className="group flex items-center gap-2 px-4 py-2 rounded-xl border border-white/10 bg-white/5 text-xs font-semibold text-gray-300 hover:text-white hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-300 hover:-translate-y-0.5 shadow-md"
           >
             <span>Back to top</span>
-            <ArrowUp size={14} className="transition-transform group-hover:-translate-y-0.5" />
-          </a>
+            <ArrowUp
+              size={14}
+              className="transition-transform group-hover:-translate-y-0.5"
+            />
+          </Link>
         </div>
       </Container>
+
+      {/* UNSUBSCRIBE MODAL */}
+      {unsubOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
+          <div className="relative w-full max-w-md rounded-3xl border border-white/15 bg-background/95 p-6 shadow-2xl backdrop-blur-2xl">
+            <button
+              onClick={() => {
+                setUnsubOpen(false);
+                setUnsubMessage("");
+              }}
+              className="absolute top-4 right-4 text-gray-400 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors"
+            >
+              <X size={18} />
+            </button>
+
+            <div className="text-center mb-6">
+              <div className="inline-flex p-3 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-400 mb-3">
+                <UserX size={22} />
+              </div>
+              <h4 className="text-xl font-bold">Unsubscribe Newsletter</h4>
+              <p className="text-xs text-gray-400 mt-1">
+                Enter your email to opt-out from future emails &amp; updates.
+              </p>
+            </div>
+
+            {unsubMessage ? (
+              <div className="text-center py-4 space-y-3">
+                <div className="inline-flex p-3 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  <CheckCircle size={24} />
+                </div>
+                <p className="text-xs font-semibold text-gray-200">
+                  {unsubMessage}
+                </p>
+                <button
+                  onClick={() => {
+                    setUnsubOpen(false);
+                    setUnsubMessage("");
+                  }}
+                  className="px-5 py-2 rounded-xl bg-white/10 text-xs font-bold hover:bg-white/20 transition-all"
+                >
+                  Close
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleUnsubscribe} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-semibold text-gray-300 mb-1.5">
+                    Your Email Address
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    value={unsubEmail}
+                    onChange={(e) => setUnsubEmail(e.target.value)}
+                    placeholder="name@example.com"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-red-500 transition-colors"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={unsubLoading}
+                  className="w-full py-2.5 rounded-xl bg-red-600 hover:bg-red-500 font-bold text-xs text-white shadow-lg shadow-red-600/30 transition-all flex items-center justify-center gap-2"
+                >
+                  {unsubLoading ? (
+                    <Loader2 size={14} className="animate-spin" />
+                  ) : (
+                    "Confirm Unsubscribe"
+                  )}
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
     </footer>
   );
 }
