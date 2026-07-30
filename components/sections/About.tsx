@@ -149,6 +149,32 @@ export default function About() {
                 <span className="font-medium">Immediate Joiner</span>
               </div>
             </motion.div>
+
+            {/* CTAs moved to Left Column to fill empty space nicely */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-col sm:flex-row gap-3 w-full max-w-sm mt-6"
+            >
+              <a
+                href="/resume/resume.pdf"
+                download
+                className="group flex-1 px-4 py-3 bg-blue-600 hover:bg-blue-500 rounded-xl transition-all duration-300 font-semibold text-white flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30 hover:shadow-blue-500/50 hover:scale-105 active:scale-95 text-xs sm:text-sm"
+              >
+                <Download className="w-4 h-4 transition-transform group-hover:-translate-y-0.5" />
+                <span>Resume</span>
+              </a>
+
+              <a
+                href="#contact"
+                className="group flex-1 px-4 py-3 rounded-xl border border-white/20 bg-white/5 backdrop-blur-md hover:bg-white hover:text-black transition-all duration-300 font-semibold flex items-center justify-center gap-2 hover:scale-105 text-xs sm:text-sm"
+              >
+                <MessageSquare className="w-4 h-4" />
+                <span>Connect</span>
+              </a>
+            </motion.div>
           </div>
 
           {/* Right Column (60%) */}
@@ -256,32 +282,6 @@ export default function About() {
                   </p>
                 </div>
               ))}
-            </motion.div>
-
-            {/* CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-wrap gap-4 pt-2"
-            >
-              <a
-                href="/resume/resume.pdf"
-                download
-                className="group px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-xl transition-all duration-300 font-semibold text-white flex items-center gap-2 shadow-lg shadow-blue-600/30 hover:shadow-blue-500/50 hover:scale-105 active:scale-95 text-sm"
-              >
-                <Download className="w-4 h-4 transition-transform group-hover:-translate-y-0.5" />
-                <span>Download Resume</span>
-              </a>
-
-              <a
-                href="#contact"
-                className="group px-6 py-3 rounded-xl border border-white/20 bg-white/5 backdrop-blur-md hover:bg-white hover:text-black transition-all duration-300 font-semibold flex items-center gap-2 hover:scale-105 text-sm"
-              >
-                <MessageSquare className="w-4 h-4" />
-                <span>Let&apos;s Connect</span>
-              </a>
             </motion.div>
 
           </div>
