@@ -139,7 +139,24 @@ export default function Hero() {
             transition={{ duration: 0.7, ease: "easeOut" }}
             className="lg:col-span-7"
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1.5 backdrop-blur-md">
+            {/* Live Analytics Active Status Badge */}
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1.5 backdrop-blur-md mb-4 shadow-lg shadow-blue-500/10">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-500" />
+              </span>
+              <span className="text-[11px] sm:text-xs text-cyan-300 font-semibold flex items-center gap-2">
+                <span>Live Analytics Portfolio</span>
+                <span className="flex items-center gap-1 pl-2 border-l border-white/20">
+                  <motion.span animate={{ y: [0, -3, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}>📊</motion.span>
+                  <motion.span animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}>⚡</motion.span>
+                  <motion.span animate={{ rotate: [0, 10, -10, 0] }} transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}>🗄️</motion.span>
+                  <motion.span animate={{ y: [0, -3, 0] }} transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}>📈</motion.span>
+                </span>
+              </span>
+            </div>
+
+            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1.5 backdrop-blur-md ml-2">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
