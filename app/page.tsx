@@ -1,5 +1,6 @@
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
+import LifePhilosophy from "@/components/sections/LifePhilosophy";
 import Skills from "@/components/sections/Skills";
 import Projects from "@/components/sections/Projects";
 import Testimonials from "@/components/sections/Testimonials";
@@ -15,6 +16,9 @@ export default function Home() {
         <Hero />
         <ScrollReveal>
           <About />
+        </ScrollReveal>
+        <ScrollReveal delay={0.1}>
+          <LifePhilosophy />
         </ScrollReveal>
         <ScrollReveal delay={0.1}>
           <Skills />
