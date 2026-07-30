@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import CustomCursor from "@/components/cursor/CustomCursor";
+import Preloader from "@/components/loader/Preloader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,13 +22,19 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth">
       <body
-        className={`${inter.className} bg-background text-foreground antialiased min-h-screen flex flex-col justify-between overflow-x-hidden`}
+        className={`${inter.className} bg-background text-foreground antialiased min-h-screen flex flex-col justify-between selection:bg-blue-500 selection:text-white`}
       >
+        {/* Startup Preloader */}
+        <Preloader />
+
+        {/* Custom Mouse Cursor (Hidden on Touch/Mobile devices) */}
+        <CustomCursor />
+
         {/* Top Navigation */}
         <Navbar />
 
         {/* Main Route Content */}
-        <div className="grow relative w-full overflow-x-hidden">{children}</div>
+        <div className="grow">{children}</div>
 
         {/* Common Footer across all pages */}
         <Footer />

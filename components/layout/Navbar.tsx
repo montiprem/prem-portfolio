@@ -26,7 +26,7 @@ const navLinks = [
 const dropdownLinks = [
   { name: "LOGIN", href: "/login", icon: LogIn, isHash: false },
   { name: "SIGN UP", href: "/signup", icon: UserPlus, isHash: false },
-  { name: "CONTACT", href: "/#contact", icon: Mail, isHash: true },
+  { name: "CONTACT", href: "/contact", icon: Mail, isHash: false }, // Updated to dedicated /contact page
   { name: "FAQ", href: "/#faq", icon: HelpCircle, isHash: true },
 ];
 
@@ -72,7 +72,7 @@ export default function Navbar() {
     setMobileMenuOpen(false);
   };
 
-  // Generic handler for section scrolling (#faq, #contact, etc.)
+  // Generic handler for section scrolling (e.g. #faq)
   const handleHashClick = (e: React.MouseEvent, href: string) => {
     const hash = href.split("#")[1];
     if (hash && pathname === "/") {
@@ -153,11 +153,13 @@ export default function Navbar() {
                       <Link
                         key={item.name}
                         href={item.href}
-                        onClick={(e) =>
-                          item.isHash
-                            ? handleHashClick(e, item.href)
-                            : setMoreDropdownOpen(false)
-                        }
+                        onClick={(e) => {
+                          if (item.isHash) {
+                            handleHashClick(e, item.href);
+                          } else {
+                            setMoreDropdownOpen(false);
+                          }
+                        }}
                         className="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-gray-200 hover:text-white hover:bg-white/10 transition-colors tracking-wider"
                       >
                         <Icon size={16} className="text-gray-400" />
@@ -180,8 +182,7 @@ export default function Navbar() {
               Resume
             </a>
             <Link
-              href="/#contact"
-              onClick={(e) => handleHashClick(e, "/#contact")}
+              href="/contact"
               className="px-4 py-2 text-xs font-semibold rounded-xl bg-blue-600 hover:bg-blue-500 text-white transition-all shadow-md shadow-blue-600/30"
             >
               Get in Touch
@@ -227,8 +228,8 @@ export default function Navbar() {
             })}
             <div className="pt-2 border-t border-white/10 flex flex-col gap-2">
               <Link
-                href="/#contact"
-                onClick={(e) => handleHashClick(e, "/#contact")}
+                href="/contact"
+                onClick={() => setMobileMenuOpen(false)}
                 className="w-full text-center py-2.5 rounded-xl bg-blue-600 text-sm font-semibold text-white"
               >
                 Get in Touch

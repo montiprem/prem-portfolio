@@ -71,6 +71,21 @@
 }
 
 /* Custom Utilities / Keyframes */
+
+/* 1. Preloader Bar Animation */
+@keyframes loading {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* 2. Floating Animations for Hero Badges & UI */
 @keyframes float {
   0%,
   100% {
@@ -78,6 +93,15 @@
   }
   50% {
     transform: translateY(-8px);
+  }
+}
+
+@keyframes bounceSlow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
   }
 }
 
@@ -90,8 +114,14 @@
   }
 }
 
+/* Helper Utility Classes */
 .animate-float {
   animation: float 4s ease-in-out infinite;
+}
+
+.animate-bounce-slow {
+  animation: bounceSlow 4s ease-in-out infinite;
+  will-change: transform;
 }
 
 .animate-pulse-glow {
