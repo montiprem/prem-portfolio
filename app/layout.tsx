@@ -20,13 +20,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth">
       <body
-        className={`${inter.className} bg-background text-foreground antialiased min-h-screen flex flex-col justify-between`}
+        className={`${inter.className} bg-background text-foreground antialiased min-h-screen flex flex-col justify-between overflow-x-hidden`}
       >
         {/* Top Navigation */}
         <Navbar />
 
         {/* Main Route Content */}
-        <div className="grow">{children}</div>
+        <div className="grow relative w-full overflow-x-hidden">{children}</div>
 
         {/* Common Footer across all pages */}
         <Footer />
