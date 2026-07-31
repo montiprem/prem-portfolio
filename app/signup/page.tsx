@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import {
-  User,
   Mail,
   Lock,
   UserPlus,
@@ -13,6 +12,7 @@ import {
   EyeOff,
   Loader2,
   CheckCircle,
+  LogIn,
 } from "lucide-react";
 import Container from "@/components/ui/Container";
 
@@ -80,7 +80,6 @@ export default function SignUpPage() {
     }
   };
 
-  // Real Google Sign-Up Handler via NextAuth
   const handleGoogleSignUp = async () => {
     try {
       await signIn("google", { callbackUrl: "/" });
@@ -107,20 +106,25 @@ export default function SignUpPage() {
         {/* Form Card */}
         <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-2xl p-6 sm:p-8 shadow-2xl">
           {submitted ? (
+            /* Updated Success View */
             <div className="text-center py-8 space-y-4">
-              <div className="inline-flex p-4 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
-                <CheckCircle className="w-10 h-10" />
+              <div className="inline-flex p-4 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <CheckCircle className="w-12 h-12 animate-bounce" />
               </div>
-              <h2 className="text-2xl font-black">Registration Alert Sent!</h2>
-              <p className="text-xs text-gray-300 max-w-sm mx-auto">
-                Thanks, {formData.firstName}! Your signup notification has been sent to Prem.
+              <h2 className="text-2xl font-black text-white">Account Created Successfully! 🎉</h2>
+              <p className="text-xs sm:text-sm text-gray-300 max-w-sm mx-auto leading-relaxed">
+                Your details have been saved successfully. You can now login using your email and password or Google Sign-In.
               </p>
-              <Link
-                href="/"
-                className="inline-block px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-bold transition-all shadow-lg shadow-blue-600/30"
-              >
-                Return to Home
-              </Link>
+              
+              <div className="pt-2">
+                <Link
+                  href="/login"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs sm:text-sm font-bold transition-all shadow-lg shadow-blue-600/30"
+                >
+                  <span>Go to Login Page</span>
+                  <LogIn className="w-4 h-4" />
+                </Link>
+              </div>
             </div>
           ) : (
             <>
