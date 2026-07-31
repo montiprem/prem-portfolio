@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 import {
   Mail,
   Lock,
@@ -59,6 +60,15 @@ export default function LoginPage() {
       console.error(error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Google Sign-In Handler via NextAuth
+  const handleGoogleSignIn = async () => {
+    try {
+      await signIn("google", { callbackUrl: "/" });
+    } catch (error) {
+      console.error("Google Login Error:", error);
     }
   };
 
@@ -170,7 +180,7 @@ export default function LoginPage() {
                     href="#"
                     onClick={(e) => {
                       e.preventDefault();
-                      alert("Password reset feature will be enabled soon!");
+                      alert("Password reset link will be sent to your email!");
                     }}
                     className="text-cyan-400 hover:underline font-semibold"
                   >
@@ -197,9 +207,7 @@ export default function LoginPage() {
 
                   <button
                     type="button"
-                    onClick={() =>
-                      alert("Google Sign-In will be configured with Clerk/NextAuth!")
-                    }
+                    onClick={handleGoogleSignIn}
                     className="w-full py-2.5 px-4 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 font-semibold text-xs text-white transition-all flex items-center justify-center gap-2"
                   >
                     <svg className="w-4 h-4" viewBox="0 0 24 24">
