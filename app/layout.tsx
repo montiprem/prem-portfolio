@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/cursor/CustomCursor";
 import Preloader from "@/components/loader/Preloader";
 import ChatBot from "@/components/ChatBot";
+import { Providers } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,23 +26,25 @@ export default function RootLayout({
       <body
         className={`${inter.className} bg-background text-foreground antialiased min-h-screen flex flex-col justify-between selection:bg-blue-500 selection:text-white`}
       >
-        {/* Startup Preloader */}
-        <Preloader />
+        <Providers>
+          {/* Startup Preloader */}
+          <Preloader />
 
-        {/* Custom Mouse Cursor (Hidden on Touch/Mobile devices) */}
-        <CustomCursor />
+          {/* Custom Mouse Cursor (Hidden on Touch/Mobile devices) */}
+          <CustomCursor />
 
-        {/* Top Navigation */}
-        <Navbar />
+          {/* Top Navigation */}
+          <Navbar />
 
-        {/* Main Route Content */}
-        <div className="grow">{children}</div>
+          {/* Main Route Content */}
+          <div className="grow">{children}</div>
 
-        {/* AI Chat Assistant Widget */}
-        <ChatBot />
+          {/* AI Chat Assistant Widget */}
+          <ChatBot />
 
-        {/* Common Footer across all pages */}
-        <Footer />
+          {/* Common Footer across all pages */}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
