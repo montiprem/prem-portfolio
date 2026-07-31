@@ -5,6 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/cursor/CustomCursor";
 import Preloader from "@/components/loader/Preloader";
+import ChatBot from "@/components/ChatBot";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,6 +36,9 @@ export default function RootLayout({
 
         {/* Main Route Content */}
         <div className="grow">{children}</div>
+
+        {/* AI Chat Assistant Widget */}
+        <ChatBot />
 
         {/* Common Footer across all pages */}
         <Footer />

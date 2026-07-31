@@ -3,7 +3,6 @@
 import Image from "next/image";
 import {
   Mail,
-  ChevronDown,
   BarChart3,
   Eye,
   TrendingUp,
@@ -47,7 +46,7 @@ function LinkedinStatsCard() {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.5 }}
-      className="w-full max-w-lg bg-white/[0.03] border border-white/10 rounded-2xl p-4 sm:p-5 shadow-2xl backdrop-blur-xl relative overflow-hidden mt-6 transition-all duration-300 hover:border-blue-500/40 hover:shadow-blue-500/10"
+      className="w-full max-w-lg bg-white/0.03 border border-white/10 rounded-2xl p-4 sm:p-5 shadow-2xl backdrop-blur-xl relative overflow-hidden mt-6 transition-all duration-300 hover:border-blue-500/40 hover:shadow-blue-500/10"
     >
       <div className="absolute -top-12 -right-12 w-40 h-40 bg-blue-500/20 rounded-full blur-3xl pointer-events-none" />
 
@@ -81,7 +80,7 @@ function LinkedinStatsCard() {
       {/* Stats Grid */}
       <div className="grid grid-cols-3 gap-2.5 mt-3.5">
         <div className="relative p-2.5 bg-white/5 border border-white/5 rounded-xl text-center md:text-left overflow-hidden">
-          <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-transparent" />
+          <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-blue-500 to-transparent" />
           <div className="flex items-center justify-center md:justify-start gap-1 text-gray-400 text-[10px] font-medium mb-1">
             <Users className="w-3 h-3 text-blue-400" />
             <span>Network</span>
@@ -91,7 +90,7 @@ function LinkedinStatsCard() {
         </div>
 
         <div className="relative p-2.5 bg-white/5 border border-white/5 rounded-xl text-center md:text-left overflow-hidden">
-          <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-500 to-transparent" />
+          <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-emerald-500 to-transparent" />
           <div className="flex items-center justify-center md:justify-start gap-1 text-gray-400 text-[10px] font-medium mb-1">
             <TrendingUp className="w-3 h-3 text-emerald-400" />
             <span>Reach</span>
@@ -101,7 +100,7 @@ function LinkedinStatsCard() {
         </div>
 
         <div className="relative p-2.5 bg-white/5 border border-white/5 rounded-xl text-center md:text-left overflow-hidden">
-          <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-500 to-transparent" />
+          <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-purple-500 to-transparent" />
           <div className="flex items-center justify-center md:justify-start gap-1 text-gray-400 text-[10px] font-medium mb-1">
             <Eye className="w-3 h-3 text-purple-400" />
             <span>Views</span>
@@ -171,7 +170,7 @@ export default function Hero() {
             </p>
 
             <h1 className="mt-2 text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.12] tracking-tight">
-              <span className="bg-gradient-to-r from-white via-blue-100 to-cyan-300 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-white via-blue-100 to-cyan-300 bg-clip-text text-transparent">
                 Building BI Dashboards
               </span>
               <br />
@@ -250,7 +249,7 @@ export default function Hero() {
               <div className="absolute h-64 w-64 sm:h-72 sm:w-72 rounded-full bg-blue-500/20 blur-[100px] pointer-events-none" />
 
               {/* Perfectly Sized DP Container */}
-              <div className="relative h-56 w-56 sm:h-68 sm:w-68 lg:h-76 lg:w-76 overflow-hidden rounded-full border-2 border-blue-500/40 bg-gradient-to-br from-blue-600/30 to-purple-600/20 p-2 shadow-[0_0_60px_rgba(59,130,246,0.3)] transition-all duration-500 hover:scale-[1.02]">
+              <div className="relative h-56 w-56 sm:h-68 sm:w-68 lg:h-76 lg:w-76 overflow-hidden rounded-full border-2 border-blue-500/40 bg-linear-to-br from-blue-600/30 to-purple-600/20 p-2 shadow-[0_0_60px_rgba(59,130,246,0.3)] transition-all duration-500 hover:scale-[1.02]">
                 <div className="relative h-full w-full overflow-hidden rounded-full">
                   <Image
                     src="/images/prem.jpeg"
@@ -262,7 +261,7 @@ export default function Hero() {
                 </div>
               </div>
 
-              {/* Clean Floating Skill Badges (Positioned neatly around the smaller DP frame) */}
+              {/* Clean Floating Skill Badges */}
               <motion.div 
                 animate={{ y: [0, -6, 0] }} 
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
