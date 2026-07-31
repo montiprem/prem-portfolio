@@ -1,46 +1,66 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import OpenAI from "openai";
 import { NextResponse } from "next/server";
 
-// Initialize with your API key
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+const client = new OpenAI({
+  apiKey: process.env.OPENROUTER_API_KEY,
+  baseURL: "https://openrouter.ai/api/v1",
+});
+
+const systemPrompt = `
+You are Prem Mandal's AI Portfolio Assistant.
+
+About Prem:
+- Senior BI Developer & Data Analyst
+- 2+ Years Experience
+- Expert in Power BI, SQL, DAX, Power Query
+- Microsoft Fabric
+- Azure
+- Python
+- Built 15+ dashboards
+- LinkedIn Community: 55K+
+- Email: jobs.premmandal@gmail.com
+
+Rules:
+- Only answer questions related to Prem.
+- Be friendly and professional.
+- Keep answers concise.
+`;
 
 export async function POST(req: Request) {
   try {
+    console.log(
+      "OPENROUTER KEY:",
+      process.env.OPENROUTER_API_KEY ? "FOUND ✅" : "NOT FOUND ❌"
+    );
+
     const { messages } = await req.json();
 
-    if (!messages || messages.length === 0) {
-      return NextResponse.json({ error: "No messages provided" }, { status: 400 });
-    }
-
-    // Extract the latest user message
-    const latestMessage = messages[messages.length - 1].content;
-
-    // System instruction & Portfolio context
-    const systemInstruction = `
-      You are an AI portfolio assistant for Prem Mandal. 
-      Prem Mandal is a Senior BI Developer & Data Analyst based in Kolkata, India, with over 2 years of experience.
-      He specializes in Power BI, SQL, DAX, Power Query, Microsoft Fabric, Azure, and Python.
-      He has built 15+ dashboards, worked with companies like Super Smelters Ltd, Bhauram Jodhraj Pvt Ltd, and currently works at Utkarsh India Ltd.
-      He also has an active LinkedIn community of over 55K+ followers.
-      Your job is to answer visitors' questions about Prem's skills, experience, projects, and how to contact him (jobs.premmandal@gmail.com). 
-      Keep your answers concise, professional, friendly, and focused on tech/data analytics.
-    `;
-
-    // Using gemini-1.5-flash (stable and highly reliable)
-    const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash",
-      systemInstruction: systemInstruction,
+    const completion = await client.chat.completions.create({
+      model: "deepseek/deepseek-chat-v3.1",
+      messages: [
+        {
+          role: "system",
+          content: systemPrompt,
+        },
+        ...messages,
+      ],
+      temperature: 0.7,
+      max_tokens: 500,
     });
 
-    const result = await model.generateContent(latestMessage);
-    const response = await result.response;
-    const reply = response.text() || "Sorry, I couldn't process that.";
+    return NextResponse.json({
+      reply:
+        completion.choices?.[0]?.message?.content ??
+        "Sorry, I couldn't generate a response.",
+    });
+  } catch (error: any) {
+    console.error("OPENROUTER ERROR:");
+    console.error(error);
 
-    return NextResponse.json({ reply });
-  } catch (error) {
-    console.error("Chat API Error:", error);
     return NextResponse.json(
-      { error: "Something went wrong. Please try again later." },
+      {
+        reply: error?.message || "Something went wrong.",
+      },
       { status: 500 }
     );
   }
