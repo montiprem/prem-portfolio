@@ -1,10 +1,8 @@
 import OpenAI from "openai";
 import { NextResponse } from "next/server";
 
-const client = new OpenAI({
-  apiKey: process.env.OPENROUTER_API_KEY,
-  baseURL: "https://openrouter.ai/api/v1",
-});
+// Next.js ko force karein ki is route ko statically evaluate na kare
+export const dynamic = "force-dynamic";
 
 const systemPrompt = `
 You are Prem Mandal's AI Portfolio Assistant.
@@ -28,21 +26,38 @@ Rules:
 
 export async function POST(req: Request) {
   try {
-    console.log(
-      "OPENROUTER KEY:",
-      process.env.OPENROUTER_API_KEY ? "FOUND ✅" : "NOT FOUND ❌"
-    );
+    const apiKey = process.env.OPENROUTER_API_KEY;
+
+    if (!apiKey) {
+      console.error("OPENROUTER_API_KEY is missing in environment variables.");
+      return NextResponse.json(
+        { reply: "API Key configuration error on server." },
+        { status: 500 }
+      );
+    }
+
+    // Function call ke andar OpenAI client initialize karein
+    const client = new OpenAI({
+      apiKey: apiKey,
+      baseURL: "https://openrouter.ai/api/v1",
+    });
 
     const { messages } = await req.json();
 
+    // Clean messages array (formatting validation)
+    const formattedMessages = messages.map((m: { role: string; content: string }) => ({
+      role: m.role,
+      content: m.content,
+    }));
+
     const completion = await client.chat.completions.create({
-      model: "deepseek/deepseek-chat-v3.1",
+      model: "deepseek/deepseek-chat", // DeepSeek standard model path on OpenRouter
       messages: [
         {
           role: "system",
           content: systemPrompt,
         },
-        ...messages,
+        ...formattedMessages,
       ],
       temperature: 0.7,
       max_tokens: 500,
@@ -54,8 +69,7 @@ export async function POST(req: Request) {
         "Sorry, I couldn't generate a response.",
     });
   } catch (error: any) {
-    console.error("OPENROUTER ERROR:");
-    console.error(error);
+    console.error("OPENROUTER ERROR:", error);
 
     return NextResponse.json(
       {
