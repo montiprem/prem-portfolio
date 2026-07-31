@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 import {
   User,
   Mail,
@@ -61,7 +62,7 @@ export default function SignUpPage() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: "Ye1125910-94f6-40b5-9375-a504ecd93df4",
+          access_key: "e1125910-94f6-40b5-9375-a504ecd93df4",
           subject: "New Account Registration Alert",
           from_name: "Portfolio SignUp",
           name: `${formData.firstName} ${formData.lastName}`,
@@ -76,6 +77,15 @@ export default function SignUpPage() {
       console.error(error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Real Google Sign-Up Handler via NextAuth
+  const handleGoogleSignUp = async () => {
+    try {
+      await signIn("google", { callbackUrl: "/" });
+    } catch (error) {
+      console.error("Google Sign-Up Error:", error);
     }
   };
 
@@ -286,9 +296,7 @@ export default function SignUpPage() {
 
                   <button
                     type="button"
-                    onClick={() =>
-                      alert("Google Login will be configured with Clerk/NextAuth!")
-                    }
+                    onClick={handleGoogleSignUp}
                     className="w-full py-2.5 px-4 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 font-semibold text-xs text-white transition-all flex items-center justify-center gap-2"
                   >
                     <svg className="w-4 h-4" viewBox="0 0 24 24">
