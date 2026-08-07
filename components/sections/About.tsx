@@ -9,6 +9,7 @@ import {
   MessageSquare,
   CheckCircle2,
   Sparkles,
+  GraduationCap,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import Container from "../ui/Container";
@@ -42,6 +43,22 @@ const timelineData = [
     company: "Utkarsh India Ltd",
     role: "Senior BI Developer",
     status: "Current",
+  },
+];
+
+const educationData = [
+  {
+    degree: "B.Com. (Bachelor of Commerce)",
+    year: "2025",
+    institution: "Sikkim Professional University Gangtok",
+  },
+  {
+    degree: "12th Standard (JAC)",
+    institution: "Model School Bengabad, Jharkhand",
+  },
+  {
+    degree: "10th Standard (CBSE)",
+    institution: "Anandalaya Public School Madhupur, Jharkhand",
   },
 ];
 
@@ -150,7 +167,7 @@ export default function About() {
               </div>
             </motion.div>
 
-            {/* CTAs moved to Left Column to fill empty space nicely */}
+            {/* CTAs */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -174,6 +191,47 @@ export default function About() {
                 <MessageSquare className="w-4 h-4" />
                 <span>Connect</span>
               </a>
+            </motion.div>
+
+            {/* EDUCATION SECTION */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="w-full max-w-sm mt-8 space-y-3"
+            >
+              <div className="flex items-center justify-between border-b border-white/10 pb-2 mb-3">
+                <div className="flex items-center gap-2">
+                  <GraduationCap className="w-4 h-4 text-blue-400" />
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-blue-400">
+                    Education
+                  </h3>
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                {educationData.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="p-3.5 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-300 hover:border-blue-500/40 hover:bg-white/0.08 shadow-md"
+                  >
+                    <div className="flex justify-between items-start gap-2">
+                      <h4 className="text-xs sm:text-sm font-bold text-white leading-snug">
+                        {item.degree}
+                      </h4>
+                      {item.year && (
+                        <span className="text-[9px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 shrink-0">
+                          {item.year}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-[11px] sm:text-xs text-gray-400 font-medium mt-1">
+                      {item.institution}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </motion.div>
           </div>
 

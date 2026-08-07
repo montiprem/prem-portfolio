@@ -12,21 +12,25 @@ import {
   UserPlus,
   Mail,
   HelpCircle,
+  Briefcase,
+  ShoppingBag,
 } from "lucide-react";
 import Container from "../ui/Container";
 
 const navLinks = [
-  { name: "Home", href: "/" },
-  { name: "Projects", href: "/projects" },
-  { name: "Services", href: "/services" },
-  { name: "Store", href: "/store" },
-  { name: "Blog", href: "/blog" },
+  { name: "Home", href: "/", isHash: false },
+  { name: "Projects", href: "/projects", isHash: false },
+  { name: "Skills", href: "/#skills", isHash: true },
+  { name: "Experience", href: "/#experience", isHash: true },
+  { name: "Blog", href: "/blog", isHash: false },
 ];
 
 const dropdownLinks = [
+  { name: "SERVICES", href: "/services", icon: Briefcase, isHash: false },
+  { name: "STORE", href: "/store", icon: ShoppingBag, isHash: false },
   { name: "LOGIN", href: "/login", icon: LogIn, isHash: false },
   { name: "SIGN UP", href: "/signup", icon: UserPlus, isHash: false },
-  { name: "CONTACT", href: "/contact", icon: Mail, isHash: false }, // Updated to dedicated /contact page
+  { name: "CONTACT", href: "/contact", icon: Mail, isHash: false },
   { name: "FAQ", href: "/#faq", icon: HelpCircle, isHash: true },
 ];
 
@@ -39,7 +43,6 @@ export default function Navbar() {
   const router = useRouter();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -72,14 +75,17 @@ export default function Navbar() {
     setMobileMenuOpen(false);
   };
 
-  // Generic handler for section scrolling (e.g. #faq)
   const handleHashClick = (e: React.MouseEvent, href: string) => {
     const hash = href.split("#")[1];
-    if (hash && pathname === "/") {
-      e.preventDefault();
-      const element = document.getElementById(hash);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+    if (hash) {
+      if (pathname === "/") {
+        e.preventDefault();
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        router.push(href);
       }
       setMoreDropdownOpen(false);
       setMobileMenuOpen(false);
@@ -96,7 +102,7 @@ export default function Navbar() {
     >
       <Container>
         <div className="flex items-center justify-between gap-4">
-          {/* Header Logo */}
+          {/* Logo */}
           <Link
             href="/"
             onClick={handleLogoClick}
@@ -108,7 +114,7 @@ export default function Navbar() {
             <Sparkles className="w-4 h-4 text-cyan-400 group-hover:rotate-12 transition-transform" />
           </Link>
 
-          {/* Desktop Navigation Links */}
+          {/* Desktop Nav Links */}
           <nav className="hidden lg:flex items-center gap-1 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full backdrop-blur-md">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
@@ -116,6 +122,7 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   href={link.href}
+                  onClick={(e) => link.isHash && handleHashClick(e, link.href)}
                   className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 ${
                     isActive
                       ? "bg-blue-600 text-white shadow-md shadow-blue-500/20"
@@ -127,7 +134,7 @@ export default function Navbar() {
               );
             })}
 
-            {/* MORE Dropdown Button */}
+            {/* MORE Dropdown */}
             <div className="relative ml-1" ref={dropdownRef}>
               <button
                 onClick={() => setMoreDropdownOpen(!moreDropdownOpen)}
@@ -144,7 +151,6 @@ export default function Navbar() {
                 />
               </button>
 
-              {/* Dropdown Menu */}
               {moreDropdownOpen && (
                 <div className="absolute right-0 mt-3 w-48 rounded-2xl bg-background/95 border border-white/15 shadow-2xl backdrop-blur-2xl py-2 z-50">
                   {dropdownLinks.map((item) => {
@@ -172,7 +178,7 @@ export default function Navbar() {
             </div>
           </nav>
 
-          {/* Right Action Buttons */}
+          {/* Right CTAs */}
           <div className="hidden md:flex items-center gap-3 shrink-0">
             <a
               href="/resume/resume.pdf"
@@ -189,7 +195,7 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="lg:hidden p-2 rounded-xl bg-white/5 border border-white/10 text-gray-300 hover:text-white cursor-pointer"
@@ -199,18 +205,17 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Mobile Dropdown Menu */}
+        {/* Mobile Dropdown */}
         {mobileMenuOpen && (
           <div className="lg:hidden mt-4 bg-background/95 border border-white/10 rounded-2xl p-4 backdrop-blur-2xl shadow-2xl space-y-2">
             {[...navLinks, ...dropdownLinks].map((link) => {
               const isActive = pathname === link.href;
-              const isHash = link.href.includes("#");
               return (
                 <Link
                   key={link.name}
                   href={link.href}
                   onClick={(e) => {
-                    if (isHash) {
+                    if (link.isHash) {
                       handleHashClick(e, link.href);
                     } else {
                       setMobileMenuOpen(false);
@@ -226,15 +231,6 @@ export default function Navbar() {
                 </Link>
               );
             })}
-            <div className="pt-2 border-t border-white/10 flex flex-col gap-2">
-              <Link
-                href="/contact"
-                onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-center py-2.5 rounded-xl bg-blue-600 text-sm font-semibold text-white"
-              >
-                Get in Touch
-              </Link>
-            </div>
           </div>
         )}
       </Container>

@@ -2,6 +2,7 @@ import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import LifePhilosophy from "@/components/sections/LifePhilosophy";
 import Skills from "@/components/sections/Skills";
+import Experience from "@/components/sections/Experience";
 import Projects from "@/components/sections/Projects";
 import Testimonials from "@/components/sections/Testimonials";
 import FAQSection from "@/components/sections/FAQSection";
@@ -22,6 +23,9 @@ export default function Home() {
         </ScrollReveal>
         <ScrollReveal delay={0.1}>
           <Skills />
+        </ScrollReveal>
+        <ScrollReveal delay={0.1}>
+          <Experience />
         </ScrollReveal>
         <ScrollReveal delay={0.1}>
           <Projects />
