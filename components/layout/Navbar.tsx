@@ -14,6 +14,8 @@ import {
   HelpCircle,
   Briefcase,
   ShoppingBag,
+  Award,
+  BookOpen,
 } from "lucide-react";
 import Container from "../ui/Container";
 import DeveloperAvatar from "../ui/DeveloperAvatar";
@@ -21,12 +23,13 @@ import DeveloperAvatar from "../ui/DeveloperAvatar";
 const navLinks = [
   { name: "Home", href: "/", isHash: false },
   { name: "Projects", href: "/projects", isHash: false },
+  { name: "Certifications", href: "/certifications", isHash: false },
   { name: "Skills", href: "/#skills", isHash: true },
   { name: "Experience", href: "/#experience", isHash: true },
-  { name: "Blog", href: "/blog", isHash: false },
 ];
 
 const dropdownLinks = [
+  { name: "BLOG", href: "/blog", icon: BookOpen, isHash: false },
   { name: "SERVICES", href: "/services", icon: Briefcase, isHash: false },
   { name: "STORE", href: "/store", icon: ShoppingBag, isHash: false },
   { name: "LOGIN", href: "/login", icon: LogIn, isHash: false },
@@ -39,10 +42,37 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [moreDropdownOpen, setMoreDropdownOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   const pathname = usePathname();
   const router = useRouter();
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (pathname !== "/") return;
+
+    const sections = ["skills", "experience", "faq"];
+    const observerOptions = {
+      root: null,
+      rootMargin: "-20% 0px -60% 0px",
+      threshold: 0,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(`#${entry.target.id}`);
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [pathname]);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -60,14 +90,18 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+      if (window.scrollY < 300 && pathname === "/") {
+        setActiveSection("");
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [pathname]);
 
   const handleLogoClick = (e: React.MouseEvent) => {
     e.preventDefault();
+    setActiveSection("");
     if (pathname === "/") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
@@ -79,6 +113,7 @@ export default function Navbar() {
   const handleHashClick = (e: React.MouseEvent, href: string) => {
     const hash = href.split("#")[1];
     if (hash) {
+      setActiveSection(`#${hash}`);
       if (pathname === "/") {
         e.preventDefault();
         const element = document.getElementById(hash);
@@ -93,6 +128,14 @@ export default function Navbar() {
     }
   };
 
+  const checkIsActive = (link: { href: string; isHash: boolean }) => {
+    if (link.isHash) {
+      const hashPart = link.href.split("#")[1];
+      return pathname === "/" && activeSection === `#${hashPart}`;
+    }
+    return pathname === link.href && (!activeSection || pathname !== "/");
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -103,32 +146,34 @@ export default function Navbar() {
     >
       <Container>
         <div className="flex items-center justify-between gap-4">
-          {/* Logo with Embedded Developer Avatar */}
           <div className="flex items-center gap-1 sm:gap-2">
             <Link
               href="/"
               onClick={handleLogoClick}
               className="inline-flex items-center gap-1.5 text-xl font-black tracking-tight text-white group cursor-pointer shrink-0"
             >
-              <span className="bg-linear-to-r from-blue-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent group-hover:opacity-80 transition-opacity">
+              <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent group-hover:opacity-80 transition-opacity">
                 Prem Mandal
               </span>
               <Sparkles className="w-4 h-4 text-cyan-400 group-hover:rotate-12 transition-transform" />
             </Link>
-
-            {/* Developer Avatar Component */}
             <DeveloperAvatar />
           </div>
 
-          {/* Desktop Nav Links */}
           <nav className="hidden lg:flex items-center gap-1 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full backdrop-blur-md">
             {navLinks.map((link) => {
-              const isActive = pathname === link.href;
+              const isActive = checkIsActive(link);
               return (
                 <Link
                   key={link.name}
                   href={link.href}
-                  onClick={(e) => link.isHash && handleHashClick(e, link.href)}
+                  onClick={(e) => {
+                    if (link.isHash) {
+                      handleHashClick(e, link.href);
+                    } else {
+                      setActiveSection("");
+                    }
+                  }}
                   className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 ${
                     isActive
                       ? "bg-blue-600 text-white shadow-md shadow-blue-500/20"
@@ -140,7 +185,6 @@ export default function Navbar() {
               );
             })}
 
-            {/* MORE Dropdown */}
             <div className="relative ml-1" ref={dropdownRef}>
               <button
                 onClick={() => setMoreDropdownOpen(!moreDropdownOpen)}
@@ -169,6 +213,7 @@ export default function Navbar() {
                           if (item.isHash) {
                             handleHashClick(e, item.href);
                           } else {
+                            setActiveSection("");
                             setMoreDropdownOpen(false);
                           }
                         }}
@@ -184,7 +229,6 @@ export default function Navbar() {
             </div>
           </nav>
 
-          {/* Right CTAs */}
           <div className="hidden md:flex items-center gap-3 shrink-0">
             <a
               href="/resume/resume.pdf"
@@ -195,13 +239,13 @@ export default function Navbar() {
             </a>
             <Link
               href="/contact"
+              onClick={() => setActiveSection("")}
               className="px-4 py-2 text-xs font-semibold rounded-xl bg-blue-600 hover:bg-blue-500 text-white transition-all shadow-md shadow-blue-600/30"
             >
               Get in Touch
             </Link>
           </div>
 
-          {/* Mobile Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="lg:hidden p-2 rounded-xl bg-white/5 border border-white/10 text-gray-300 hover:text-white cursor-pointer"
@@ -211,11 +255,10 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Mobile Dropdown */}
         {mobileMenuOpen && (
           <div className="lg:hidden mt-4 bg-background/95 border border-white/10 rounded-2xl p-4 backdrop-blur-2xl shadow-2xl space-y-2">
             {[...navLinks, ...dropdownLinks].map((link) => {
-              const isActive = pathname === link.href;
+              const isActive = checkIsActive(link);
               return (
                 <Link
                   key={link.name}
@@ -224,6 +267,7 @@ export default function Navbar() {
                     if (link.isHash) {
                       handleHashClick(e, link.href);
                     } else {
+                      setActiveSection("");
                       setMobileMenuOpen(false);
                     }
                   }}
