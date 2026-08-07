@@ -8,38 +8,48 @@ type Mood = "sleeping" | "thinking" | "debugging" | "active";
 
 export default function DeveloperAvatar() {
   const [mood, setMood] = useState<Mood>("sleeping");
+  const [sleepTextIndex, setSleepTextIndex] = useState(0);
 
+  const sleepMessages = ["Zzz...", "Hello Buddy 👋", "Idle Mode 💤"];
+
+  // Alternate Sleeping Messages Every 2.5 Seconds
+  useEffect(() => {
+    if (mood !== "sleeping") return;
+
+    const interval = setInterval(() => {
+      setSleepTextIndex((prev) => (prev + 1) % sleepMessages.length);
+    }, 2500);
+
+    return () => clearInterval(interval);
+  }, [mood]);
+
+  // Interaction Handlers
   useEffect(() => {
     let scrollTimeout: NodeJS.Timeout;
 
-    // 1. Hover Detection for Interactive Elements
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
 
-      // Inputs / Textareas / Forms triggers Debug Mode
       if (target.closest("input, textarea, select, form")) {
         setMood("debugging");
         return;
       }
 
-      // Buttons / Links / Cards triggers Active Dev Mode
       if (target.closest("a, button, [role='button'], .group")) {
         setMood("active");
         return;
       }
 
-      // Default back to Sleeping if normal area
       setMood("sleeping");
     };
 
-    // 2. Fast Scroll Detection triggers Thinking Mode
     const handleScroll = () => {
       setMood("thinking");
 
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
         setMood("sleeping");
-      }, 1200); // 1.2 sec baad back to sleep
+      }, 1200);
     };
 
     window.addEventListener("mouseover", handleMouseOver);
@@ -51,6 +61,8 @@ export default function DeveloperAvatar() {
       clearTimeout(scrollTimeout);
     };
   }, []);
+
+  const isAwake = mood !== "sleeping";
 
   return (
     <div className="inline-flex items-center gap-2 ml-2 pointer-events-none select-none">
@@ -68,7 +80,7 @@ export default function DeveloperAvatar() {
           }`}
         />
 
-        {/* SVG AVATAR CHARACTER */}
+        {/* SVG AVATAR CHARACTER WITH HAND GESTURES */}
         <motion.svg
           viewBox="0 0 120 120"
           className="w-full h-full drop-shadow-md relative z-10"
@@ -111,12 +123,35 @@ export default function DeveloperAvatar() {
             strokeWidth="3"
           />
 
+          {/* LEFT & RIGHT HAND GESTURES / ARMS */}
+          {isAwake ? (
+            /* Active Typing Hands on Laptop */
+            <g stroke={mood === "debugging" ? "#f59e0b" : "#38bdf8"} strokeWidth="4" strokeLinecap="round">
+              <motion.path
+                d="M 38 85 Q 45 92 50 95"
+                animate={{ rotate: [-5, 5, -5] }}
+                transition={{ duration: 0.2, repeat: Infinity }}
+              />
+              <motion.path
+                d="M 82 85 Q 75 92 70 95"
+                animate={{ rotate: [5, -5, 5] }}
+                transition={{ duration: 0.2, repeat: Infinity }}
+              />
+            </g>
+          ) : (
+            /* Sleeping Relaxed Hands Folded */
+            <g stroke="#475569" strokeWidth="4" strokeLinecap="round">
+              <path d="M 40 90 Q 48 95 55 95" />
+              <path d="M 80 90 Q 72 95 65 95" />
+            </g>
+          )}
+
           {/* Laptop Screen */}
-          {mood !== "sleeping" && (
+          {isAwake && (
             <g>
               <rect
                 x="40"
-                y="82"
+                y="80"
                 width="40"
                 height="22"
                 rx="3"
@@ -131,7 +166,7 @@ export default function DeveloperAvatar() {
                 strokeWidth="2"
               />
               <path
-                d="M 35 104 L 85 104"
+                d="M 35 102 L 85 102"
                 stroke={
                   mood === "debugging"
                     ? "#d97706"
@@ -183,27 +218,24 @@ export default function DeveloperAvatar() {
             strokeWidth="2"
           />
 
-          {/* Eyes State Engine */}
+          {/* Eyes State Engine (Sleeping vs Awake) */}
           {mood === "sleeping" ? (
-            /* Sleeping Zzz Eyes */
             <g stroke="#94a3b8" strokeWidth="2.5" strokeLinecap="round">
+              {/* Sleeping curve eyes */}
               <path d="M 50 45 Q 54 48 56 45" />
               <path d="M 64 45 Q 68 48 70 45" />
             </g>
           ) : mood === "thinking" ? (
-            /* Thinking Upward Eyes */
             <g fill="#c084fc">
               <circle cx="53" cy="43" r="3" />
               <circle cx="67" cy="43" r="3" />
             </g>
           ) : mood === "debugging" ? (
-            /* Alert Debugging Orange Eyes */
             <g fill="#fbbf24">
               <circle cx="53" cy="45" r="3.5" className="animate-ping" />
               <circle cx="67" cy="45" r="3.5" className="animate-ping" />
             </g>
           ) : (
-            /* Active Focused Cyan Eyes */
             <g fill="#22d3ee">
               <circle cx="53" cy="45" r="3" />
               <circle cx="67" cy="45" r="3" />
@@ -212,59 +244,62 @@ export default function DeveloperAvatar() {
         </motion.svg>
       </div>
 
-      {/* DYNAMIC MOOD BADGE */}
-      <AnimatePresence mode="wait">
-        {mood === "sleeping" && (
-          <motion.span
-            key="sleeping"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            className="text-[9px] text-gray-400 font-mono bg-white/5 border border-white/10 px-2 py-0.5 rounded-full"
-          >
-            Zzz...
-          </motion.span>
-        )}
+      {/* DYNAMIC STATUS BADGE (Desktop Only) */}
+      <div className="hidden md:inline-flex">
+        <AnimatePresence mode="wait">
+          {mood === "sleeping" && (
+            <motion.span
+              key={sleepMessages[sleepTextIndex]}
+              initial={{ opacity: 0, y: 3 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -3 }}
+              transition={{ duration: 0.2 }}
+              className="text-[9px] text-gray-300 font-mono bg-white/5 border border-white/10 px-2 py-0.5 rounded-full shadow-sm"
+            >
+              {sleepMessages[sleepTextIndex]}
+            </motion.span>
+          )}
 
-        {mood === "thinking" && (
-          <motion.span
-            key="thinking"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            className="text-[8px] text-purple-300 font-mono font-bold uppercase bg-purple-500/20 border border-purple-400/30 px-2 py-0.5 rounded-full flex items-center gap-1"
-          >
-            <BrainCircuit className="w-2.5 h-2.5 text-purple-400 animate-spin" />
-            Analyzing
-          </motion.span>
-        )}
+          {mood === "thinking" && (
+            <motion.span
+              key="thinking"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              className="text-[8px] text-purple-300 font-mono font-bold uppercase bg-purple-500/20 border border-purple-400/30 px-2 py-0.5 rounded-full flex items-center gap-1"
+            >
+              <BrainCircuit className="w-2.5 h-2.5 text-purple-400 animate-spin" />
+              Analyzing
+            </motion.span>
+          )}
 
-        {mood === "debugging" && (
-          <motion.span
-            key="debugging"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            className="text-[8px] text-amber-300 font-mono font-bold uppercase bg-amber-500/20 border border-amber-400/30 px-2 py-0.5 rounded-full flex items-center gap-1"
-          >
-            <Bug className="w-2.5 h-2.5 text-amber-400 animate-bounce" />
-            Debugging
-          </motion.span>
-        )}
+          {mood === "debugging" && (
+            <motion.span
+              key="debugging"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              className="text-[8px] text-amber-300 font-mono font-bold uppercase bg-amber-500/20 border border-amber-400/30 px-2 py-0.5 rounded-full flex items-center gap-1"
+            >
+              <Bug className="w-2.5 h-2.5 text-amber-400 animate-bounce" />
+              Debugging
+            </motion.span>
+          )}
 
-        {mood === "active" && (
-          <motion.span
-            key="active"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            className="text-[8px] text-cyan-300 font-mono font-bold uppercase bg-cyan-500/20 border border-cyan-400/30 px-2 py-0.5 rounded-full flex items-center gap-1"
-          >
-            <Terminal className="w-2.5 h-2.5 text-cyan-400 animate-pulse" />
-            Dev Mode
-          </motion.span>
-        )}
-      </AnimatePresence>
+          {mood === "active" && (
+            <motion.span
+              key="active"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              className="text-[8px] text-cyan-300 font-mono font-bold uppercase bg-cyan-500/20 border border-cyan-400/30 px-2 py-0.5 rounded-full flex items-center gap-1"
+            >
+              <Terminal className="w-2.5 h-2.5 text-cyan-400 animate-pulse" />
+              Dev Mode
+            </motion.span>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
