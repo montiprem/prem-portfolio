@@ -40,6 +40,8 @@
 
   html {
     scroll-behavior: smooth;
+    /* Prevent jitter during fast scrolls */
+    scroll-padding-top: 80px; 
   }
 
   body {
@@ -49,6 +51,17 @@
     color: var(--foreground);
     font-family: var(--font-geist-sans), system-ui, sans-serif;
     overflow-x: hidden;
+    /* Force GPU Acceleration for Smooth Page Scrolling */
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Optimize Heavy Blur Performance */
+  .backdrop-blur-xl,
+  .backdrop-blur-2xl,
+  .backdrop-blur-md {
+    will-change: backdrop-filter;
+    transform: translateZ(0);
   }
 
   /* Custom Modern Scrollbar */
@@ -72,7 +85,6 @@
 
 /* Custom Utilities / Keyframes */
 
-/* 1. Preloader Bar Animation */
 @keyframes loading {
   0% {
     transform: translateX(-100%);
@@ -85,7 +97,6 @@
   }
 }
 
-/* 2. Floating Animations for Hero Badges & UI */
 @keyframes float {
   0%,
   100% {
@@ -114,9 +125,9 @@
   }
 }
 
-/* Helper Utility Classes */
 .animate-float {
   animation: float 4s ease-in-out infinite;
+  will-change: transform;
 }
 
 .animate-bounce-slow {
@@ -126,4 +137,5 @@
 
 .animate-pulse-glow {
   animation: pulseGlow 3s ease-in-out infinite;
+  will-change: opacity;
 }

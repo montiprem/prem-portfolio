@@ -13,14 +13,15 @@ export default function ScrollReveal({
   delay = 0,
   direction = "up",
 }: Props) {
-  const offset = { up: { y: 40 }, left: { x: -40 }, right: { x: 40 } }[direction];
+  const offset = { up: { y: 25 }, left: { x: -25 }, right: { x: 25 } }[direction];
 
   return (
     <motion.div
       initial={{ opacity: 0, ...offset }}
       whileInView={{ opacity: 1, y: 0, x: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, delay, ease: "easeOut" }}
+      viewport={{ once: true, margin: "-50px" }} // Screen me aane se thoda pehle trigger hoga
+      transition={{ duration: 0.5, delay, ease: [0.25, 0.1, 0.25, 1.0] }}
+      style={{ willChange: "opacity, transform" }} // Hardware Acceleration Force Karega
     >
       {children}
     </motion.div>

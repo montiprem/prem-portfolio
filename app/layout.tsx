@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import CustomCursor from "@/components/cursor/CustomCursor";
 import Preloader from "@/components/loader/Preloader";
 import ChatBot from "@/components/ChatBot";
 import { Providers } from "./providers";
@@ -30,10 +29,7 @@ export default function RootLayout({
           {/* Startup Preloader */}
           <Preloader />
 
-          {/* Custom Mouse Cursor (Hidden on Touch/Mobile devices) */}
-          <CustomCursor />
-
-          {/* Top Navigation */}
+          {/* Top Navigation (Contains DeveloperAvatar inside) */}
           <Navbar />
 
           {/* Main Route Content */}

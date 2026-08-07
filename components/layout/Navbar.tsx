@@ -16,6 +16,7 @@ import {
   ShoppingBag,
 } from "lucide-react";
 import Container from "../ui/Container";
+import DeveloperAvatar from "../ui/DeveloperAvatar";
 
 const navLinks = [
   { name: "Home", href: "/", isHash: false },
@@ -102,17 +103,22 @@ export default function Navbar() {
     >
       <Container>
         <div className="flex items-center justify-between gap-4">
-          {/* Logo */}
-          <Link
-            href="/"
-            onClick={handleLogoClick}
-            className="inline-flex items-center gap-2 text-xl font-black tracking-tight text-white group cursor-pointer shrink-0"
-          >
-            <span className="bg-linear-to-r from-blue-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent group-hover:opacity-80 transition-opacity">
-              Prem Mandal
-            </span>
-            <Sparkles className="w-4 h-4 text-cyan-400 group-hover:rotate-12 transition-transform" />
-          </Link>
+          {/* Logo with Embedded Developer Avatar */}
+          <div className="flex items-center gap-1 sm:gap-2">
+            <Link
+              href="/"
+              onClick={handleLogoClick}
+              className="inline-flex items-center gap-1.5 text-xl font-black tracking-tight text-white group cursor-pointer shrink-0"
+            >
+              <span className="bg-linear-to-r from-blue-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent group-hover:opacity-80 transition-opacity">
+                Prem Mandal
+              </span>
+              <Sparkles className="w-4 h-4 text-cyan-400 group-hover:rotate-12 transition-transform" />
+            </Link>
+
+            {/* Developer Avatar Component */}
+            <DeveloperAvatar />
+          </div>
 
           {/* Desktop Nav Links */}
           <nav className="hidden lg:flex items-center gap-1 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full backdrop-blur-md">
