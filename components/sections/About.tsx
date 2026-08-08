@@ -49,15 +49,17 @@ const timelineData = [
 const educationData = [
   {
     degree: "B.Com. (Bachelor of Commerce)",
-    year: "2025",
-    institution: "Sikkim Professional University Gangtok",
+    year: "2022 - 2025",
+    institution: "Sikkim Professional University, Gangtok",
   },
   {
     degree: "12th Standard (JAC)",
+    year: "2019 - 2021",
     institution: "Model School Bengabad, Jharkhand",
   },
   {
     degree: "10th Standard (CBSE)",
+    year: "2018 - 2019",
     institution: "Anandalaya Public School Madhupur, Jharkhand",
   },
 ];
@@ -97,7 +99,7 @@ export default function About() {
           </p>
           <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
             Turning Data Into{" "}
-            <span className="bg-linear-to-r from-blue-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent">
               Business Decisions
             </span>
           </h2>
@@ -118,7 +120,7 @@ export default function About() {
               <div className="absolute h-80 w-80 rounded-full bg-blue-500/30 blur-[120px] pointer-events-none" />
 
               {/* Photo Frame with Glowing Ring */}
-              <div className="relative group h-72 w-72 sm:h-80 sm:w-80 overflow-hidden rounded-3xl border-2 border-blue-500/50 bg-linear-to-br from-blue-600/30 via-purple-600/20 to-transparent p-2 shadow-[0_0_80px_rgba(59,130,246,0.35)] transition-all duration-500 hover:scale-[1.03] hover:border-cyan-400">
+              <div className="relative group h-72 w-72 sm:h-80 sm:w-80 overflow-hidden rounded-3xl border-2 border-blue-500/50 bg-gradient-to-br from-blue-600/30 via-purple-600/20 to-transparent p-2 shadow-[0_0_80px_rgba(59,130,246,0.35)] transition-all duration-500 hover:scale-[1.03] hover:border-cyan-400">
                 <div className="relative h-full w-full overflow-hidden rounded-[20px]">
                   <Image
                     src="/images/prem.jpeg"
@@ -178,7 +180,7 @@ export default function About() {
               <a
                 href="/resume/resume.pdf"
                 download
-                className="group flex-1 px-4 py-3 bg-blue-600 hover:bg-blue-500 rounded-xl transition-all duration-300 font-semibold text-white flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30 hover:shadow-blue-500/50 hover:scale-105 active:scale-95 text-xs sm:text-sm"
+                className="group flex-1 px-4 py-3 bg-blue-600 hover:bg-blue-500 rounded-xl transition-all duration-300 font-semibold text-white flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30 hover:shadow-blue-500/50 hover:scale-105 active:scale-95 text-xs sm:text-sm cursor-pointer"
               >
                 <Download className="w-4 h-4 transition-transform group-hover:-translate-y-0.5" />
                 <span>Resume</span>
@@ -186,14 +188,14 @@ export default function About() {
 
               <a
                 href="#contact"
-                className="group flex-1 px-4 py-3 rounded-xl border border-white/20 bg-white/5 backdrop-blur-md hover:bg-white hover:text-black transition-all duration-300 font-semibold flex items-center justify-center gap-2 hover:scale-105 text-xs sm:text-sm"
+                className="group flex-1 px-4 py-3 rounded-xl border border-white/20 bg-white/5 backdrop-blur-md hover:bg-white hover:text-black transition-all duration-300 font-semibold flex items-center justify-center gap-2 hover:scale-105 text-xs sm:text-sm cursor-pointer"
               >
                 <MessageSquare className="w-4 h-4" />
                 <span>Connect</span>
               </a>
             </motion.div>
 
-            {/* EDUCATION SECTION */}
+            {/* EDUCATION SECTION (LEFT COLUMN) */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -214,14 +216,14 @@ export default function About() {
                 {educationData.map((item, idx) => (
                   <div
                     key={idx}
-                    className="p-3.5 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-300 hover:border-blue-500/40 hover:bg-white/0.08 shadow-md"
+                    className="p-3.5 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-300 hover:border-blue-500/40 hover:bg-white/10 shadow-md"
                   >
                     <div className="flex justify-between items-start gap-2">
                       <h4 className="text-xs sm:text-sm font-bold text-white leading-snug">
                         {item.degree}
                       </h4>
                       {item.year && (
-                        <span className="text-[9px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 shrink-0">
+                        <span className="text-[9px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 shrink-0 font-mono">
                           {item.year}
                         </span>
                       )}
@@ -292,9 +294,9 @@ export default function About() {
               <div className="relative pl-2 sm:pl-4 border-l border-white/10 space-y-4">
                 {timelineData.map((item) => (
                   <div key={item.company} className="relative pl-6 group">
-                    <div className="absolute -left-1.25 top-4 h-2.5 w-2.5 rounded-full border border-blue-400 bg-background group-hover:bg-blue-400 group-hover:scale-150 transition-all duration-300 shadow-[0_0_10px_rgba(59,130,246,0.8)]" />
+                    <div className="absolute -left-[5px] top-4 h-2.5 w-2.5 rounded-full border border-blue-400 bg-background group-hover:bg-blue-400 group-hover:scale-150 transition-all duration-300 shadow-[0_0_10px_rgba(59,130,246,0.8)]" />
 
-                    <div className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-md transition-all duration-300 hover:border-blue-500/50 hover:bg-white/0.08 hover:-translate-y-0.5 flex flex-wrap items-center justify-between gap-2 shadow-lg">
+                    <div className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-md transition-all duration-300 hover:border-blue-500/50 hover:bg-white/10 hover:-translate-y-0.5 flex flex-wrap items-center justify-between gap-2 shadow-lg">
                       <div>
                         <div className="flex items-center gap-2">
                           <span className="text-xs font-bold text-blue-400">

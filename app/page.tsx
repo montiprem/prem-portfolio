@@ -6,6 +6,7 @@ import Experience from "@/components/sections/Experience";
 import Projects from "@/components/sections/Projects";
 import Testimonials from "@/components/sections/Testimonials";
 import FAQSection from "@/components/sections/FAQSection";
+import CommunityPresence from "@/components/sections/CommunityPresence";
 import Contact from "@/components/sections/Contact";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 
@@ -35,6 +36,9 @@ export default function Home() {
         </ScrollReveal>
         <ScrollReveal delay={0.1}>
           <FAQSection />
+        </ScrollReveal>
+        <ScrollReveal delay={0.1}>
+          <CommunityPresence />
         </ScrollReveal>
         <ScrollReveal>
           <Contact />

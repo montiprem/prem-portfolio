@@ -1,13 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Briefcase, Calendar, Sparkles, MapPin } from "lucide-react";
+import { Briefcase, Calendar, Sparkles, MapPin, ExternalLink } from "lucide-react";
 import Container from "../ui/Container";
 
 const experienceData = [
   {
     year: "2026 - Present",
     company: "Utkarsh India Ltd",
+    companyUrl: "https://utkarshindia.in/",
     role: "Senior BI Developer",
     location: "Kolkata, India",
     status: "Current",
@@ -17,6 +18,7 @@ const experienceData = [
   {
     year: "2025 - 2026",
     company: "Bhauram Jodhraj Pvt Ltd",
+    companyUrl: "https://www.bhauramjodhraj.com/",
     role: "Senior BI Developer",
     location: "Kolkata, India",
     status: null,
@@ -26,6 +28,7 @@ const experienceData = [
   {
     year: "2024 - 2025",
     company: "Super Smelters Ltd",
+    companyUrl: "https://supershakti.in/",
     role: "Power BI Developer",
     location: "Kolkata, India",
     status: null,
@@ -59,7 +62,7 @@ export default function Experience() {
           </p>
           <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
             Work{" "}
-            <span className="bg-linear-to-r from-blue-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent">
               Experience
             </span>
           </h2>
@@ -126,12 +129,20 @@ export default function Experience() {
                             )}
                           </h3>
                           
-                          <div className="flex flex-wrap items-center gap-3 mt-1">
-                            <p className="text-xs sm:text-sm font-semibold text-blue-400 flex items-center gap-1.5">
-                              <Briefcase className="w-3.5 h-3.5" /> {item.company}
-                            </p>
+                          <div className="flex flex-wrap items-center gap-3 mt-1.5">
+                            {/* Interactive Company Link */}
+                            <a
+                              href={item.companyUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-xs sm:text-sm font-semibold text-blue-400 hover:text-cyan-300 transition-colors flex items-center gap-1.5 hover:underline"
+                            >
+                              <Briefcase className="w-3.5 h-3.5" />
+                              <span>{item.company}</span>
+                              <ExternalLink className="w-3 h-3 text-cyan-400" />
+                            </a>
 
-                            {/* Location Tag with Indian Flag Sticker */}
+                            {/* Location Tag */}
                             <span className="text-xs text-gray-400 flex items-center gap-1 bg-white/5 px-2.5 py-0.5 rounded-md border border-white/5">
                               <MapPin className="w-3 h-3 text-cyan-400 shrink-0" />
                               <span>{item.location}</span>

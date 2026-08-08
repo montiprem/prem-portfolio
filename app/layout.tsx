@@ -12,7 +12,14 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Prem Mandal | Senior BI Developer & Data Analyst",
   description:
-    "Portfolio of Prem Mandal, BI Developer specialized in Power BI, SQL, and Data Analytics.",
+    "Portfolio of Prem Mandal - Senior BI Developer and Data Analyst specializing in Power BI, SQL, DAX, and Data Analytics.",
+  icons: {
+    icon: [
+      { url: "/icon.png?v=1", type: "image/png" },
+    ],
+    shortcut: "/icon.png?v=1",
+    apple: "/icon.png?v=1",
+  },
 };
 
 export default function RootLayout({
@@ -29,7 +36,7 @@ export default function RootLayout({
           {/* Startup Preloader */}
           <Preloader />
 
-          {/* Top Navigation (Contains DeveloperAvatar inside) */}
+          {/* Top Navigation */}
           <Navbar />
 
           {/* Main Route Content */}
