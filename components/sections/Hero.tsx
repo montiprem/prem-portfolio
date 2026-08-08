@@ -12,9 +12,6 @@ import {
   Download,
   ArrowRight,
   Sparkles,
-  Terminal,
-  Database,
-  Zap,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import Container from "../ui/Container";
@@ -49,7 +46,7 @@ function LinkedinStatsCard() {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.5 }}
-      className="w-full max-w-lg bg-white/5 border border-white/10 rounded-2xl p-3 sm:p-5 shadow-2xl backdrop-blur-xl relative overflow-hidden mt-4 sm:mt-6 transition-all duration-300 hover:border-blue-500/40 hover:shadow-blue-500/10"
+      className="w-full max-w-lg bg-white/0.03 border border-white/10 rounded-2xl p-3 sm:p-5 shadow-2xl backdrop-blur-xl relative overflow-hidden mt-4 sm:mt-6 transition-all duration-300 hover:border-blue-500/40 hover:shadow-blue-500/10"
     >
       <div className="absolute -top-12 -right-12 w-40 h-40 bg-blue-500/20 rounded-full blur-3xl pointer-events-none" />
 
@@ -126,7 +123,7 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen overflow-hidden bg-background flex items-center pt-24 pb-12 sm:pt-32 sm:pb-20 text-white"
     >
-      {/* Background Ambient Glows */}
+      {/* Background Glows */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.12),transparent_60%)] pointer-events-none" />
       <div className="absolute -top-40 -left-40 h-96 w-96 rounded-full bg-blue-500/15 blur-[140px] pointer-events-none" />
       <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-cyan-500/15 blur-[140px] pointer-events-none" />
@@ -141,7 +138,7 @@ export default function Hero() {
             transition={{ duration: 0.7, ease: "easeOut" }}
             className="lg:col-span-7"
           >
-            {/* Top Badge: Data is Everything */}
+            {/* Replaced Badge: Data is Everything */}
             <div className="inline-flex items-center gap-2 sm:gap-2.5 rounded-full border border-blue-500/30 bg-blue-500/10 px-3 sm:px-4 py-1 sm:py-1.5 backdrop-blur-md mb-3 sm:mb-4 shadow-lg shadow-blue-500/10">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
@@ -158,7 +155,6 @@ export default function Hero() {
               </span>
             </div>
 
-            {/* Freelance Availability Badge */}
             <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 sm:px-3.5 py-1 sm:py-1.5 backdrop-blur-md ml-0 sm:ml-2">
               <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -183,8 +179,7 @@ export default function Hero() {
               </span>
             </h1>
 
-            <h2 className="text-[11px] sm:text-lg font-medium text-blue-400/90 mt-2 sm:mt-3 flex items-center gap-2">
-              <Database className="w-4 h-4 text-cyan-400" />
+            <h2 className="text-[11px] sm:text-lg font-medium text-blue-400/90 mt-2 sm:mt-3">
               Senior BI Developer • Data Analyst • Microsoft Fabric
             </h2>
 
@@ -192,17 +187,7 @@ export default function Hero() {
               I build enterprise-grade BI solutions using Power BI, SQL, DAX, Power Query, and Microsoft Fabric. From analytical data modeling to executive dashboards, I help businesses turn complex data into actionable insights.
             </p>
 
-            {/* LIVE TECH CONSOLE SNIPPET (NEW ENHANCEMENT) */}
-            <div className="mt-4 p-3 rounded-xl bg-black/40 border border-white/10 max-w-xl flex items-center gap-3 backdrop-blur-md">
-              <Terminal className="w-4 h-4 text-cyan-400 shrink-0" />
-              <div className="text-[11px] font-mono text-gray-300 flex-1 truncate">
-                <span className="text-emerald-400">status:</span> <span className="text-yellow-300">DirectLake_Active</span> | <span className="text-cyan-300">dax_engine:</span> <span className="text-blue-400">Optimized</span>
-              </div>
-              <span className="text-[10px] text-cyan-400 font-mono bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">LIVE</span>
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-2 sm:gap-3 mt-5">
+            <div className="flex flex-wrap gap-2 sm:gap-3 mt-4 sm:mt-6">
               <a
                 href="/resume/resume.pdf"
                 download
@@ -221,7 +206,6 @@ export default function Hero() {
               </a>
             </div>
 
-            {/* Social Icons */}
             <div className="flex gap-2 sm:gap-2.5 mt-4 sm:mt-5">
               {socials.map(({ href, label, icon: Icon }) => (
                 <a
@@ -237,26 +221,18 @@ export default function Hero() {
               ))}
             </div>
 
-            {/* Impact Metric Counters */}
             <div className="flex gap-5 sm:gap-10 mt-5 pt-5 sm:mt-6 sm:pt-6 border-t border-white/10">
               <div>
-                <p className="text-xl sm:text-3xl font-extrabold text-white tracking-tight flex items-center gap-1">
-                  <span>02+</span>
-                </p>
+                <p className="text-xl sm:text-3xl font-extrabold text-white tracking-tight">02+</p>
                 <p className="text-[10px] sm:text-xs text-gray-400 font-medium mt-0.5">Years Experience</p>
               </div>
               <div>
-                <p className="text-xl sm:text-3xl font-extrabold text-white tracking-tight flex items-center gap-1">
-                  <span>15+</span>
-                </p>
+                <p className="text-xl sm:text-3xl font-extrabold text-white tracking-tight">15+</p>
                 <p className="text-[10px] sm:text-xs text-gray-400 font-medium mt-0.5">Projects Built</p>
               </div>
               <div>
-                <p className="text-xl sm:text-3xl font-extrabold text-white tracking-tight flex items-center gap-1">
-                  <span>55K+</span>
-                  <Zap className="w-4 h-4 text-amber-400 fill-amber-400 shrink-0" />
-                </p>
-                <p className="text-[10px] sm:text-xs text-gray-400 font-medium mt-0.5">Community Reach</p>
+                <p className="text-xl sm:text-3xl font-extrabold text-white tracking-tight">55K+</p>
+                <p className="text-[10px] sm:text-xs text-gray-400 font-medium mt-0.5">Community</p>
               </div>
             </div>
           </motion.div>
