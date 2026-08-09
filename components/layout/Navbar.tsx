@@ -215,7 +215,7 @@ export default function Navbar() {
               </button>
 
               {moreDropdownOpen && (
-                <div className="absolute right-0 mt-3 w-48 rounded-2xl bg-slate-900/95 dark:bg-background/95 border border-white/15 shadow-2xl backdrop-blur-2xl py-2 z-50">
+                <div className="absolute right-0 mt-3 w-48 rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-white/15 shadow-2xl backdrop-blur-2xl py-2 z-50">
                   {dropdownLinks.map((item) => {
                     const Icon = item.icon;
                     return (
@@ -230,9 +230,9 @@ export default function Navbar() {
                             setMoreDropdownOpen(false);
                           }
                         }}
-                        className="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-gray-200 hover:text-white hover:bg-white/10 transition-colors tracking-wider"
+                        className="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-slate-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors tracking-wider"
                       >
-                        <Icon size={16} className="text-gray-400" />
+                        <Icon size={16} className="text-slate-400 dark:text-gray-400" />
                         <span>{item.name}</span>
                       </Link>
                     );
@@ -275,10 +275,11 @@ export default function Navbar() {
           </button>
         </div>
 
+        {/* MOBILE DRAWER (THEME ADAPTIVE) */}
         {mobileMenuOpen && (
-          <div className="lg:hidden mt-4 bg-slate-900/95 dark:bg-background/95 border border-white/10 rounded-2xl p-4 backdrop-blur-2xl shadow-2xl space-y-2 text-white">
-            <div className="flex items-center justify-between pb-2 border-b border-white/10">
-              <span className="text-xs font-medium text-gray-400">Theme</span>
+          <div className="lg:hidden mt-4 bg-slate-50/95 dark:bg-slate-900/95 border border-slate-200 dark:border-white/10 rounded-2xl p-4 backdrop-blur-2xl shadow-2xl space-y-2 text-slate-800 dark:text-white transition-colors duration-300">
+            <div className="flex items-center justify-between pb-3 mb-1 border-b border-slate-200 dark:border-white/10">
+              <span className="text-xs font-bold text-slate-600 dark:text-gray-400 uppercase tracking-wider">Theme</span>
               <ThemeToggle />
             </div>
 
@@ -296,10 +297,10 @@ export default function Navbar() {
                       setMobileMenuOpen(false);
                     }
                   }}
-                  className={`block px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                  className={`block px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${
                     isActive
-                      ? "bg-blue-600 text-white"
-                      : "text-gray-300 hover:bg-white/5 hover:text-white"
+                      ? "bg-blue-600 text-white shadow-md shadow-blue-500/20"
+                      : "text-slate-700 dark:text-gray-300 hover:bg-slate-200/80 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-white"
                   }`}
                 >
                   {link.name}
@@ -311,7 +312,7 @@ export default function Navbar() {
             <a
               href="/resume/resume.pdf"
               download
-              className="flex items-center justify-center gap-2 w-full mt-2 py-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-sm font-bold"
+              className="flex items-center justify-center gap-2 w-full mt-3 py-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-700 dark:text-cyan-300 text-sm font-bold shadow-xs hover:bg-cyan-500/20 transition-all"
             >
               <Download size={16} />
               <span>Download Resume</span>
