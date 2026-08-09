@@ -6,30 +6,30 @@ import { ArrowLeft, FileText } from "lucide-react";
 
 export default function TermsOfServicePage() {
   return (
-    <main className="min-h-screen bg-background pt-32 pb-20 relative text-gray-300">
+    <main className="min-h-screen bg-background pt-32 pb-20 relative text-slate-700 dark:text-gray-300 transition-colors duration-300">
       <Container className="max-w-4xl">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-xs font-semibold text-blue-400 hover:text-blue-300 mb-8"
+          className="inline-flex items-center gap-2 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 mb-8"
         >
           <ArrowLeft className="w-4 h-4" /> Back to Home
         </Link>
 
-        <div className="bg-card border border-white/10 rounded-3xl p-8 sm:p-12 shadow-2xl">
+        <div className="bg-slate-50/80 dark:bg-card border border-slate-200 dark:border-white/10 rounded-3xl p-8 sm:p-12 shadow-xl dark:shadow-2xl backdrop-blur-2xl">
           <div className="flex items-center gap-3 mb-6">
-            <FileText className="w-8 h-8 text-blue-400" />
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-white">
+            <FileText className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
               Terms of Service
             </h1>
           </div>
 
-          <p className="text-xs text-gray-400 mb-8 font-mono">
+          <p className="text-xs text-slate-500 dark:text-gray-400 mb-8 font-mono">
             Last Updated: August 2026
           </p>
 
           <div className="space-y-6 text-sm leading-relaxed">
             <section>
-              <h2 className="text-lg font-bold text-white mb-2">
+              <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
                 1. Acceptance of Terms
               </h2>
               <p>
@@ -40,7 +40,7 @@ export default function TermsOfServicePage() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-white mb-2">
+              <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
                 2. Intellectual Property
               </h2>
               <p>
@@ -52,7 +52,7 @@ export default function TermsOfServicePage() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-white mb-2">
+              <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
                 3. Use of Content
               </h2>
               <p>

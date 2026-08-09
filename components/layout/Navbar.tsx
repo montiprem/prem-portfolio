@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import {
   Menu,
@@ -14,11 +15,12 @@ import {
   HelpCircle,
   Briefcase,
   ShoppingBag,
-  Award,
   BookOpen,
+  Download,
 } from "lucide-react";
 import Container from "../ui/Container";
 import DeveloperAvatar from "../ui/DeveloperAvatar";
+import ThemeToggle from "../ui/ThemeToggle";
 
 const navLinks = [
   { name: "Home", href: "/", isHash: false },
@@ -138,29 +140,40 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-black/10 dark:border-white/10 ${
         scrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-white/10 py-3 shadow-lg"
-          : "bg-transparent py-5"
+          ? "bg-background/80 backdrop-blur-xl py-3 shadow-lg"
+          : "bg-background/40 backdrop-blur-md py-4"
       }`}
     >
       <Container>
         <div className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-1 sm:gap-2">
+          {/* LOGO & BRAND SECTION */}
+          <div className="flex items-center gap-2 sm:gap-3">
             <Link
               href="/"
               onClick={handleLogoClick}
-              className="inline-flex items-center gap-1.5 text-xl font-black tracking-tight text-white group cursor-pointer shrink-0"
+              className="inline-flex items-center gap-2.5 text-xl font-black tracking-tight text-foreground group cursor-pointer shrink-0"
             >
-              <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent group-hover:opacity-80 transition-opacity">
+              {/* Image Logo Badge */}
+              <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-slate-900 dark:bg-[#0a0f1d] p-1 flex items-center justify-center group-hover:border-cyan-500/40 transition-colors">
+                <Image
+                  src="/logopm.png"
+                  alt="Prem Mandal Logo"
+                  fill
+                  unoptimized
+                  className="object-contain group-hover:scale-110 transition-transform duration-300"
+                />
+              </div>
+
+              <span className="bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600 dark:from-blue-400 dark:via-cyan-300 dark:to-indigo-400 bg-clip-text text-transparent group-hover:opacity-80 transition-opacity font-extrabold">
                 Prem Mandal
               </span>
-              <Sparkles className="w-4 h-4 text-cyan-400 group-hover:rotate-12 transition-transform" />
             </Link>
             <DeveloperAvatar />
           </div>
 
-          <nav className="hidden lg:flex items-center gap-1 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full backdrop-blur-md">
+          <nav className="hidden lg:flex items-center gap-1 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 px-4 py-1.5 rounded-full backdrop-blur-md">
             {navLinks.map((link) => {
               const isActive = checkIsActive(link);
               return (
@@ -177,7 +190,7 @@ export default function Navbar() {
                   className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 ${
                     isActive
                       ? "bg-blue-600 text-white shadow-md shadow-blue-500/20"
-                      : "text-gray-300 hover:text-white hover:bg-white/5"
+                      : "text-slate-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5"
                   }`}
                 >
                   {link.name}
@@ -188,7 +201,7 @@ export default function Navbar() {
             <div className="relative ml-1" ref={dropdownRef}>
               <button
                 onClick={() => setMoreDropdownOpen(!moreDropdownOpen)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-yellow-500/40 bg-yellow-500/10 text-yellow-400 hover:bg-yellow-500/20 text-xs font-bold transition-all duration-300 cursor-pointer ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-yellow-500/40 bg-yellow-500/10 text-amber-600 dark:text-yellow-400 hover:bg-yellow-500/20 text-xs font-bold transition-all duration-300 cursor-pointer ${
                   moreDropdownOpen ? "ring-2 ring-yellow-500/30" : ""
                 }`}
               >
@@ -202,7 +215,7 @@ export default function Navbar() {
               </button>
 
               {moreDropdownOpen && (
-                <div className="absolute right-0 mt-3 w-48 rounded-2xl bg-background/95 border border-white/15 shadow-2xl backdrop-blur-2xl py-2 z-50">
+                <div className="absolute right-0 mt-3 w-48 rounded-2xl bg-slate-900/95 dark:bg-background/95 border border-white/15 shadow-2xl backdrop-blur-2xl py-2 z-50">
                   {dropdownLinks.map((item) => {
                     const Icon = item.icon;
                     return (
@@ -229,18 +242,25 @@ export default function Navbar() {
             </div>
           </nav>
 
+          {/* RIGHT ACTION BUTTONS */}
           <div className="hidden md:flex items-center gap-3 shrink-0">
+            {/* Theme Toggle Button */}
+            <ThemeToggle />
+
+            {/* UPGRADED RESUME BUTTON */}
             <a
               href="/resume/resume.pdf"
               download
-              className="px-4 py-2 text-xs font-semibold rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-white transition-all shadow-sm"
+              className="group relative inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-xl border border-cyan-500/40 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-600 dark:text-cyan-300 hover:text-cyan-700 dark:hover:text-white transition-all duration-300 shadow-md hover:shadow-cyan-500/20 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer overflow-hidden"
             >
-              Resume
+              <Download className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400 group-hover:scale-110 group-hover:translate-y-0.5 transition-transform duration-300" />
+              <span>Resume</span>
             </a>
+
             <Link
               href="/contact"
               onClick={() => setActiveSection("")}
-              className="px-4 py-2 text-xs font-semibold rounded-xl bg-blue-600 hover:bg-blue-500 text-white transition-all shadow-md shadow-blue-600/30"
+              className="px-4 py-2 text-xs font-bold rounded-xl bg-blue-600 hover:bg-blue-500 text-white transition-all duration-300 shadow-md shadow-blue-600/30 hover:shadow-blue-500/50 hover:-translate-y-0.5 active:translate-y-0"
             >
               Get in Touch
             </Link>
@@ -248,7 +268,7 @@ export default function Navbar() {
 
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-xl bg-white/5 border border-white/10 text-gray-300 hover:text-white cursor-pointer"
+            className="lg:hidden p-2 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-slate-700 dark:text-gray-300 hover:text-black dark:hover:text-white cursor-pointer flex items-center gap-2"
             aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -256,7 +276,12 @@ export default function Navbar() {
         </div>
 
         {mobileMenuOpen && (
-          <div className="lg:hidden mt-4 bg-background/95 border border-white/10 rounded-2xl p-4 backdrop-blur-2xl shadow-2xl space-y-2">
+          <div className="lg:hidden mt-4 bg-slate-900/95 dark:bg-background/95 border border-white/10 rounded-2xl p-4 backdrop-blur-2xl shadow-2xl space-y-2 text-white">
+            <div className="flex items-center justify-between pb-2 border-b border-white/10">
+              <span className="text-xs font-medium text-gray-400">Theme</span>
+              <ThemeToggle />
+            </div>
+
             {[...navLinks, ...dropdownLinks].map((link) => {
               const isActive = checkIsActive(link);
               return (
@@ -281,6 +306,16 @@ export default function Navbar() {
                 </Link>
               );
             })}
+
+            {/* Mobile Resume Download Option */}
+            <a
+              href="/resume/resume.pdf"
+              download
+              className="flex items-center justify-center gap-2 w-full mt-2 py-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-sm font-bold"
+            >
+              <Download size={16} />
+              <span>Download Resume</span>
+            </a>
           </div>
         )}
       </Container>

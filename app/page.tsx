@@ -20,9 +20,6 @@ export default function Home() {
           <About />
         </ScrollReveal>
         <ScrollReveal delay={0.1}>
-          <LifePhilosophy />
-        </ScrollReveal>
-        <ScrollReveal delay={0.1}>
           <Skills />
         </ScrollReveal>
         <ScrollReveal delay={0.1}>
@@ -39,6 +36,10 @@ export default function Home() {
         </ScrollReveal>
         <ScrollReveal delay={0.1}>
           <CommunityPresence />
+        </ScrollReveal>
+        {/* LifePhilosophy shift is yahan Contact ke theek upar */}
+        <ScrollReveal delay={0.1}>
+          <LifePhilosophy />
         </ScrollReveal>
         <ScrollReveal>
           <Contact />

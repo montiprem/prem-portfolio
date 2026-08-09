@@ -15,10 +15,10 @@ export const metadata: Metadata = {
     "Portfolio of Prem Mandal - Senior BI Developer and Data Analyst specializing in Power BI, SQL, DAX, and Data Analytics.",
   icons: {
     icon: [
-      { url: "/icon.png?v=1", type: "image/png" },
+      { url: "/logopm.png?v=2", type: "image/png" },
     ],
-    shortcut: "/icon.png?v=1",
-    apple: "/icon.png?v=1",
+    shortcut: "/logopm.png?v=2",
+    apple: "/logopm.png?v=2",
   },
 };
 

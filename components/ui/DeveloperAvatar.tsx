@@ -244,7 +244,7 @@ export default function DeveloperAvatar() {
         </motion.svg>
       </div>
 
-      {/* DYNAMIC STATUS BADGE (Desktop Only) */}
+      {/* DYNAMIC STATUS BADGE (Desktop Only - Theme Responsive) */}
       <div className="hidden md:inline-flex">
         <AnimatePresence mode="wait">
           {mood === "sleeping" && (
@@ -254,7 +254,7 @@ export default function DeveloperAvatar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -3 }}
               transition={{ duration: 0.2 }}
-              className="text-[9px] text-gray-300 font-mono bg-white/5 border border-white/10 px-2 py-0.5 rounded-full shadow-sm"
+              className="text-[9px] text-slate-700 dark:text-gray-300 font-mono bg-slate-200/80 dark:bg-white/5 border border-slate-300 dark:border-white/10 px-2 py-0.5 rounded-full shadow-xs"
             >
               {sleepMessages[sleepTextIndex]}
             </motion.span>
@@ -266,9 +266,9 @@ export default function DeveloperAvatar() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
-              className="text-[8px] text-purple-300 font-mono font-bold uppercase bg-purple-500/20 border border-purple-400/30 px-2 py-0.5 rounded-full flex items-center gap-1"
+              className="text-[8px] text-purple-700 dark:text-purple-300 font-mono font-bold uppercase bg-purple-500/15 border border-purple-400/30 px-2 py-0.5 rounded-full flex items-center gap-1"
             >
-              <BrainCircuit className="w-2.5 h-2.5 text-purple-400 animate-spin" />
+              <BrainCircuit className="w-2.5 h-2.5 text-purple-600 dark:text-purple-400 animate-spin" />
               Analyzing
             </motion.span>
           )}
@@ -279,9 +279,9 @@ export default function DeveloperAvatar() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
-              className="text-[8px] text-amber-300 font-mono font-bold uppercase bg-amber-500/20 border border-amber-400/30 px-2 py-0.5 rounded-full flex items-center gap-1"
+              className="text-[8px] text-amber-700 dark:text-amber-300 font-mono font-bold uppercase bg-amber-500/15 border border-amber-400/30 px-2 py-0.5 rounded-full flex items-center gap-1"
             >
-              <Bug className="w-2.5 h-2.5 text-amber-400 animate-bounce" />
+              <Bug className="w-2.5 h-2.5 text-amber-600 dark:text-amber-400 animate-bounce" />
               Debugging
             </motion.span>
           )}
@@ -292,9 +292,9 @@ export default function DeveloperAvatar() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
-              className="text-[8px] text-cyan-300 font-mono font-bold uppercase bg-cyan-500/20 border border-cyan-400/30 px-2 py-0.5 rounded-full flex items-center gap-1"
+              className="text-[8px] text-cyan-700 dark:text-cyan-300 font-mono font-bold uppercase bg-cyan-500/15 border border-cyan-400/30 px-2 py-0.5 rounded-full flex items-center gap-1"
             >
-              <Terminal className="w-2.5 h-2.5 text-cyan-400 animate-pulse" />
+              <Terminal className="w-2.5 h-2.5 text-cyan-600 dark:text-cyan-400 animate-pulse" />
               Dev Mode
             </motion.span>
           )}

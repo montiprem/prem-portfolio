@@ -46,24 +46,24 @@ function LinkedinStatsCard() {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.5 }}
-      className="w-full max-w-lg bg-white/0.03 border border-white/10 rounded-2xl p-3 sm:p-5 shadow-2xl backdrop-blur-xl relative overflow-hidden mt-4 sm:mt-6 transition-all duration-300 hover:border-blue-500/40 hover:shadow-blue-500/10"
+      className="w-full max-w-lg bg-white/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-3 sm:p-5 shadow-2xl backdrop-blur-xl relative overflow-hidden mt-4 sm:mt-6 transition-all duration-300 hover:border-blue-500/40 hover:shadow-blue-500/10"
     >
       <div className="absolute -top-12 -right-12 w-40 h-40 bg-blue-500/20 rounded-full blur-3xl pointer-events-none" />
 
       {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-3 pb-3.5 border-b border-white/10">
+      <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-3 pb-3.5 border-b border-slate-200 dark:border-white/10">
         <div className="flex items-center gap-2.5 sm:gap-3">
           <div className="p-2 sm:p-2.5 bg-blue-600 rounded-xl text-white shadow-lg shadow-blue-500/30">
             <LinkedinIcon size={18} />
           </div>
           <div>
             <div className="flex items-center gap-1.5 sm:gap-2">
-              <h3 className="text-xs sm:text-base font-bold text-white">Prem Mandal</h3>
-              <span className="bg-amber-500/10 text-amber-400 text-[9px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-full border border-amber-500/20 flex items-center gap-1">
+              <h3 className="text-xs sm:text-base font-bold text-slate-900 dark:text-white">Prem Mandal</h3>
+              <span className="bg-amber-500/10 text-amber-600 dark:text-amber-400 text-[9px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-full border border-amber-500/20 flex items-center gap-1">
                 <Award className="w-2.5 h-2.5 sm:w-3 sm:h-3" /> Top Voice
               </span>
             </div>
-            <p className="text-[10px] sm:text-[11px] text-gray-400">Senior Data Analyst & BI Specialist</p>
+            <p className="text-[10px] sm:text-[11px] text-slate-500 dark:text-gray-400">Senior Data Analyst & BI Specialist</p>
           </div>
         </div>
 
@@ -79,38 +79,38 @@ function LinkedinStatsCard() {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5 mt-3.5">
-        <div className="relative p-2.5 bg-white/5 border border-white/5 rounded-xl text-left overflow-hidden">
+        <div className="relative p-2.5 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-xl text-left overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-transparent" />
-          <div className="flex items-center justify-start gap-1 text-gray-400 text-[10px] font-medium mb-1">
-            <Users className="w-3 h-3 text-blue-400" />
+          <div className="flex items-center justify-start gap-1 text-slate-500 dark:text-gray-400 text-[10px] font-medium mb-1">
+            <Users className="w-3 h-3 text-blue-500 dark:text-blue-400" />
             <span>Network</span>
           </div>
-          <p className="text-sm sm:text-lg font-extrabold text-white">55.4K+</p>
-          <p className="text-[9px] text-gray-400 mt-0.5">Followers</p>
+          <p className="text-sm sm:text-lg font-extrabold text-slate-900 dark:text-white">55.4K+</p>
+          <p className="text-[9px] text-slate-500 dark:text-gray-400 mt-0.5">Followers</p>
         </div>
 
-        <div className="relative p-2.5 bg-white/5 border border-white/5 rounded-xl text-left overflow-hidden">
+        <div className="relative p-2.5 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-xl text-left overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-500 to-transparent" />
-          <div className="flex items-center justify-start gap-1 text-gray-400 text-[10px] font-medium mb-1">
-            <TrendingUp className="w-3 h-3 text-emerald-400" />
+          <div className="flex items-center justify-start gap-1 text-slate-500 dark:text-gray-400 text-[10px] font-medium mb-1">
+            <TrendingUp className="w-3 h-3 text-emerald-500 dark:text-emerald-400" />
             <span>Reach</span>
           </div>
-          <p className="text-sm sm:text-lg font-extrabold text-white">382K+</p>
-          <p className="text-[9px] text-emerald-400 font-medium mt-0.5">7-Day Imp</p>
+          <p className="text-sm sm:text-lg font-extrabold text-slate-900 dark:text-white">382K+</p>
+          <p className="text-[9px] text-emerald-600 dark:text-emerald-400 font-medium mt-0.5">7-Day Imp</p>
         </div>
 
-        <div className="relative col-span-2 sm:col-span-1 p-2.5 bg-white/5 border border-white/5 rounded-xl text-center sm:text-left overflow-hidden">
+        <div className="relative col-span-2 sm:col-span-1 p-2.5 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-xl text-center sm:text-left overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-500 to-transparent" />
-          <div className="flex items-center justify-center sm:justify-start gap-1 text-gray-400 text-[10px] font-medium mb-1">
-            <Eye className="w-3 h-3 text-purple-400" />
+          <div className="flex items-center justify-center sm:justify-start gap-1 text-slate-500 dark:text-gray-400 text-[10px] font-medium mb-1">
+            <Eye className="w-3 h-3 text-purple-500 dark:text-purple-400" />
             <span>Views</span>
           </div>
-          <p className="text-sm sm:text-lg font-extrabold text-white">3,700+</p>
-          <p className="text-[9px] text-gray-400 mt-0.5">Viewers</p>
+          <p className="text-sm sm:text-lg font-extrabold text-slate-900 dark:text-white">3,700+</p>
+          <p className="text-[9px] text-slate-500 dark:text-gray-400 mt-0.5">Viewers</p>
         </div>
       </div>
 
-      <p className="text-[9px] sm:text-[10px] text-gray-400 italic mt-2.5 text-center px-1">
+      <p className="text-[9px] sm:text-[10px] text-slate-500 dark:text-gray-400 italic mt-2.5 text-center px-1">
         &quot;I&apos;m a data magician. I make boring data disappear and awesomeness appear.&quot;
       </p>
     </motion.div>
@@ -121,7 +121,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen overflow-hidden bg-background flex items-center pt-24 pb-12 sm:pt-32 sm:pb-20 text-white"
+      className="relative min-h-screen overflow-hidden bg-background flex items-center pt-24 pb-12 sm:pt-32 sm:pb-20 text-foreground transition-colors duration-300"
     >
       {/* Background Glows */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.12),transparent_60%)] pointer-events-none" />
@@ -144,9 +144,9 @@ export default function Hero() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-500" />
               </span>
-              <span className="text-[10px] sm:text-xs text-cyan-300 font-semibold flex items-center gap-1.5 sm:gap-2">
+              <span className="text-[10px] sm:text-xs text-cyan-600 dark:text-cyan-300 font-semibold flex items-center gap-1.5 sm:gap-2">
                 <span>Data is Everything</span>
-                <span className="flex items-center gap-1 pl-1.5 sm:pl-2 border-l border-white/20">
+                <span className="flex items-center gap-1 pl-1.5 sm:pl-2 border-l border-slate-300 dark:border-white/20">
                   <motion.span animate={{ y: [0, -3, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}>📊</motion.span>
                   <motion.span animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}>⚡</motion.span>
                   <motion.span animate={{ rotate: [0, 10, -10, 0] }} transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}>🗄️</motion.span>
@@ -160,30 +160,30 @@ export default function Hero() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-emerald-500" />
               </span>
-              <span className="text-[10px] sm:text-xs text-emerald-400 font-medium">
+              <span className="text-[10px] sm:text-xs text-emerald-600 dark:text-emerald-400 font-medium">
                 Available for freelance & full-time work
               </span>
             </div>
 
-            <p className="text-blue-400 font-semibold mt-3 sm:mt-4 tracking-wide text-[11px] sm:text-sm uppercase flex items-center gap-1 sm:gap-1.5">
+            <p className="text-blue-600 dark:text-blue-400 font-semibold mt-3 sm:mt-4 tracking-wide text-[11px] sm:text-sm uppercase flex items-center gap-1 sm:gap-1.5">
               <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> Prem Mandal
             </p>
 
             <h1 className="mt-1 sm:mt-2 text-2xl sm:text-4xl lg:text-6xl font-extrabold leading-snug sm:leading-[1.12] tracking-tight">
-              <span className="bg-gradient-to-r from-white via-blue-100 to-cyan-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-700 via-cyan-600 to-indigo-700 dark:from-white dark:via-blue-100 dark:to-cyan-300 bg-clip-text text-transparent">
                 Building BI Dashboards
               </span>
               <br />
-              <span className="text-gray-400 text-lg sm:text-3xl lg:text-5xl font-bold">
+              <span className="text-slate-600 dark:text-gray-400 text-lg sm:text-3xl lg:text-5xl font-bold">
                 that drive decisions.
               </span>
             </h1>
 
-            <h2 className="text-[11px] sm:text-lg font-medium text-blue-400/90 mt-2 sm:mt-3">
+            <h2 className="text-[11px] sm:text-lg font-medium text-blue-600/90 dark:text-blue-400/90 mt-2 sm:mt-3">
               Senior BI Developer • Data Analyst • Microsoft Fabric
             </h2>
 
-            <p className="mt-2 sm:mt-4 text-gray-300 text-xs sm:text-base max-w-xl leading-relaxed sm:leading-relaxed">
+            <p className="mt-2 sm:mt-4 text-slate-700 dark:text-gray-300 text-xs sm:text-base max-w-xl leading-relaxed sm:leading-relaxed">
               I build enterprise-grade BI solutions using Power BI, SQL, DAX, Power Query, and Microsoft Fabric. From analytical data modeling to executive dashboards, I help businesses turn complex data into actionable insights.
             </p>
 
@@ -199,7 +199,7 @@ export default function Hero() {
 
               <a
                 href="#contact"
-                className="group px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl border border-white/20 bg-white/5 backdrop-blur-md hover:bg-white hover:text-black transition-all duration-300 font-semibold flex items-center gap-1.5 sm:gap-2 hover:scale-105 text-[10px] sm:text-sm"
+                className="group px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl border border-slate-300 dark:border-white/20 bg-slate-100 dark:bg-white/5 backdrop-blur-md hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-black text-slate-900 dark:text-white transition-all duration-300 font-semibold flex items-center gap-1.5 sm:gap-2 hover:scale-105 text-[10px] sm:text-sm"
               >
                 <span>Let&apos;s Talk</span>
                 <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -214,25 +214,25 @@ export default function Hero() {
                   target={href.startsWith("http") ? "_blank" : undefined}
                   rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
                   aria-label={label}
-                  className="p-2 sm:p-2.5 rounded-xl border border-white/10 bg-white/5 text-gray-300 hover:text-white hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-300 hover:scale-110"
+                  className="p-2 sm:p-2.5 rounded-xl border border-slate-300 dark:border-white/10 bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-300 hover:scale-110"
                 >
                   <Icon size={18} />
                 </a>
               ))}
             </div>
 
-            <div className="flex gap-5 sm:gap-10 mt-5 pt-5 sm:mt-6 sm:pt-6 border-t border-white/10">
+            <div className="flex gap-5 sm:gap-10 mt-5 pt-5 sm:mt-6 sm:pt-6 border-t border-slate-200 dark:border-white/10">
               <div>
-                <p className="text-xl sm:text-3xl font-extrabold text-white tracking-tight">02+</p>
-                <p className="text-[10px] sm:text-xs text-gray-400 font-medium mt-0.5">Years Experience</p>
+                <p className="text-xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">02+</p>
+                <p className="text-[10px] sm:text-xs text-slate-500 dark:text-gray-400 font-medium mt-0.5">Years Experience</p>
               </div>
               <div>
-                <p className="text-xl sm:text-3xl font-extrabold text-white tracking-tight">15+</p>
-                <p className="text-[10px] sm:text-xs text-gray-400 font-medium mt-0.5">Projects Built</p>
+                <p className="text-xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">15+</p>
+                <p className="text-[10px] sm:text-xs text-slate-500 dark:text-gray-400 font-medium mt-0.5">Projects Built</p>
               </div>
               <div>
-                <p className="text-xl sm:text-3xl font-extrabold text-white tracking-tight">55K+</p>
-                <p className="text-[10px] sm:text-xs text-gray-400 font-medium mt-0.5">Community</p>
+                <p className="text-xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">55K+</p>
+                <p className="text-[10px] sm:text-xs text-slate-500 dark:text-gray-400 font-medium mt-0.5">Community</p>
               </div>
             </div>
           </motion.div>
@@ -263,49 +263,49 @@ export default function Hero() {
               <motion.div 
                 animate={{ y: [0, -4, 0] }} 
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-1 left-0 sm:top-4 sm:left-4 rounded-lg sm:rounded-xl border border-white/10 bg-[#0b1220]/95 backdrop-blur-md px-2.5 py-1 sm:px-3 sm:py-1 shadow-xl"
+                className="absolute -top-1 left-0 sm:top-4 sm:left-4 rounded-lg sm:rounded-xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-[#0b1220]/95 backdrop-blur-md px-2.5 py-1 sm:px-3 sm:py-1 shadow-xl"
               >
-                <span className="text-[10px] sm:text-xs font-semibold text-blue-300">Power BI 📊</span>
+                <span className="text-[10px] sm:text-xs font-semibold text-blue-700 dark:text-blue-300">Power BI 📊</span>
               </motion.div>
 
               <motion.div 
                 animate={{ y: [0, -6, 0] }} 
                 transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                className="absolute top-4 right-0 sm:top-8 sm:right-2 rounded-lg sm:rounded-xl border border-white/10 bg-[#0b1220]/95 backdrop-blur-md px-2.5 py-1 sm:px-3 sm:py-1 shadow-xl"
+                className="absolute top-4 right-0 sm:top-8 sm:right-2 rounded-lg sm:rounded-xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-[#0b1220]/95 backdrop-blur-md px-2.5 py-1 sm:px-3 sm:py-1 shadow-xl"
               >
-                <span className="text-[10px] sm:text-xs font-semibold text-cyan-300">SQL 🗄️</span>
+                <span className="text-[10px] sm:text-xs font-semibold text-cyan-700 dark:text-cyan-300">SQL 🗄️</span>
               </motion.div>
 
               <motion.div 
                 animate={{ y: [0, -3, 0] }} 
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute top-1/2 -left-2 sm:-left-4 rounded-lg sm:rounded-xl border border-white/10 bg-[#0b1220]/95 backdrop-blur-md px-2.5 py-1 sm:px-3 sm:py-1 shadow-xl"
+                className="absolute top-1/2 -left-2 sm:-left-4 rounded-lg sm:rounded-xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-[#0b1220]/95 backdrop-blur-md px-2.5 py-1 sm:px-3 sm:py-1 shadow-xl"
               >
-                <span className="text-[10px] sm:text-xs font-semibold text-yellow-300">Python 🐍</span>
+                <span className="text-[10px] sm:text-xs font-semibold text-yellow-700 dark:text-yellow-300">Python 🐍</span>
               </motion.div>
 
               <motion.div 
                 animate={{ y: [0, -5, 0] }} 
                 transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-                className="absolute top-1/2 -right-2 sm:-right-4 rounded-lg sm:rounded-xl border border-white/10 bg-[#0b1220]/95 backdrop-blur-md px-2.5 py-1 sm:px-3 sm:py-1 shadow-xl"
+                className="absolute top-1/2 -right-2 sm:-right-4 rounded-lg sm:rounded-xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-[#0b1220]/95 backdrop-blur-md px-2.5 py-1 sm:px-3 sm:py-1 shadow-xl"
               >
-                <span className="text-[10px] sm:text-xs font-semibold text-indigo-300">Fabric ☁️</span>
+                <span className="text-[10px] sm:text-xs font-semibold text-indigo-700 dark:text-indigo-300">Fabric ☁️</span>
               </motion.div>
 
               <motion.div 
                 animate={{ y: [0, -4, 0] }} 
                 transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                className="absolute bottom-3 left-0 sm:bottom-8 sm:left-4 rounded-lg sm:rounded-xl border border-white/10 bg-[#0b1220]/95 backdrop-blur-md px-2.5 py-1 sm:px-3 sm:py-1 shadow-xl"
+                className="absolute bottom-3 left-0 sm:bottom-8 sm:left-4 rounded-lg sm:rounded-xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-[#0b1220]/95 backdrop-blur-md px-2.5 py-1 sm:px-3 sm:py-1 shadow-xl"
               >
-                <span className="text-[10px] sm:text-xs font-semibold text-sky-300">Azure ⚡</span>
+                <span className="text-[10px] sm:text-xs font-semibold text-sky-700 dark:text-sky-300">Azure ⚡</span>
               </motion.div>
 
               <motion.div 
                 animate={{ y: [0, -6, 0] }} 
                 transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut", delay: 2.5 }}
-                className="absolute bottom-1 right-0 sm:bottom-4 sm:right-4 rounded-lg sm:rounded-xl border border-white/10 bg-[#0b1220]/95 backdrop-blur-md px-2.5 py-1 sm:px-3 sm:py-1 shadow-xl"
+                className="absolute bottom-1 right-0 sm:bottom-4 sm:right-4 rounded-lg sm:rounded-xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-[#0b1220]/95 backdrop-blur-md px-2.5 py-1 sm:px-3 sm:py-1 shadow-xl"
               >
-                <span className="text-[10px] sm:text-xs font-semibold text-emerald-300">DAX 📈</span>
+                <span className="text-[10px] sm:text-xs font-semibold text-emerald-700 dark:text-emerald-300">DAX 📈</span>
               </motion.div>
             </motion.div>
 

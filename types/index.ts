@@ -1,19 +1,20 @@
 export interface Project {
-  id?: string; // Optional: future routing ke liye (e.g., /projects/employee-attrition)
+  id?: string;
   title: string;
   description: string;
   tags: string[];
   company?: string;
   demoUrl?: string;
-  githubUrl?: string; // Optional: agar open-source repo ho
-  image?: string; // Optional: single dashboard screenshot ke liye
-  images?: string[]; // Multiple screenshots carousel slider ke liye
-  driveUrl?: string; // Google Drive folder/file view link
-  pdfUrl?: string; // Local PDF download path
-  datasetUrl?: string; // Local CSV / Excel Dataset download path
+  githubUrl?: string;
+  image?: string;
+  images?: string[];
+  driveUrl?: string;
+  pdfUrl?: string;
+  datasetUrl?: string;
+  tableauEmbedName?: string; // Tableau Public Embed Name
   category?: "Power BI" | "SQL" | "Data Engineering" | "Python" | "Advance Excel" | "Tableau";
   accent?: "blue" | "cyan" | "indigo";
-  featured?: boolean; // Optional: homepage par highlight karne ke liye
+  featured?: boolean;
 }
 
 // Service Type

@@ -75,7 +75,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative py-28 bg-background overflow-hidden text-white"
+      className="relative py-28 bg-background overflow-hidden text-foreground transition-colors duration-300"
     >
       {/* Background Lights & Mesh */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.12),transparent_70%)] pointer-events-none" />
@@ -94,12 +94,12 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <p className="text-blue-400 font-semibold uppercase tracking-widest text-xs sm:text-sm flex items-center justify-center gap-1.5">
-            <Sparkles className="w-4 h-4" /> ABOUT ME
+          <p className="text-blue-600 dark:text-blue-400 font-semibold uppercase tracking-widest text-xs sm:text-sm flex items-center justify-center gap-1.5">
+            <Sparkles className="w-4 h-4 text-cyan-500 dark:text-cyan-400" /> ABOUT ME
           </p>
           <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
             Turning Data Into{" "}
-            <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600 dark:from-blue-400 dark:via-cyan-300 dark:to-indigo-400 bg-clip-text text-transparent">
               Business Decisions
             </span>
           </h2>
@@ -139,17 +139,17 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="w-full max-w-sm mt-8 rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl shadow-2xl space-y-3.5 hover:border-blue-500/30 transition-all duration-300"
+              className="w-full max-w-sm mt-8 rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-white/5 p-5 backdrop-blur-xl shadow-xl dark:shadow-2xl space-y-3.5 hover:border-blue-500/30 transition-all duration-300"
             >
-              <div className="flex items-center gap-3 text-sm text-gray-200">
-                <div className="p-2 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/20">
+              <div className="flex items-center gap-3 text-sm text-slate-700 dark:text-gray-200">
+                <div className="p-2 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
                   <MapPin className="w-4 h-4 shrink-0" />
                 </div>
                 <span className="font-medium">Kolkata, India</span>
               </div>
 
-              <div className="flex items-center gap-3 text-sm text-gray-200">
-                <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              <div className="flex items-center gap-3 text-sm text-slate-700 dark:text-gray-200">
+                <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
                   <Briefcase className="w-4 h-4 shrink-0" />
                 </div>
                 <span className="flex items-center gap-2 font-medium">
@@ -161,8 +161,8 @@ export default function About() {
                 </span>
               </div>
 
-              <div className="flex items-center gap-3 text-sm text-gray-200">
-                <div className="p-2 rounded-lg bg-amber-500/10 text-amber-400 border border-amber-500/20">
+              <div className="flex items-center gap-3 text-sm text-slate-700 dark:text-gray-200">
+                <div className="p-2 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
                   <Zap className="w-4 h-4 shrink-0" />
                 </div>
                 <span className="font-medium">Immediate Joiner</span>
@@ -188,7 +188,7 @@ export default function About() {
 
               <a
                 href="#contact"
-                className="group flex-1 px-4 py-3 rounded-xl border border-white/20 bg-white/5 backdrop-blur-md hover:bg-white hover:text-black transition-all duration-300 font-semibold flex items-center justify-center gap-2 hover:scale-105 text-xs sm:text-sm cursor-pointer"
+                className="group flex-1 px-4 py-3 rounded-xl border border-slate-300 dark:border-white/20 bg-slate-100 dark:bg-white/5 backdrop-blur-md hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-black text-slate-900 dark:text-white transition-all duration-300 font-semibold flex items-center justify-center gap-2 hover:scale-105 text-xs sm:text-sm cursor-pointer"
               >
                 <MessageSquare className="w-4 h-4" />
                 <span>Connect</span>
@@ -203,10 +203,10 @@ export default function About() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="w-full max-w-sm mt-8 space-y-3"
             >
-              <div className="flex items-center justify-between border-b border-white/10 pb-2 mb-3">
+              <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-2 mb-3">
                 <div className="flex items-center gap-2">
-                  <GraduationCap className="w-4 h-4 text-blue-400" />
-                  <h3 className="text-xs font-bold uppercase tracking-wider text-blue-400">
+                  <GraduationCap className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">
                     Education
                   </h3>
                 </div>
@@ -216,19 +216,19 @@ export default function About() {
                 {educationData.map((item, idx) => (
                   <div
                     key={idx}
-                    className="p-3.5 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-300 hover:border-blue-500/40 hover:bg-white/10 shadow-md"
+                    className="p-3.5 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-white/5 backdrop-blur-md transition-all duration-300 hover:border-blue-500/40 hover:bg-white dark:hover:bg-white/10 shadow-sm"
                   >
                     <div className="flex justify-between items-start gap-2">
-                      <h4 className="text-xs sm:text-sm font-bold text-white leading-snug">
+                      <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-snug">
                         {item.degree}
                       </h4>
                       {item.year && (
-                        <span className="text-[9px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 shrink-0 font-mono">
+                        <span className="text-[9px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 shrink-0 font-mono">
                           {item.year}
                         </span>
                       )}
                     </div>
-                    <p className="text-[11px] sm:text-xs text-gray-400 font-medium mt-1">
+                    <p className="text-[11px] sm:text-xs text-slate-600 dark:text-gray-400 font-medium mt-1">
                       {item.institution}
                     </p>
                   </div>
@@ -246,10 +246,10 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="space-y-4 text-gray-300 text-base sm:text-lg leading-relaxed"
+              className="space-y-4 text-slate-700 dark:text-gray-300 text-base sm:text-lg leading-relaxed"
             >
               <p>
-                I&apos;m <strong className="text-white font-semibold">Prem Mandal</strong>, a Senior BI Developer & Data Analyst with 2+ years of hands-on experience converting raw enterprise data into executive dashboards across manufacturing, steel, and tea sectors.
+                I&apos;m <strong className="text-slate-900 dark:text-white font-semibold">Prem Mandal</strong>, a Senior BI Developer & Data Analyst with 2+ years of hands-on experience converting raw enterprise data into executive dashboards across manufacturing, steel, and tea sectors.
               </p>
               <p>
                 I specialize in end-to-end analytics — from architecting data models (Star/Snowflake) and writing complex DAX queries to orchestrating semantic models in Power BI Service and Microsoft Fabric.
@@ -263,16 +263,16 @@ export default function About() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <h3 className="text-xs font-bold uppercase tracking-wider text-blue-400 mb-3">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 mb-3">
                 Core Technical Skills
               </h3>
               <div className="flex flex-wrap gap-2.5">
                 {techStack.map((tech) => (
                   <span
                     key={tech}
-                    className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium border border-white/10 bg-white/5 text-gray-200 backdrop-blur-md transition-all duration-300 hover:border-blue-500/50 hover:bg-blue-500/20 hover:text-white hover:scale-105 hover:-translate-y-0.5 cursor-default shadow-sm"
+                    className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-gray-200 backdrop-blur-md transition-all duration-300 hover:border-blue-500/50 hover:bg-blue-500/20 hover:text-blue-600 dark:hover:text-white hover:scale-105 hover:-translate-y-0.5 cursor-default shadow-sm"
                   >
-                    <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
                     {tech}
                   </span>
                 ))}
@@ -287,31 +287,31 @@ export default function About() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="space-y-3"
             >
-              <h3 className="text-xs font-bold uppercase tracking-wider text-blue-400 mb-4">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 mb-4">
                 Career Journey
               </h3>
 
-              <div className="relative pl-2 sm:pl-4 border-l border-white/10 space-y-4">
+              <div className="relative pl-2 sm:pl-4 border-l border-slate-200 dark:border-white/10 space-y-4">
                 {timelineData.map((item) => (
                   <div key={item.company} className="relative pl-6 group">
-                    <div className="absolute -left-[5px] top-4 h-2.5 w-2.5 rounded-full border border-blue-400 bg-background group-hover:bg-blue-400 group-hover:scale-150 transition-all duration-300 shadow-[0_0_10px_rgba(59,130,246,0.8)]" />
+                    <div className="absolute -left-[5px] top-4 h-2.5 w-2.5 rounded-full border border-blue-500 bg-background group-hover:bg-blue-500 group-hover:scale-150 transition-all duration-300 shadow-[0_0_10px_rgba(59,130,246,0.8)]" />
 
-                    <div className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-md transition-all duration-300 hover:border-blue-500/50 hover:bg-white/10 hover:-translate-y-0.5 flex flex-wrap items-center justify-between gap-2 shadow-lg">
+                    <div className="rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-white/5 p-4 backdrop-blur-md transition-all duration-300 hover:border-blue-500/50 hover:bg-white dark:hover:bg-white/10 hover:-translate-y-0.5 flex flex-wrap items-center justify-between gap-2 shadow-sm dark:shadow-lg">
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="text-xs font-bold text-blue-400">
+                          <span className="text-xs font-bold text-blue-600 dark:text-blue-400">
                             {item.year}
                           </span>
-                          <h4 className="text-base font-semibold text-white">
+                          <h4 className="text-base font-semibold text-slate-900 dark:text-white">
                             {item.company}
                           </h4>
                           {item.status && (
-                            <span className="bg-emerald-500/10 text-emerald-400 text-[10px] font-semibold px-2 py-0.5 rounded-full border border-emerald-500/20">
+                            <span className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-semibold px-2 py-0.5 rounded-full border border-emerald-500/20">
                               {item.status}
                             </span>
                           )}
                         </div>
-                        <p className="text-xs text-gray-400 mt-1">
+                        <p className="text-xs text-slate-500 dark:text-gray-400 mt-1">
                           {item.role}
                         </p>
                       </div>
@@ -332,12 +332,12 @@ export default function About() {
               {statsData.map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-xl border border-white/10 bg-white/5 p-4 text-center backdrop-blur-md transition-all duration-300 hover:border-blue-500/50 hover:bg-blue-500/10 hover:-translate-y-1 shadow-md"
+                  className="rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-white/5 p-4 text-center backdrop-blur-md transition-all duration-300 hover:border-blue-500/50 hover:bg-blue-500/10 hover:-translate-y-1 shadow-sm"
                 >
-                  <p className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                  <p className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                     {stat.value}
                   </p>
-                  <p className="text-xs text-gray-400 font-medium mt-1">
+                  <p className="text-xs text-slate-500 dark:text-gray-400 font-medium mt-1">
                     {stat.label}
                   </p>
                 </div>

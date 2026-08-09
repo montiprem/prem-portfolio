@@ -15,7 +15,8 @@ export default function ChatBot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Hi there! 👋 I'm Prem's AI assistant. Ask me anything about his skills, projects, or experience!",
+      content:
+        "Hi there! 👋 I'm Prem's AI assistant. Ask me anything about his skills, projects, or experience!",
     },
   ]);
   const [loading, setLoading] = useState(false);
@@ -26,7 +27,10 @@ export default function ChatBot() {
 
     const userMessage = input.trim();
     setInput("");
-    const newMessages: Message[] = [...messages, { role: "user", content: userMessage }];
+    const newMessages: Message[] = [
+      ...messages,
+      { role: "user", content: userMessage },
+    ];
     setMessages(newMessages);
     setLoading(true);
 
@@ -47,7 +51,8 @@ I'm improving its knowledge, speed, and overall experience.
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3">
+    // Position updated to bottom-8/bottom-10 to prevent footer overlap
+    <div className="fixed bottom-8 right-6 md:bottom-10 md:right-8 z-50 flex items-center gap-3">
       {/* Animated Greeting Bubble / Sticker */}
       {!isOpen && (
         <motion.div
@@ -71,7 +76,7 @@ I'm improving its knowledge, speed, and overall experience.
         whileHover={{ scale: 1.15 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="relative p-3.5 bg-linear-to-tr from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white rounded-full shadow-[0_0_25px_rgba(59,130,246,0.6)] flex items-center justify-center border border-white/20 transition-all group"
+        className="relative p-3.5 bg-gradient-to-tr from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white rounded-full shadow-[0_0_25px_rgba(59,130,246,0.6)] flex items-center justify-center border border-white/20 transition-all group cursor-pointer"
         aria-label="Open AI Chat"
       >
         <motion.div
@@ -101,7 +106,7 @@ I'm improving its knowledge, speed, and overall experience.
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute bottom-16 right-0 w-[90vw] sm:w-[380px] h-[500px] bg-[#0b1220]/95 border border-white/15 rounded-3xl shadow-2xl backdrop-blur-2xl flex flex-col overflow-hidden text-white"
+            className="absolute bottom-16 right-0 w-[90vw] sm:w-[380px] h-[480px] sm:h-[500px] bg-[#0b1220]/95 border border-white/15 rounded-3xl shadow-2xl backdrop-blur-2xl flex flex-col overflow-hidden text-white"
           >
             {/* Header */}
             <div className="p-4 bg-white/5 border-b border-white/10 flex items-center justify-between">
@@ -114,13 +119,14 @@ I'm improving its knowledge, speed, and overall experience.
                     Prem&apos;s AI Assistant <span className="text-sm">🤖</span>
                   </h3>
                   <p className="text-[10px] text-amber-400 flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" /> Maintenance Mode
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />{" "}
+                    Maintenance Mode
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="text-gray-400 hover:text-white p-1 transition-colors"
+                className="text-gray-400 hover:text-white p-1 transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -131,7 +137,9 @@ I'm improving its knowledge, speed, and overall experience.
               {messages.map((msg, idx) => (
                 <div
                   key={idx}
-                  className={`flex gap-2.5 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                  className={`flex gap-2.5 ${
+                    msg.role === "user" ? "justify-end" : "justify-start"
+                  }`}
                 >
                   {msg.role === "assistant" && (
                     <div className="w-7 h-7 rounded-full bg-blue-600/30 border border-blue-500/40 flex items-center justify-center shrink-0 text-blue-300">
@@ -165,7 +173,10 @@ I'm improving its knowledge, speed, and overall experience.
             </div>
 
             {/* Input Form */}
-            <form onSubmit={sendMessage} className="p-3 bg-white/5 border-t border-white/10 flex items-center gap-2">
+            <form
+              onSubmit={sendMessage}
+              className="p-3 bg-white/5 border-t border-white/10 flex items-center gap-2"
+            >
               <input
                 type="text"
                 value={input}
@@ -176,7 +187,7 @@ I'm improving its knowledge, speed, and overall experience.
               <button
                 type="submit"
                 disabled={loading}
-                className="p-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl transition-all disabled:opacity-50 shrink-0 shadow-md"
+                className="p-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl transition-all disabled:opacity-50 shrink-0 shadow-md cursor-pointer"
               >
                 <Send className="w-4 h-4" />
               </button>

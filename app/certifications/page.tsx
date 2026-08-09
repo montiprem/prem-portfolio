@@ -54,7 +54,7 @@ const featuredCertificates = [
     credentialUrl:
       "https://drive.google.com/file/d/129irflLjSS7ZEvpgwqk0COIHVBqiKSCc/view?usp=drive_link",
     pdfUrl: "/certificates/Prem mandal _CERTIFICATE OF APPRECIATION.pdf",
-    image: "/certificates/Prem mandal _CERTIFICATE OF APPRECIATION.png",
+    image: "/certificates/Certificate of Appreciation (5th Position).png",
   },
   {
     id: 4,
@@ -100,7 +100,7 @@ const featuredCertificates = [
       "https://docs.google.com/document/d/1SGh_HuOBIj2BqLR9ENum3fmjFEEzQ5G2mWDWIOayZh8/edit?usp=sharing",
     pdfUrl:
       "https://docs.google.com/document/d/1SGh_HuOBIj2BqLR9ENum3fmjFEEzQ5G2mWDWIOayZh8/edit?usp=sharing",
-    image: "",
+    image: "/certificates/Data Analytics and Visualization certificate.png",
   },
 ];
 
@@ -212,7 +212,7 @@ const communityPlatforms = [
 
 export default function CertificationsPage() {
   return (
-    <main className="min-h-screen bg-background pt-32 pb-20 relative overflow-hidden text-white">
+    <main className="min-h-screen bg-background text-foreground pt-32 pb-20 relative overflow-hidden transition-colors duration-300">
       {/* Background FX */}
       <div className="absolute inset-0 opacity-[0.03] bg-[url('/grid.svg')] pointer-events-none" />
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-125 h-125 bg-blue-500/10 rounded-full blur-[140px] pointer-events-none" />
@@ -225,13 +225,13 @@ export default function CertificationsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="text-xs uppercase tracking-widest font-semibold text-cyan-400 bg-cyan-500/10 px-3.5 py-1.5 rounded-full border border-cyan-500/20 inline-flex items-center gap-1.5">
+            <span className="text-xs uppercase tracking-widest font-semibold text-cyan-600 dark:text-cyan-400 bg-cyan-500/10 px-3.5 py-1.5 rounded-full border border-cyan-500/20 inline-flex items-center gap-1.5">
               <Award className="w-3.5 h-3.5" /> Verified Credentials
             </span>
-            <h1 className="text-4xl sm:text-5xl font-extrabold text-white mt-4 tracking-tight">
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 dark:text-white mt-4 tracking-tight">
               Certifications &amp; Badges
             </h1>
-            <p className="text-gray-400 mt-4 text-base sm:text-lg">
+            <p className="text-slate-600 dark:text-gray-400 mt-4 text-base sm:text-lg">
               Industry certifications in Data Analytics, Python, IBM, Accenture, and Software Engineering.
             </p>
           </motion.div>
@@ -239,9 +239,9 @@ export default function CertificationsPage() {
 
         {/* SECTION 1: FEATURED CERTIFICATIONS */}
         <div className="mb-20">
-          <div className="flex items-center gap-2 mb-8 pb-3 border-b border-white/10">
-            <Sparkles className="w-5 h-5 text-yellow-400" />
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+          <div className="flex items-center gap-2 mb-8 pb-3 border-b border-slate-200 dark:border-white/10">
+            <Sparkles className="w-5 h-5 text-amber-500 dark:text-yellow-400" />
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
               Featured Certifications
             </h2>
           </div>
@@ -253,11 +253,11 @@ export default function CertificationsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
-                className="bg-card border border-white/10 rounded-2xl overflow-hidden hover:border-cyan-500/50 transition-all duration-300 hover:-translate-y-1.5 shadow-2xl flex flex-col justify-between group"
+                className="bg-slate-50/80 dark:bg-card border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden hover:border-cyan-500/50 transition-all duration-300 hover:-translate-y-1.5 shadow-sm hover:shadow-xl dark:shadow-2xl flex flex-col justify-between group"
               >
                 <div>
                   {/* Top Thumbnail Box */}
-                  <div className="relative w-full h-48 bg-linear-to-br from-slate-900 via-blue-950 to-slate-900 border-b border-white/5 flex items-center justify-center overflow-hidden">
+                  <div className="relative w-full h-48 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-100 dark:from-slate-900 dark:via-blue-950 dark:to-slate-900 border-b border-slate-200 dark:border-white/5 flex items-center justify-center overflow-hidden">
                     {cert.image ? (
                       <Image
                         src={cert.image}
@@ -267,46 +267,46 @@ export default function CertificationsPage() {
                       />
                     ) : (
                       <div className="p-4 relative z-20 text-center flex flex-col items-center">
-                        <div className="p-3.5 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 mb-2">
+                        <div className="p-3.5 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-600 dark:text-cyan-400 mb-2">
                           <Award className="w-8 h-8 group-hover:scale-110 transition-transform" />
                         </div>
-                        <span className="text-xs font-bold text-white tracking-wide">
+                        <span className="text-xs font-bold text-slate-900 dark:text-white tracking-wide">
                           {cert.issuer}
                         </span>
-                        <span className="text-[10px] text-cyan-400 font-mono mt-1">
+                        <span className="text-[10px] text-cyan-600 dark:text-cyan-400 font-mono mt-1">
                           VERIFIED CREDENTIAL
                         </span>
                       </div>
                     )}
-                    <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent z-10 pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 dark:from-black/80 via-transparent to-transparent z-10 pointer-events-none" />
                   </div>
 
                   {/* Body Content */}
                   <div className="p-6">
-                    <div className="flex items-center justify-between text-xs text-gray-400 mb-3">
-                      <span className="flex items-center gap-1 font-semibold text-blue-400">
+                    <div className="flex items-center justify-between text-xs text-slate-500 dark:text-gray-400 mb-3">
+                      <span className="flex items-center gap-1 font-semibold text-blue-600 dark:text-blue-400">
                         <Building2 className="w-3.5 h-3.5" />
                         {cert.issuer}
                       </span>
                       <span className="flex items-center gap-1 font-medium">
-                        <Calendar className="w-3.5 h-3.5 text-gray-500" />
+                        <Calendar className="w-3.5 h-3.5 text-slate-400 dark:text-gray-500" />
                         {cert.issueDate}
                       </span>
                     </div>
 
-                    <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-cyan-300 transition-colors leading-snug">
+                    <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-cyan-300 transition-colors leading-snug">
                       {cert.title}
                     </h3>
 
-                    <p className="text-[11px] font-mono text-gray-400 mt-2">
-                      Reference No: <span className="text-gray-200">{cert.credentialId}</span>
+                    <p className="text-[11px] font-mono text-slate-500 dark:text-gray-400 mt-2">
+                      Reference No: <span className="text-slate-800 dark:text-gray-200">{cert.credentialId}</span>
                     </p>
 
                     <div className="flex flex-wrap gap-1.5 mt-4">
                       {cert.skills.map((skill) => (
                         <span
                           key={skill}
-                          className="text-[10px] text-gray-300 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md font-mono"
+                          className="text-[10px] text-slate-700 dark:text-gray-300 bg-slate-200/60 dark:bg-white/5 border border-slate-300 dark:border-white/10 px-2 py-0.5 rounded-md font-mono"
                         >
                           {skill}
                         </span>
@@ -321,9 +321,9 @@ export default function CertificationsPage() {
                     href={cert.pdfUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-semibold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    className="flex-1 py-2.5 rounded-xl bg-slate-200 dark:bg-white/5 hover:bg-slate-300 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 text-slate-800 dark:text-white font-semibold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer"
                   >
-                    <FileText className="w-3.5 h-3.5 text-blue-400" />
+                    <FileText className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
                     <span>View PDF</span>
                   </a>
 
@@ -343,12 +343,12 @@ export default function CertificationsPage() {
         </div>
 
         {/* SECTION 2: ADDITIONAL CERTIFICATIONS */}
-        <div className="bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-10 backdrop-blur-xl shadow-2xl mb-20">
-          <div className="mb-8 pb-3 border-b border-white/10">
-            <h2 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+        <div className="bg-slate-50/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-3xl p-6 sm:p-10 backdrop-blur-xl shadow-sm dark:shadow-2xl mb-20">
+          <div className="mb-8 pb-3 border-b border-slate-200 dark:border-white/10">
+            <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
               <span>Additional Certifications</span>
             </h2>
-            <p className="text-xs text-gray-400 mt-1">
+            <p className="text-xs text-slate-500 dark:text-gray-400 mt-1">
               Foundational courses, specialized learning modules, and online achievements.
             </p>
           </div>
@@ -360,33 +360,33 @@ export default function CertificationsPage() {
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 transition-all text-gray-300 hover:text-white"
+                className="group flex items-center gap-3 p-2 rounded-xl hover:bg-slate-200/60 dark:hover:bg-white/5 transition-all text-slate-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white"
               >
-                <span className="w-2 h-2 rounded-full bg-cyan-400 group-hover:scale-125 transition-transform shrink-0" />
+                <span className="w-2 h-2 rounded-full bg-cyan-500 dark:bg-cyan-400 group-hover:scale-125 transition-transform shrink-0" />
                 <span className="text-xs sm:text-sm font-medium flex-1">
-                  {item.title} <span className="text-gray-400 font-normal">(by {item.issuer})</span>
+                  {item.title} <span className="text-slate-500 dark:text-gray-400 font-normal">(by {item.issuer})</span>
                 </span>
-                <ExternalLink className="w-3.5 h-3.5 text-gray-500 group-hover:text-cyan-400 transition-colors shrink-0 opacity-0 group-hover:opacity-100" />
+                <ExternalLink className="w-3.5 h-3.5 text-slate-400 dark:text-gray-500 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors shrink-0 opacity-0 group-hover:opacity-100" />
               </a>
             ))}
           </div>
         </div>
 
         {/* SECTION 3: MY PRESENCE IN THE DATA COMMUNITY */}
-        <div className="relative rounded-3xl border border-white/10 bg-white/5 backdrop-blur-2xl p-8 sm:p-12 text-center text-white shadow-2xl overflow-hidden">
+        <div className="relative rounded-3xl border border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-white/5 backdrop-blur-2xl p-8 sm:p-12 text-center text-foreground shadow-sm dark:shadow-2xl overflow-hidden">
           <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
 
-          <p className="text-blue-400 font-semibold uppercase tracking-widest text-xs flex items-center justify-center gap-1.5 mb-2">
-            <Sparkles className="w-4 h-4 text-cyan-400" /> DIGITAL FOOTPRINT
+          <p className="text-blue-600 dark:text-blue-400 font-semibold uppercase tracking-widest text-xs flex items-center justify-center gap-1.5 mb-2">
+            <Sparkles className="w-4 h-4 text-cyan-500 dark:text-cyan-400" /> DIGITAL FOOTPRINT
           </p>
-          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
+          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
             My Presence in the{" "}
-            <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600 dark:from-blue-400 dark:via-cyan-300 dark:to-indigo-400 bg-clip-text text-transparent">
               Data Community
             </span>
           </h2>
-          <p className="mt-3 text-xs sm:text-base text-gray-400 max-w-2xl mx-auto font-medium leading-relaxed">
+          <p className="mt-3 text-xs sm:text-base text-slate-600 dark:text-gray-400 max-w-2xl mx-auto font-medium leading-relaxed">
             Engaging, building dashboards, and sharing analytical solutions across leading global platforms.
           </p>
 
@@ -403,9 +403,9 @@ export default function CertificationsPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.08 }}
-                  className={`group relative p-5 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-500 hover:-translate-y-1.5 ${platform.borderColor} ${platform.glowColor} flex flex-col items-center justify-between text-center`}
+                  className={`group relative p-5 rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 backdrop-blur-xl transition-all duration-500 hover:-translate-y-1.5 ${platform.borderColor} ${platform.glowColor} flex flex-col items-center justify-between text-center shadow-sm`}
                 >
-                  <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 text-cyan-400 group-hover:scale-110 group-hover:bg-blue-500/10 group-hover:text-white transition-all duration-300">
+                  <div className="p-3.5 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-cyan-600 dark:text-cyan-400 group-hover:scale-110 group-hover:bg-blue-500/10 group-hover:text-blue-600 dark:group-hover:text-white transition-all duration-300">
                     {platform.isBrand ? (
                       <Icon size={26} />
                     ) : (
@@ -414,10 +414,10 @@ export default function CertificationsPage() {
                   </div>
 
                   <div className="mt-4">
-                    <h3 className="text-sm sm:text-base font-bold text-white group-hover:text-cyan-300 transition-colors">
+                    <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors">
                       {platform.name}
                     </h3>
-                    <span className="text-[10px] font-mono font-medium text-gray-400 group-hover:text-cyan-400 transition-colors mt-1 block">
+                    <span className="text-[10px] font-mono font-medium text-slate-500 dark:text-gray-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors mt-1 block">
                       {platform.badge}
                     </span>
                   </div>

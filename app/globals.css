@@ -8,7 +8,7 @@
   --color-primary: #2563eb;
   --color-secondary: #60a5fa;
 
-  --color-muted: #94a3b8;
+  --color-muted: var(--muted);
   --color-card: var(--card);
 }
 
@@ -24,14 +24,18 @@
     --secondary: #60a5fa;
     --muted: #94a3b8;
     --card: rgba(255, 255, 255, 0.05);
+    --scrollbar-track: #030712;
+    --scrollbar-thumb: rgba(255, 255, 255, 0.15);
   }
 
   /* Light Theme overrides */
-  :root.light,
   .light {
     --background: #f8fafc;
     --foreground: #0f172a;
-    --card: rgba(0, 0, 0, 0.05);
+    --muted: #64748b;
+    --card: rgba(255, 255, 255, 0.8);
+    --scrollbar-track: #f1f5f9;
+    --scrollbar-thumb: rgba(0, 0, 0, 0.2);
   }
 
   * {
@@ -40,7 +44,6 @@
 
   html {
     scroll-behavior: smooth;
-    /* Prevent jitter during fast scrolls */
     scroll-padding-top: 80px; 
   }
 
@@ -51,12 +54,11 @@
     color: var(--foreground);
     font-family: var(--font-geist-sans), system-ui, sans-serif;
     overflow-x: hidden;
-    /* Force GPU Acceleration for Smooth Page Scrolling */
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  /* Optimize Heavy Blur Performance */
   .backdrop-blur-xl,
   .backdrop-blur-2xl,
   .backdrop-blur-md {
@@ -70,11 +72,11 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #030712;
+    background: var(--scrollbar-track);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--scrollbar-thumb);
     border-radius: 9999px;
   }
 
@@ -84,45 +86,19 @@
 }
 
 /* Custom Utilities / Keyframes */
-
-@keyframes loading {
-  0% {
-    transform: translateX(-100%);
-  }
-  50% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
-
 @keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
 }
 
 @keyframes bounceSlow {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 @keyframes pulseGlow {
-  0%, 100% {
-    opacity: 0.4;
-  }
-  50% {
-    opacity: 0.8;
-  }
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
 }
 
 .animate-float {

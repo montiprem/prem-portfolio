@@ -41,7 +41,7 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      className="relative py-28 bg-background overflow-hidden text-white border-t border-white/5"
+      className="relative py-28 bg-background overflow-hidden text-foreground border-t border-slate-200 dark:border-white/5 transition-colors duration-300"
     >
       {/* Background Ambient Glows */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.1),transparent_70%)] pointer-events-none" />
@@ -57,12 +57,12 @@ export default function Experience() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-20"
         >
-          <p className="text-blue-400 font-semibold uppercase tracking-widest text-xs sm:text-sm flex items-center justify-center gap-1.5">
-            <Sparkles className="w-4 h-4" /> CAREER PATH
+          <p className="text-blue-600 dark:text-blue-400 font-semibold uppercase tracking-widest text-xs sm:text-sm flex items-center justify-center gap-1.5">
+            <Sparkles className="w-4 h-4 text-cyan-500 dark:text-cyan-400" /> CAREER PATH
           </p>
           <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
             Work{" "}
-            <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600 dark:from-blue-400 dark:via-cyan-300 dark:to-indigo-400 bg-clip-text text-transparent">
               Experience
             </span>
           </h2>
@@ -87,7 +87,7 @@ export default function Experience() {
                   <div className="absolute left-4 md:left-1/2 top-6 -translate-x-1/2 z-20 flex items-center justify-center">
                     <span className="relative flex h-5 w-5 items-center justify-center">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-60" />
-                      <span className="relative inline-flex h-4 w-4 rounded-full border-2 border-blue-400 bg-background shadow-[0_0_10px_rgba(59,130,246,0.9)]" />
+                      <span className="relative inline-flex h-4 w-4 rounded-full border-2 border-blue-500 bg-background shadow-[0_0_10px_rgba(59,130,246,0.9)]" />
                     </span>
                   </div>
 
@@ -111,19 +111,19 @@ export default function Experience() {
                         delay: index * 0.15,
                         ease: "easeOut",
                       }}
-                      className="group rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl shadow-2xl transition-all duration-500 hover:border-blue-500/50 hover:bg-white/[0.08] hover:shadow-[0_0_40px_rgba(59,130,246,0.2)] text-left"
+                      className="group rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-white/5 p-6 backdrop-blur-xl shadow-xl dark:shadow-2xl transition-all duration-500 hover:border-blue-500/50 hover:bg-white dark:hover:bg-white/[0.08] hover:shadow-2xl dark:hover:shadow-[0_0_40px_rgba(59,130,246,0.2)] text-left"
                     >
                       {/* Top Info Header */}
                       <div
-                        className={`flex flex-wrap items-center gap-2 pb-3 mb-3 border-b border-white/10 ${
+                        className={`flex flex-wrap items-center gap-2 pb-3 mb-3 border-b border-slate-200 dark:border-white/10 ${
                           isEven ? "md:justify-between" : "justify-between"
                         }`}
                       >
                         <div>
-                          <h3 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+                          <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
                             {item.role}
                             {item.status && (
-                              <span className="bg-emerald-500/10 text-emerald-400 text-[10px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-500/20">
+                              <span className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-semibold px-2.5 py-0.5 rounded-full border border-emerald-500/20">
                                 {item.status}
                               </span>
                             )}
@@ -135,30 +135,30 @@ export default function Experience() {
                               href={item.companyUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-xs sm:text-sm font-semibold text-blue-400 hover:text-cyan-300 transition-colors flex items-center gap-1.5 hover:underline"
+                              className="text-xs sm:text-sm font-semibold text-blue-600 dark:text-blue-400 hover:text-cyan-600 dark:hover:text-cyan-300 transition-colors flex items-center gap-1.5 hover:underline"
                             >
                               <Briefcase className="w-3.5 h-3.5" />
                               <span>{item.company}</span>
-                              <ExternalLink className="w-3 h-3 text-cyan-400" />
+                              <ExternalLink className="w-3 h-3 text-cyan-600 dark:text-cyan-400" />
                             </a>
 
                             {/* Location Tag */}
-                            <span className="text-xs text-gray-400 flex items-center gap-1 bg-white/5 px-2.5 py-0.5 rounded-md border border-white/5">
-                              <MapPin className="w-3 h-3 text-cyan-400 shrink-0" />
+                            <span className="text-xs text-slate-600 dark:text-gray-400 flex items-center gap-1 bg-slate-200/60 dark:bg-white/5 px-2.5 py-0.5 rounded-md border border-slate-300 dark:border-white/5">
+                              <MapPin className="w-3 h-3 text-cyan-600 dark:text-cyan-400 shrink-0" />
                               <span>{item.location}</span>
                               <span className="text-xs">🇮🇳</span>
                             </span>
                           </div>
                         </div>
 
-                        <div className="flex items-center gap-1.5 text-xs font-semibold text-cyan-300 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20 shrink-0">
-                          <Calendar className="w-3.5 h-3.5 text-cyan-400" />
+                        <div className="flex items-center gap-1.5 text-xs font-semibold text-cyan-700 dark:text-cyan-300 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20 shrink-0">
+                          <Calendar className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
                           <span>{item.year}</span>
                         </div>
                       </div>
 
                       {/* Description */}
-                      <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-medium">
+                      <p className="text-xs sm:text-sm text-slate-700 dark:text-gray-300 leading-relaxed font-medium">
                         {item.description}
                       </p>
                     </motion.div>
