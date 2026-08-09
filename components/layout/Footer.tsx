@@ -34,6 +34,66 @@ const socials = [
   },
 ];
 
+// Modern Custom Footer Logo
+function FooterLogo() {
+  return (
+    <Link href="/#home" className="group inline-flex items-center gap-3">
+      {/* Icon Badge */}
+      <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 via-cyan-500 to-indigo-600 p-[1px] shadow-lg shadow-blue-500/20 group-hover:shadow-cyan-400/40 transition-all duration-300">
+        <div className="w-full h-full bg-[#0a0f1d] rounded-[11px] flex items-center justify-center relative overflow-hidden">
+          <div className="absolute inset-0 bg-blue-500/10 group-hover:bg-cyan-500/20 transition-colors" />
+          
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="text-cyan-400 group-hover:scale-110 transition-transform duration-300"
+          >
+            <path
+              d="M3 20H21"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              className="opacity-40"
+            />
+            <path
+              d="M6 16V12"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              className="opacity-60"
+            />
+            <path
+              d="M11 16V8"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+            <path
+              d="M16 16V4"
+              stroke="#38BDF8"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+            />
+          </svg>
+        </div>
+      </div>
+
+      {/* Brand Text */}
+      <div className="flex flex-col">
+        <span className="text-lg font-extrabold tracking-tight text-white group-hover:text-cyan-300 transition-colors leading-tight">
+          Prem Mandal<span className="text-cyan-400">.</span>
+        </span>
+        <span className="text-[10px] font-mono font-medium text-gray-400 tracking-wider uppercase">
+          Senior BI Developer
+        </span>
+      </div>
+    </Link>
+  );
+}
+
 export default function Footer() {
   const year = new Date().getFullYear();
 
@@ -134,17 +194,9 @@ export default function Footer() {
       <Container className="relative z-10">
         {/* TOP SECTION: Brand Info & Navigation */}
         <div className="flex flex-col md:flex-row justify-between gap-12 mb-16">
-          {/* Brand Info */}
+          {/* Brand Info with New Logo */}
           <div className="max-w-md">
-            <Link
-              href="/#home"
-              className="inline-flex items-center gap-2 text-2xl font-black tracking-tight"
-            >
-              <span className="bg-linear-to-r from-blue-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent">
-                Prem Mandal
-              </span>
-              <Sparkles className="w-4 h-4 text-cyan-400" />
-            </Link>
+            <FooterLogo />
 
             <p className="mt-4 text-gray-300 text-sm leading-relaxed">
               Senior BI Developer &amp; Data Engineer crafting enterprise
@@ -318,7 +370,7 @@ export default function Footer() {
                 <button
                   type="submit"
                   disabled={subLoading}
-                  className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-bold text-white shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2 shrink-0"
+                  className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-bold text-white shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2 shrink-0 cursor-pointer"
                 >
                   {subLoading ? (
                     <Loader2 size={14} className="animate-spin" />
@@ -376,7 +428,7 @@ export default function Footer() {
             {/* Unsubscribe Button Trigger */}
             <button
               onClick={() => setUnsubOpen(true)}
-              className="text-gray-400 hover:text-red-400 transition-colors flex items-center gap-1 font-semibold"
+              className="text-gray-400 hover:text-red-400 transition-colors flex items-center gap-1 font-semibold cursor-pointer"
             >
               <UserX size={12} />
               <span>Unsubscribe</span>
@@ -407,7 +459,7 @@ export default function Footer() {
                 setUnsubOpen(false);
                 setUnsubMessage("");
               }}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors"
+              className="absolute top-4 right-4 text-gray-400 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
             >
               <X size={18} />
             </button>
@@ -435,7 +487,7 @@ export default function Footer() {
                     setUnsubOpen(false);
                     setUnsubMessage("");
                   }}
-                  className="px-5 py-2 rounded-xl bg-white/10 text-xs font-bold hover:bg-white/20 transition-all"
+                  className="px-5 py-2 rounded-xl bg-white/10 text-xs font-bold hover:bg-white/20 transition-all cursor-pointer"
                 >
                   Close
                 </button>
@@ -459,7 +511,7 @@ export default function Footer() {
                 <button
                   type="submit"
                   disabled={unsubLoading}
-                  className="w-full py-2.5 rounded-xl bg-red-600 hover:bg-red-500 font-bold text-xs text-white shadow-lg shadow-red-600/30 transition-all flex items-center justify-center gap-2"
+                  className="w-full py-2.5 rounded-xl bg-red-600 hover:bg-red-500 font-bold text-xs text-white shadow-lg shadow-red-600/30 transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   {unsubLoading ? (
                     <Loader2 size={14} className="animate-spin" />

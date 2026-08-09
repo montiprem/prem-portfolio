@@ -2,59 +2,59 @@ import { Project } from "@/types";
 
 export const projects: Project[] = [
   {
-    id: "employee-attrition",
-    title: "Employee Attrition Dashboard",
+    id: "covid-19-analysis",
+    title: "Covid 19 Analysis & Dashboard",
     description:
-      "Tracks and analyzes workforce attrition trends across departments, supporting data-driven retention and management decisions.",
-    tags: ["Power BI", "DAX", "HR Analytics"],
-    company: "Utkarsh India Limited",
+      "Comprehensive Covid-19 data analysis dashboard tracking nationwide infection rates, recovery metrics, testing trends, and regional impact analysis.",
+    tags: ["Power BI", "Healthcare Analytics", "DAX", "Data Modeling", "Pandemic Insights"],
+    category: "Power BI",
+    accent: "indigo",
+    featured: true,
+    images: [
+      "/projects/Power BI/Covid 19/covid 1.png",
+      "/projects/Power BI/Covid 19/covid 2.png",
+      "/projects/Power BI/Covid 19/covid 3.png",
+      "/projects/Power BI/Covid 19/covid 4.png",
+      "/projects/Power BI/Covid 19/covid 5.png",
+    ],
+    driveUrl:
+      "https://drive.google.com/file/d/1UMaZgskF3Si-EOHRXzdGNpvk55B0WYy9/view?usp=drive_link",
+    pdfUrl: "/projects/Power BI/Covid 19/Covid 19 Analysis & Dashboard Power Bi.pdf",
+    datasetUrl: "/projects/Power BI/Covid 19/covid_19_india.csv",
+  },
+  {
+    id: "diabetic-patient-analysis",
+    title: "Diabetic Patient Analysis Power BI Dashboard",
+    description:
+      "Comprehensive healthcare analytics dashboard analyzing diabetic patient demographics, glucose levels, insulin dosages, risk factors, and treatment outcomes.",
+    tags: ["Power BI", "Healthcare Analytics", "DAX", "Patient Insights", "Data Modeling"],
+    category: "Power BI",
     accent: "blue",
     featured: true,
+    images: [
+      "/projects/Power BI/diabetes/diabetes 1.png",
+      "/projects/Power BI/diabetes/diabetes 2.png",
+      "/projects/Power BI/diabetes/diabetes 3.png",
+    ],
+    driveUrl:
+      "https://drive.google.com/file/d/10XrzYSMNzoXz8HVP3mlzIry8WYmCwj_x/view?usp=drive_link",
+    pdfUrl: "/projects/Power BI/diabetes/Diabetic Patient Analysis -.pdf",
   },
   {
-    id: "weekly-mis-mom",
-    title: "Weekly MIS & MOM Dashboard",
+    id: "netflix-data-power-bi-dashboard",
+    title: "Netflix Data Power BI Dashboard",
     description:
-      "Single-page dashboard consolidating weekly reports submitted by all department HODs into one consistent view.",
-    tags: ["Power BI", "Power Query"],
-    company: "Utkarsh India Limited",
+      "Interactive data visualization dashboard tracking Netflix movies and TV shows distribution, content genres, ratings analysis, and release year trends.",
+    tags: ["Power BI", "Data Visualization", "DAX", "Content Analytics", "Power Query"],
+    category: "Power BI",
     accent: "cyan",
     featured: true,
-  },
-  {
-    id: "auction-sales",
-    title: "Auction Sales Dashboard",
-    description:
-      "Week-wise dashboard analyzing buyer-wise purchase volumes and tea variety-wise margins to guide pricing decisions for upcoming auctions.",
-    tags: ["Power BI", "DAX", "Data Cleaning"],
-    company: "Bhauram Jodhraj Pvt Ltd",
-    accent: "indigo",
-  },
-  {
-    id: "import-export-analysis",
-    title: "Import/Export Analysis Dashboard",
-    description:
-      "Global market insights dashboard built on data sourced and scraped from Volza for import/export trend analysis.",
-    tags: ["Power BI", "Data Integration"],
-    company: "Bhauram Jodhraj Pvt Ltd",
-    accent: "blue",
-  },
-  {
-    id: "sales-analysis",
-    title: "Sales Analysis Dashboard",
-    description:
-      "Week-wise, month-wise and yearly sales insights built from raw Excel data, published to Power BI Service with Row Level Security.",
-    tags: ["Power BI", "RLS", "Advanced Excel"],
-    company: "Super Smelters Ltd",
-    accent: "cyan",
-  },
-  {
-    id: "vehicle-track-weigh",
-    title: "Vehicle Track & Weigh Dashboard",
-    description:
-      "Monitors weekly vehicle turnaround time and weight discrepancies for operational tracking.",
-    tags: ["Power BI", "Operations"],
-    company: "Super Smelters Ltd",
-    accent: "indigo",
+    images: [
+      "/projects/Power BI/Netflix/Netflix 1.png",
+    ],
+    driveUrl:
+      "https://drive.google.com/file/d/1SKNRSB-ALjUBXUhJRrMH3GI-uSpf9VaL/view?usp=drive_link",
+    pdfUrl: "/projects/Power BI/Netflix/Netflix data Power bi dashboard.pdf",
+    datasetUrl: "/projects/Power BI/Netflix/netflix_csv.csv",
   },
 ];
