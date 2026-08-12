@@ -23,15 +23,31 @@ export default function Contact() {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Portfolio contact from ${form.name}`);
-    const body = encodeURIComponent(
-      `${form.message}\n\nFrom: ${form.name} (${form.email})`
-    );
-    window.location.href = `mailto:jobs.premmandal@gmail.com?subject=${subject}&body=${body}`;
-    setSent(true);
-  }
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
+
+      if (response.ok) {
+        setSent(true);
+        setTimeout(() => {
+          setSent(false);
+          setForm({ name: "", email: "", message: "" });
+        }, 3000);
+      } else {
+        console.error('Failed to submit form');
+      }
+    } catch (error) {
+      console.error('Failed to submit form', error);
+    }
+  };
 
   return (
     <section
@@ -217,7 +233,7 @@ export default function Contact() {
               {sent && (
                 <div className="flex items-center justify-center gap-2 p-2.5 sm:p-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-semibold text-center">
                   <CheckCircle2 className="w-4 h-4" />
-                  <span>Redirecting to your mail client...</span>
+                  <span>Message sent successfully!</span>
                 </div>
               )}
             </div>
