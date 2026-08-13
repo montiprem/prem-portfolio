@@ -5,21 +5,7 @@ export function createClient() {
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
   if (!url || !key) {
-     return {
-         auth: {
-            signInWithPassword: async () => ({ error: { message: "Supabase not configured" } }),
-            signUp: async () => ({ error: { message: "Supabase not configured" } }),
-            signInWithOAuth: async () => ({ error: { message: "Supabase not configured" } }),
-            resetPasswordForEmail: async () => ({ error: { message: "Supabase not configured" } }),
-            updateUser: async () => ({ error: { message: "Supabase not configured" } }),
-            signOut: async () => {},
-         },
-         from: () => ({
-             update: () => ({
-                 eq: async () => ({ error: { message: "Supabase not configured" } })
-             })
-         })
-     } as any;
+    throw new Error('Missing Supabase environment variables: NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY must be defined.');
   }
 
   return createBrowserClient(url, key)

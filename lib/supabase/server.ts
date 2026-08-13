@@ -6,21 +6,7 @@ export async function createClient() {
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
   if (!url || !key) {
-    // When environment variables are missing during static prerendering,
-    // we return a dummy client so the build does not fail.
-    // In actual production runtime, this will be handled properly.
-    return {
-      auth: {
-         getUser: async () => ({ data: { user: null }, error: null }),
-      },
-      from: () => ({
-         select: () => ({
-             eq: () => ({
-                 single: async () => ({ data: null, error: null })
-             })
-         })
-      })
-    } as any;
+    throw new Error('Missing Supabase environment variables: NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY must be defined.');
   }
 
   const cookieStore = await cookies()
