@@ -1,22 +1,24 @@
 "use client";
 
 import { useState } from "react";
+import { createClient } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { signIn } from "next-auth/react";
 import {
+  ArrowLeft,
   Mail,
   Lock,
-  UserPlus,
-  ArrowLeft,
   Eye,
   EyeOff,
+  UserPlus,
   Loader2,
   CheckCircle,
-  LogIn,
 } from "lucide-react";
 import Container from "@/components/ui/Container";
 
-export default function SignUpPage() {
+export default function Signup() {
+  const router = useRouter();
+  const supabase = createClient();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -25,77 +27,83 @@ export default function SignUpPage() {
     confirmPassword: "",
     agree: false,
   });
-
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
+    setFormData({
+      ...formData,
       [name]: type === "checkbox" ? checked : value,
-    }));
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMsg("");
 
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
+      setErrorMsg("Passwords do not match");
       return;
     }
 
     if (!formData.agree) {
-      alert("Please agree to the Terms of Service & Privacy Policy.");
+      setErrorMsg("You must agree to the Terms of Service & Privacy Policy");
       return;
     }
 
     setLoading(true);
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          access_key: "e1125910-94f6-40b5-9375-a504ecd93df4",
-          subject: "New Account Registration Alert",
-          from_name: "Portfolio SignUp",
-          name: `${formData.firstName} ${formData.lastName}`,
-          email: formData.email,
-        }),
+      const { data, error } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/auth/callback?next=/dashboard`,
+          data: {
+            full_name: `${formData.firstName} ${formData.lastName}`.trim(),
+          }
+        }
       });
 
-      if (response.ok) {
+      if (error) {
+        setErrorMsg(error.message);
+      } else {
         setSubmitted(true);
       }
     } catch (error) {
       console.error(error);
+      setErrorMsg("An unexpected error occurred.");
     } finally {
       setLoading(false);
     }
   };
 
   const handleGoogleSignUp = async () => {
+    setLoading(true);
     try {
-      await signIn("google", { callbackUrl: "/" });
-    } catch (error) {
-      console.error("Google Sign-Up Error:", error);
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback?next=/dashboard`,
+        }
+      });
+      if (error) throw error;
+    } catch (error: any) {
+      setErrorMsg(error.message);
+      setLoading(false);
     }
   };
 
   return (
     <div className="min-h-screen bg-background text-foreground flex items-center justify-center relative overflow-hidden py-16 px-4 transition-colors duration-300">
-      {/* Background Lights */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-600/20 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute bottom-10 right-1/4 w-72 h-72 bg-cyan-500/15 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-cyan-500/15 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-blue-600/15 rounded-full blur-[140px] pointer-events-none" />
 
       <Container className="relative z-10 max-w-lg w-full">
-        {/* Back Button */}
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white transition-colors mb-6"
@@ -103,43 +111,41 @@ export default function SignUpPage() {
           <ArrowLeft size={16} /> Back to Home
         </Link>
 
-        {/* Form Card */}
         <div className="rounded-3xl border border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-white/5 backdrop-blur-2xl p-6 sm:p-8 shadow-xl dark:shadow-2xl">
           {submitted ? (
-            /* Updated Success View */
             <div className="text-center py-8 space-y-4">
               <div className="inline-flex p-4 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-                <CheckCircle className="w-12 h-12 animate-bounce" />
+                <CheckCircle className="w-10 h-10" />
               </div>
-              <h2 className="text-2xl font-black text-slate-900 dark:text-white">Account Created Successfully! 🎉</h2>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-gray-300 max-w-sm mx-auto leading-relaxed">
-                Your details have been saved successfully. You can now login using your email and password or Google Sign-In.
+              <h2 className="text-2xl font-black text-slate-900 dark:text-white">Check Your Email</h2>
+              <p className="text-xs text-slate-600 dark:text-gray-300 max-w-xs mx-auto">
+                We've sent a confirmation link to your email address. Please verify to continue.
               </p>
-              
-              <div className="pt-2">
-                <Link
-                  href="/login"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs sm:text-sm font-bold text-white transition-all shadow-lg shadow-blue-600/30"
-                >
-                  <span>Go to Login Page</span>
-                  <LogIn className="w-4 h-4" />
-                </Link>
-              </div>
+              <Link
+                href="/login"
+                className="inline-block px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-bold text-white transition-all shadow-lg shadow-blue-600/30"
+              >
+                Go to Login
+              </Link>
             </div>
           ) : (
             <>
-              {/* Header Title */}
               <div className="text-center mb-6">
                 <h1 className="text-3xl font-black tracking-tight bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600 dark:from-blue-400 dark:via-cyan-300 dark:to-indigo-400 bg-clip-text text-transparent">
                   Create an Account
                 </h1>
                 <p className="text-xs text-slate-500 dark:text-gray-400 mt-1">
-                  Join to access exclusive Power BI dashboards &amp; resources
+                  Join the platform to access premium resources and templates.
                 </p>
               </div>
 
+              {errorMsg && (
+                <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 text-red-500 text-xs rounded-xl text-center">
+                  {errorMsg}
+                </div>
+              )}
+
               <form onSubmit={handleSubmit} className="space-y-4">
-                {/* First Name & Last Name */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-semibold text-slate-700 dark:text-gray-300 mb-1.5">
@@ -172,7 +178,6 @@ export default function SignUpPage() {
                   </div>
                 </div>
 
-                {/* Email Address */}
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 dark:text-gray-300 mb-1.5">
                     Email Address <span className="text-cyan-600 dark:text-cyan-400">*</span>
@@ -191,7 +196,6 @@ export default function SignUpPage() {
                   </div>
                 </div>
 
-                {/* Password & Confirm Password */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-semibold text-slate-700 dark:text-gray-300 mb-1.5">
@@ -235,9 +239,7 @@ export default function SignUpPage() {
                       />
                       <button
                         type="button"
-                        onClick={() =>
-                          setShowConfirmPassword(!showConfirmPassword)
-                        }
+                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                         className="absolute right-3 top-3 text-slate-400 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white"
                       >
                         {showConfirmPassword ? (
@@ -250,7 +252,6 @@ export default function SignUpPage() {
                   </div>
                 </div>
 
-                {/* Terms Checkbox */}
                 <div className="flex items-center gap-2 pt-1">
                   <input
                     type="checkbox"
@@ -281,7 +282,6 @@ export default function SignUpPage() {
                   </label>
                 </div>
 
-                {/* Action Buttons */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3">
                   <button
                     type="submit"
@@ -304,29 +304,16 @@ export default function SignUpPage() {
                     className="w-full py-2.5 px-4 rounded-xl border border-slate-200 dark:border-white/15 bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 font-semibold text-xs text-slate-800 dark:text-white transition-all flex items-center justify-center gap-2 cursor-pointer"
                   >
                     <svg className="w-4 h-4" viewBox="0 0 24 24">
-                      <path
-                        fill="#EA4335"
-                        d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.7 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.3 9 5 12 5z"
-                      />
-                      <path
-                        fill="#4285F4"
-                        d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"
-                      />
-                      <path
-                        fill="#FBBC05"
-                        d="M5.6 14.8c-.2-.7-.4-1.5-.4-2.3s.2-1.6.4-2.3L1.9 7.3C.7 9.7 0 12.3 0 15s.7 5.3 1.9 7.7l3.7-2.9c-.2-.7-.4-1.5-.4-2.3z"
-                      />
-                      <path
-                        fill="#34A853"
-                        d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2.3-6.4-5.2L1.9 16c1.8 3.7 5.6 7 10.1 7z"
-                      />
+                      <path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.7 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.3 9 5 12 5z" />
+                      <path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z" />
+                      <path fill="#FBBC05" d="M5.6 14.8c-.2-.7-.4-1.5-.4-2.3s.2-1.6.4-2.3L1.9 7.3C.7 9.7 0 12.3 0 15s.7 5.3 1.9 7.7l3.7-2.9c-.2-.7-.4-1.5-.4-2.3z" />
+                      <path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2.3-6.4-5.2L1.9 16c1.8 3.7 5.6 7 10.1 7z" />
                     </svg>
                     <span>Google</span>
                   </button>
                 </div>
               </form>
 
-              {/* OR Divider */}
               <div className="relative my-6 text-center">
                 <div className="absolute inset-0 flex items-center">
                   <div className="w-full border-t border-slate-200 dark:border-white/10" />
@@ -336,7 +323,6 @@ export default function SignUpPage() {
                 </span>
               </div>
 
-              {/* Login Link */}
               <p className="text-center text-xs text-slate-500 dark:text-gray-400">
                 Already have an account?{" "}
                 <Link
