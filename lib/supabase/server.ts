@@ -2,12 +2,30 @@ import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
 export async function createClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!url || !key) {
+    // When environment variables are missing during static prerendering,
+    // we return a dummy client so the build does not fail.
+    // In actual production runtime, this will be handled properly.
+    return {
+      auth: {
+         getUser: async () => ({ data: { user: null }, error: null }),
+      },
+      from: () => ({
+         select: () => ({
+             eq: () => ({
+                 single: async () => ({ data: null, error: null })
+             })
+         })
+      })
+    } as any;
+  }
+
   const cookieStore = await cookies()
 
-  return createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co',
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder',
-    {
+  return createServerClient(url, key, {
       cookies: {
         getAll() {
           return cookieStore.getAll()

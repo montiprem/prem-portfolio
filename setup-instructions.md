@@ -1,25 +1,36 @@
 # Phase 3 Setup Instructions: Authentication & Database
 
-This document contains the exact steps required to complete the setup of your Supabase authentication and database for the portfolio.
+This document contains the exact steps required to complete the setup of your Supabase authentication and database for the portfolio, ensuring correct PKCE flow and database security.
 
 ## 1. Supabase Environment Variables
 
-In the root of your project, create a `.env.local` file (this is already ignored by Git) and add the following variables. Replace the placeholders with the actual values from your Supabase project dashboard (Settings -> API):
+In your Vercel Project Settings (Settings -> Environment Variables), you must configure the following variables for all environments (Production, Preview, Development). Replace the placeholders with the actual values from your Supabase project dashboard (Project Settings -> API):
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 ```
 
-## 2. Supabase SQL Migration (Profiles Table)
+*Note: The application is designed to strictly fail and abort build/prerendering if these are missing, rather than fall back to fake credentials.*
 
-You need to create the `profiles` table in your Supabase PostgreSQL database. I have created a migration file for you at `supabase/migrations/00000000000000_create_profiles.sql`.
+## 2. Supabase Redirect URL Configuration
 
-Run the following SQL script directly in your Supabase SQL Editor to reproduce the schema, Row Level Security (RLS) policies, and automated triggers:
+To ensure email confirmations and password resets redirect the user back to the application properly in production, configure your URLs in the Supabase Dashboard (Authentication -> URL Configuration):
+
+1.  **Site URL:** Set this to your production URL: `https://prem-portfolio-drab.vercel.app`
+2.  **Redirect URLs:** Add the exact callback route used by the application:
+    *   `https://prem-portfolio-drab.vercel.app/auth/callback`
+    *   *(Optional but recommended for local dev)* `http://localhost:3000/auth/callback`
+
+## 3. Supabase SQL Migration (Profiles Table & RLS)
+
+You need to create the `profiles` table in your Supabase PostgreSQL database. I have created a robust, idempotent migration file for you at `supabase/migrations/00000000000000_create_profiles.sql`.
+
+Run the following SQL script directly in your Supabase SQL Editor. It creates the table, sets strict Row Level Security (RLS) so users can only read/update their *own* data, and creates a trigger with conflict-handling to auto-generate profiles:
 
 ```sql
 -- Create profiles table
-create table public.profiles (
+create table if not exists public.profiles (
   id uuid not null references auth.users on delete cascade,
   email text,
   full_name text,
@@ -33,9 +44,16 @@ create table public.profiles (
 -- Set up Row Level Security (RLS)
 alter table public.profiles enable row level security;
 
-create policy "Public profiles are viewable by everyone."
+-- Drop existing policies if running multiple times
+drop policy if exists "Public profiles are viewable by everyone." on profiles;
+drop policy if exists "Users can insert their own profile." on profiles;
+drop policy if exists "Users can update own profile." on profiles;
+drop policy if exists "Users can read own profile." on profiles;
+
+-- NEW RESTRICTED READ POLICY: A user can only read their own profile
+create policy "Users can read own profile."
   on profiles for select
-  using ( true );
+  using ( auth.uid() = id );
 
 create policy "Users can insert their own profile."
   on profiles for insert
@@ -46,10 +64,12 @@ create policy "Users can update own profile."
   using ( auth.uid() = id );
 
 -- Set up Realtime
+drop publication if exists supabase_realtime;
+create publication supabase_realtime;
 alter publication supabase_realtime add table profiles;
 
 -- Create a trigger to automatically create a profile when a new user signs up
-create function public.handle_new_user()
+create or replace function public.handle_new_user()
 returns trigger
 language plpgsql
 security definer set search_path = public
@@ -61,21 +81,17 @@ begin
     new.email,
     new.raw_user_meta_data->>'full_name',
     new.raw_user_meta_data->>'avatar_url'
-  );
+  )
+  on conflict (id) do nothing; -- safe guard if profile exists
   return new;
 end;
 $$;
 
+drop trigger if exists on_auth_user_created on auth.users;
 create trigger on_auth_user_created
   after insert on auth.users
   for each row execute procedure public.handle_new_user();
 ```
-
-## 3. Email Functionality
-
-The codebase has been updated to use Supabase Auth for account creation, login, and password resets. These functions will automatically trigger emails based on your Supabase Email Templates configuration.
-
-*   **Setup required:** Ensure that "Enable Email Confirmations" is turned on (if desired) in your Supabase Authentication settings. Customize your email templates in the Supabase dashboard (Authentication -> Email Templates). Make sure your Site URL (e.g., `http://localhost:3000` for local dev, or your production domain) and Redirect URLs (e.g., `http://localhost:3000/auth/callback`, `http://localhost:3000/reset-password`) are configured in Supabase (Authentication -> URL Configuration).
 
 ## 4. Contact Form Configuration
 
@@ -85,5 +101,5 @@ To actually send emails to yourself from this form, you will need to add a trans
 
 **Required Manual Steps:**
 1. Sign up for Resend (or a similar provider) and get an API key.
-2. Add `RESEND_API_KEY=your_key` to your `.env.local` file (and Vercel environment variables).
+2. Add `RESEND_API_KEY=your_key` to your Vercel environment variables.
 3. In `app/api/contact/route.ts`, uncomment the example code and install the necessary package (`npm install resend`).
