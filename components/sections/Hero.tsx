@@ -133,65 +133,35 @@ export default function Hero() {
           
           {/* Left Column */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="lg:col-span-7"
+            className="lg:col-span-7 flex flex-col justify-center"
           >
-            {/* Replaced Badge: Data is Everything */}
-            <div className="inline-flex items-center gap-2 sm:gap-2.5 rounded-full border border-blue-500/30 bg-blue-500/10 px-3 sm:px-4 py-1 sm:py-1.5 backdrop-blur-md mb-3 sm:mb-4 shadow-lg shadow-blue-500/10">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-blue-500/30 bg-blue-500/10 text-[10px] sm:text-xs font-bold text-blue-600 dark:text-blue-400 mb-4 sm:mb-6 w-fit shadow-[0_0_15px_rgba(59,130,246,0.15)]">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-500" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-blue-500" />
               </span>
-              <span className="text-[10px] sm:text-xs text-cyan-600 dark:text-cyan-300 font-semibold flex items-center gap-1.5 sm:gap-2">
-                <span>Data is Everything</span>
-                <span className="flex items-center gap-1 pl-1.5 sm:pl-2 border-l border-slate-300 dark:border-white/20">
-                  <motion.span animate={{ y: [0, -3, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}>📊</motion.span>
-                  <motion.span animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}>⚡</motion.span>
-                  <motion.span animate={{ rotate: [0, 10, -10, 0] }} transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}>🗄️</motion.span>
-                  <motion.span animate={{ y: [0, -3, 0] }} transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}>📈</motion.span>
-                </span>
-              </span>
+              Available for work
             </div>
 
-            <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 sm:px-3.5 py-1 sm:py-1.5 backdrop-blur-md ml-0 sm:ml-2">
-              <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-emerald-500" />
-              </span>
-              <span className="text-[10px] sm:text-xs text-emerald-600 dark:text-emerald-400 font-medium">
-                Available for freelance & full-time work
-              </span>
-            </div>
-
-            <p className="text-blue-600 dark:text-blue-400 font-semibold mt-3 sm:mt-4 tracking-wide text-[11px] sm:text-sm uppercase flex items-center gap-1 sm:gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> Prem Mandal
-            </p>
-
-            <h1 className="mt-1 sm:mt-2 text-2xl sm:text-4xl lg:text-6xl font-extrabold leading-snug sm:leading-[1.12] tracking-tight">
-              <span className="bg-gradient-to-r from-blue-700 via-cyan-600 to-indigo-700 dark:from-white dark:via-blue-100 dark:to-cyan-300 bg-clip-text text-transparent">
-                Building BI Dashboards
-              </span>
-              <br />
-              <span className="text-slate-600 dark:text-gray-400 text-lg sm:text-3xl lg:text-5xl font-bold">
-                that drive decisions.
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-black leading-[1.05] tracking-tighter text-slate-900 dark:text-white">
+              Senior BI Developer <br className="hidden sm:block" /> &amp;{" "}
+              <span className="bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent inline-block pb-1 sm:pb-2 drop-shadow-sm">
+                Data Analyst
               </span>
             </h1>
 
-            <h2 className="text-[11px] sm:text-lg font-medium text-blue-600/90 dark:text-blue-400/90 mt-2 sm:mt-3">
-              Senior BI Developer • Data Analyst • Microsoft Fabric
-            </h2>
-
-            <p className="mt-2 sm:mt-4 text-slate-700 dark:text-gray-300 text-xs sm:text-base max-w-xl leading-relaxed sm:leading-relaxed">
-              I build enterprise-grade BI solutions using Power BI, SQL, DAX, Power Query, and Microsoft Fabric. From analytical data modeling to executive dashboards, I help businesses turn complex data into actionable insights.
+            <p className="mt-4 sm:mt-6 text-sm sm:text-base md:text-lg text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed font-medium">
+              I transform complex enterprise data into actionable executive insights. Specializing in Power BI, SQL, DAX, and Microsoft Fabric.
             </p>
 
-            <div className="flex flex-wrap gap-2 sm:gap-3 mt-4 sm:mt-6">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-6 sm:mt-8">
               <a
                 href="/resume/resume.pdf"
                 download
-                className="group px-4 py-2.5 sm:px-5 sm:py-3 bg-blue-600 hover:bg-blue-500 rounded-xl transition-all duration-300 font-semibold text-white flex items-center gap-1.5 sm:gap-2 shadow-lg shadow-blue-600/30 hover:scale-105 active:scale-95 text-[10px] sm:text-sm"
+                className="group px-6 py-3 sm:px-8 sm:py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white transition-all duration-300 shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:shadow-[0_0_30px_rgba(37,99,235,0.6)] hover:-translate-y-1 active:translate-y-0 font-bold tracking-wide flex items-center gap-2 text-xs sm:text-sm"
               >
                 <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover:-translate-y-0.5" />
                 <span>Download CV</span>
@@ -199,14 +169,14 @@ export default function Hero() {
 
               <a
                 href="#contact"
-                className="group px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl border border-slate-300 dark:border-white/20 bg-slate-100 dark:bg-white/5 backdrop-blur-md hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-black text-slate-900 dark:text-white transition-all duration-300 font-semibold flex items-center gap-1.5 sm:gap-2 hover:scale-105 text-[10px] sm:text-sm"
+                className="group px-6 py-3 sm:px-8 sm:py-3.5 rounded-xl border border-slate-300 dark:border-white/10 bg-white/50 dark:bg-white/5 backdrop-blur-xl hover:border-blue-500/50 hover:bg-blue-50/50 dark:hover:bg-white/10 text-slate-900 dark:text-white transition-all duration-300 font-bold tracking-wide flex items-center gap-2 hover:-translate-y-1 text-xs sm:text-sm"
               >
                 <span>Let&apos;s Talk</span>
                 <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </a>
             </div>
 
-            <div className="flex gap-2 sm:gap-2.5 mt-4 sm:mt-5">
+            <div className="flex gap-2 sm:gap-2.5 mt-6 sm:mt-8">
               {socials.map(({ href, label, icon: Icon }) => (
                 <a
                   key={label}
@@ -214,7 +184,7 @@ export default function Hero() {
                   target={href.startsWith("http") ? "_blank" : undefined}
                   rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
                   aria-label={label}
-                  className="p-2 sm:p-2.5 rounded-xl border border-slate-300 dark:border-white/10 bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-300 hover:scale-110"
+                  className="p-2.5 sm:p-3 rounded-xl border border-slate-300 dark:border-white/10 bg-white/50 dark:bg-white/5 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-white hover:border-blue-500/50 hover:bg-blue-50/80 dark:hover:bg-blue-500/20 transition-all duration-300 hover:-translate-y-1 shadow-sm"
                 >
                   <Icon size={18} />
                 </a>

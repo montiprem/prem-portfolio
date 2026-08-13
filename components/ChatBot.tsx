@@ -52,69 +52,81 @@ I'm improving its knowledge, speed, and overall experience.
 
   return (
     // Position updated to bottom-8/bottom-10 to prevent footer overlap
-    <div className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 flex flex-col items-end gap-3 group">
-
-      {/* Floating Toggle Button (with built-in tooltip) */}
-      <div className="relative flex items-center justify-center">
-
-        {/* Elegant Desktop Tooltip */}
-        {!isOpen && (
-          <div className="absolute right-full mr-3 top-1/2 -translate-y-1/2 hidden md:block opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-            <div className="bg-[#0b1220]/95 border border-white/10 text-white px-3 py-1.5 rounded-xl shadow-xl backdrop-blur-md text-[11px] font-semibold whitespace-nowrap">
-              Ask Prem&apos;s AI
-            </div>
-          </div>
-        )}
-
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => setIsOpen(!isOpen)}
-          className="relative w-12 h-12 md:w-14 md:h-14 bg-gradient-to-tr from-blue-600/90 to-cyan-500/90 hover:from-blue-500 hover:to-cyan-400 text-white rounded-full shadow-lg shadow-blue-500/20 backdrop-blur-sm flex items-center justify-center border border-white/10 transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-          aria-label={isOpen ? "Close AI Assistant" : "Open AI Assistant"}
-          aria-expanded={isOpen}
+    <div className="fixed bottom-8 right-6 md:bottom-10 md:right-8 z-50 flex items-center gap-3">
+      {/* Animated Greeting Bubble / Sticker */}
+      {!isOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: 10, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.3 }}
+          className="hidden sm:flex items-center gap-2 bg-[#0b1220]/90 border border-blue-500/30 text-white px-3.5 py-2 rounded-2xl shadow-xl backdrop-blur-md text-xs font-medium"
         >
-            {isOpen ? (
-              <X className="w-5 h-5 md:w-6 md:h-6" />
-            ) : (
-              <div className="relative flex items-center justify-center">
-                <Bot className="w-5 h-5 md:w-6 md:h-6 text-white" />
-                {/* Subtle Status Dot */}
-                <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400/60 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 border border-white/20" />
-                </span>
-              </div>
-            )}
-        </motion.button>
-      </div>
+          <motion.span
+            animate={{ rotate: [0, 14, -14, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+          >
+            👋
+          </motion.span>
+          <span>Ask Prem&apos;s AI Assistant!</span>
+        </motion.div>
+      )}
+
+      {/* Floating Toggle Button */}
+      <motion.button
+        whileHover={{ scale: 1.15 }}
+        whileTap={{ scale: 0.9 }}
+        onClick={() => setIsOpen(!isOpen)}
+        className="relative p-3.5 bg-gradient-to-tr from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white rounded-full shadow-[0_0_25px_rgba(59,130,246,0.6)] flex items-center justify-center border border-white/20 transition-all group cursor-pointer"
+        aria-label="Open AI Chat"
+      >
+        <motion.div
+          animate={{ y: [0, -3, 0] }}
+          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+          className="flex items-center justify-center"
+        >
+          {isOpen ? (
+            <X className="w-6 h-6" />
+          ) : (
+            <div className="relative flex items-center justify-center">
+              <Bot className="w-6 h-6 text-white" />
+              <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-200 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-300" />
+              </span>
+            </div>
+          )}
+        </motion.div>
+      </motion.button>
 
       {/* Chat Window */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 15, scale: 0.97 }}
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 15, scale: 0.97, transition: { duration: 0.15 } }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute bottom-[4.5rem] md:bottom-20 right-0 w-[calc(100vw-3rem)] max-w-[380px] h-[calc(100vh-8rem)] max-h-[550px] bg-[#0b1220]/95 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-2xl flex flex-col overflow-hidden text-white"
+            className="absolute bottom-16 right-0 w-[90vw] sm:w-[380px] h-[480px] sm:h-[500px] bg-[#0b1220]/95 border border-white/15 rounded-3xl shadow-2xl backdrop-blur-2xl flex flex-col overflow-hidden text-white"
           >
             {/* Header */}
             <div className="p-4 bg-white/5 border-b border-white/10 flex items-center justify-between">
               <div className="flex items-center gap-2.5">
+                <div className="relative p-2 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-500 text-white shadow-md">
+                  <Bot className="w-4 h-4" />
+                </div>
                 <div>
                   <h3 className="text-sm font-bold flex items-center gap-1.5">
                     Prem&apos;s AI Assistant <span className="text-sm">🤖</span>
                   </h3>
-                  <p className="text-[10px] text-slate-400 mt-0.5 max-w-[240px] leading-tight">
-                    Ask me about Prem, his skills, projects, experience, Power BI, or SQL.
+                  <p className="text-[10px] text-amber-400 flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />{" "}
+                    Maintenance Mode
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="text-gray-400 hover:text-white p-1.5 hover:bg-white/10 rounded-lg transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
-                aria-label="Close panel"
+                className="text-gray-400 hover:text-white p-1 transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
