@@ -128,7 +128,7 @@ export default function Hero() {
       <div className="absolute -top-40 -left-40 h-96 w-96 rounded-full bg-blue-500/15 blur-[140px] pointer-events-none" />
       <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-cyan-500/15 blur-[140px] pointer-events-none" />
 
-      <Container className="relative z-10 lg:max-w-[1200px] xl:max-w-[1366px] 2xl:max-w-[1536px]">
+      <Container className="relative z-10">
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 items-center">
           
           {/* Left Column */}

@@ -150,7 +150,7 @@ export default function Navbar() {
       <Container>
         <div className="flex items-center justify-between gap-4">
           {/* LOGO & BRAND SECTION */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2">
             <Link
               href="/"
               onClick={handleLogoClick}
@@ -199,7 +199,7 @@ export default function Navbar() {
               );
             })}
 
-            <div className="relative ml-1" ref={dropdownRef}>
+            <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setMoreDropdownOpen(!moreDropdownOpen)}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-yellow-500/40 bg-yellow-500/10 text-amber-600 dark:text-yellow-400 hover:bg-yellow-500/20 text-xs font-bold transition-all duration-300 cursor-pointer ${
@@ -246,7 +246,7 @@ export default function Navbar() {
           {/* RIGHT ACTION BUTTONS */}
           <div className="hidden md:flex items-center gap-3 shrink-0">
             <a
-              href="https://wa.me/91728105278"
+              href="https://wa.me/917281055278"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp"

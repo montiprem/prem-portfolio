@@ -7,7 +7,7 @@ export default function WhatsAppButton() {
   return (
     <div className="fixed bottom-24 right-6 md:bottom-28 md:right-8 z-50 flex items-center gap-3">
       <motion.a
-        href="https://wa.me/91728105278"
+        href="https://wa.me/917281055278"
         target="_blank"
         rel="noopener noreferrer"
         whileHover={{ scale: 1.15 }}
