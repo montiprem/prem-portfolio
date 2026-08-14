@@ -129,14 +129,14 @@ export default function Hero() {
       <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-cyan-500/15 blur-[140px] pointer-events-none" />
 
       <Container className="relative z-10">
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 items-center">
           
           {/* Left Column */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="lg:col-span-7 flex flex-col justify-center"
+            className="lg:col-span-7 2xl:col-span-8 flex flex-col justify-center"
           >
             <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-blue-500/30 bg-blue-500/10 text-[10px] sm:text-xs font-bold text-blue-600 dark:text-blue-400 mb-4 sm:mb-6 w-fit shadow-[0_0_15px_rgba(59,130,246,0.15)]">
               <span className="relative flex h-2 w-2">
@@ -208,7 +208,7 @@ export default function Hero() {
           </motion.div>
 
           {/* Right Column */}
-          <div className="lg:col-span-5 flex flex-col items-center w-full mt-8 lg:mt-0">
+          <div className="lg:col-span-5 2xl:col-span-4 flex flex-col items-center w-full mt-8 lg:mt-0">
             <motion.div 
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}

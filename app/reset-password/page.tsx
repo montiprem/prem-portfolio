@@ -4,7 +4,6 @@ import { useState, useMemo } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { Lock, Eye, EyeOff, Loader2, CheckCircle } from "lucide-react";
-import Container from "@/components/ui/Container";
 
 export default function ResetPassword() {
   const router = useRouter();
@@ -53,16 +52,19 @@ export default function ResetPassword() {
     <div className="min-h-screen bg-background text-foreground flex items-center justify-center relative overflow-hidden py-16 px-4 transition-colors duration-300">
       <div className="absolute bottom-1/3 left-1/4 w-96 h-96 bg-emerald-500/15 rounded-full blur-[150px] pointer-events-none" />
 
-      <Container className="relative z-10 max-w-md w-full">
+      <div className="relative z-10 max-w-md w-full mx-auto px-6 lg:px-8">
         <div className="rounded-3xl border border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-white/5 backdrop-blur-2xl p-6 sm:p-8 shadow-xl dark:shadow-2xl">
           {submitted ? (
             <div className="text-center py-8 space-y-4">
               <div className="inline-flex p-4 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
                 <CheckCircle className="w-10 h-10" />
               </div>
-              <h2 className="text-2xl font-black text-slate-900 dark:text-white">Password Updated</h2>
+              <h2 className="text-2xl font-black text-slate-900 dark:text-white">
+                Password Updated
+              </h2>
               <p className="text-xs text-slate-600 dark:text-gray-300 max-w-xs mx-auto">
-                Your password has been successfully reset. Redirecting to login...
+                Your password has been successfully reset. Redirecting to
+                login...
               </p>
             </div>
           ) : (
@@ -85,7 +87,8 @@ export default function ResetPassword() {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 dark:text-gray-300 mb-1.5">
-                    New Password <span className="text-cyan-600 dark:text-cyan-400">*</span>
+                    New Password{" "}
+                    <span className="text-cyan-600 dark:text-cyan-400">*</span>
                   </label>
                   <div className="relative">
                     <Lock className="w-4 h-4 text-slate-400 dark:text-gray-400 absolute left-3.5 top-3" />
@@ -109,7 +112,8 @@ export default function ResetPassword() {
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 dark:text-gray-300 mb-1.5">
-                    Confirm New Password <span className="text-cyan-600 dark:text-cyan-400">*</span>
+                    Confirm New Password{" "}
+                    <span className="text-cyan-600 dark:text-cyan-400">*</span>
                   </label>
                   <div className="relative">
                     <Lock className="w-4 h-4 text-slate-400 dark:text-gray-400 absolute left-3.5 top-3" />
@@ -123,10 +127,16 @@ export default function ResetPassword() {
                     />
                     <button
                       type="button"
-                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      onClick={() =>
+                        setShowConfirmPassword(!showConfirmPassword)
+                      }
                       className="absolute right-3 top-3 text-slate-400 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white"
                     >
-                      {showConfirmPassword ? <EyeOff size={14} /> : <Eye size={14} />}
+                      {showConfirmPassword ? (
+                        <EyeOff size={14} />
+                      ) : (
+                        <Eye size={14} />
+                      )}
                     </button>
                   </div>
                 </div>
@@ -148,7 +158,7 @@ export default function ResetPassword() {
             </>
           )}
         </div>
-      </Container>
+      </div>
     </div>
   );
 }

@@ -116,7 +116,7 @@ export default function SkillsSection() {
     <section id="skills" className="py-24 bg-background relative overflow-hidden transition-colors duration-300">
       <Container>
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-4xl mx-auto mb-16">
           <p className="text-blue-600 dark:text-blue-400 font-semibold uppercase tracking-widest text-xs flex items-center justify-center gap-1.5">
             <Sparkles className="w-4 h-4 text-cyan-500" /> TECHNICAL CAPABILITIES
           </p>

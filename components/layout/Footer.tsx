@@ -314,7 +314,7 @@ export default function Footer() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6 relative z-10">
-            <div className="max-w-xl text-center lg:text-left">
+            <div className="max-w-2xl text-center lg:text-left">
               <h3 className="text-lg font-black tracking-tight text-slate-900 dark:text-white flex items-center justify-center lg:justify-start gap-2">
                 <span>Subscribe to Newsletter</span>
                 <Sparkles size={16} className="text-cyan-600 dark:text-cyan-400" />
@@ -328,7 +328,7 @@ export default function Footer() {
             <div className="w-full lg:w-auto">
               <form
                 onSubmit={handleSubscribe}
-                className="flex flex-col sm:flex-row items-center gap-2 max-w-md w-full"
+                className="flex flex-col sm:flex-row items-center gap-2 max-w-lg w-full"
               >
                 <div className="relative w-full">
                   <Mail className="w-4 h-4 text-slate-400 dark:text-gray-400 absolute left-3.5 top-3" />

@@ -15,7 +15,6 @@ import {
   CheckCircle,
   KeyRound,
 } from "lucide-react";
-import Container from "@/components/ui/Container";
 
 export default function Signup() {
   const router = useRouter();
@@ -68,15 +67,15 @@ export default function Signup() {
           emailRedirectTo: `${window.location.origin}/auth/callback?next=/dashboard`,
           data: {
             full_name: `${formData.firstName} ${formData.lastName}`.trim(),
-          }
-        }
+          },
+        },
       });
 
       if (error) {
         if (error.message.includes("already registered")) {
-           setErrorMsg("Already registered. Please login.");
+          setErrorMsg("Already registered. Please login.");
         } else {
-           setErrorMsg(error.message);
+          setErrorMsg(error.message);
         }
       } else {
         setVerificationMode(true);
@@ -103,7 +102,7 @@ export default function Signup() {
       const { error } = await supabase.auth.verifyOtp({
         email: formData.email,
         token: otpToken,
-        type: 'signup'
+        type: "signup",
       });
 
       if (error) {
@@ -126,10 +125,10 @@ export default function Signup() {
     setLoading(true);
     try {
       const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
+        provider: "google",
         options: {
           redirectTo: `${window.location.origin}/auth/callback?next=/dashboard`,
-        }
+        },
       });
       if (error) throw error;
     } catch (error: any) {
@@ -143,7 +142,7 @@ export default function Signup() {
       <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-cyan-500/15 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-blue-600/15 rounded-full blur-[140px] pointer-events-none" />
 
-      <Container className="relative z-10 max-w-lg w-full">
+      <div className="relative z-10 max-w-lg w-full mx-auto px-6 lg:px-8">
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white transition-colors mb-6"
@@ -157,58 +156,68 @@ export default function Signup() {
               <div className="inline-flex p-4 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
                 <CheckCircle className="w-10 h-10" />
               </div>
-              <h2 className="text-2xl font-black text-slate-900 dark:text-white">Account Verified!</h2>
+              <h2 className="text-2xl font-black text-slate-900 dark:text-white">
+                Account Verified!
+              </h2>
               <p className="text-xs text-slate-600 dark:text-gray-300 max-w-xs mx-auto">
                 Redirecting to dashboard...
               </p>
             </div>
           ) : verificationMode ? (
-             <div className="space-y-6">
-                <div className="text-center mb-6">
-                  <h1 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white">
-                    Verify Your Email
-                  </h1>
-                  <p className="text-xs text-slate-500 dark:text-gray-400 mt-2">
-                    We've sent a verification link and a 6-digit OTP code to <strong className="text-slate-800 dark:text-white">{formData.email}</strong>.
-                    Click the link in the email or enter the code below.
-                  </p>
+            <div className="space-y-6">
+              <div className="text-center mb-6">
+                <h1 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white">
+                  Verify Your Email
+                </h1>
+                <p className="text-xs text-slate-500 dark:text-gray-400 mt-2">
+                  We've sent a verification link and a 6-digit OTP code to{" "}
+                  <strong className="text-slate-800 dark:text-white">
+                    {formData.email}
+                  </strong>
+                  . Click the link in the email or enter the code below.
+                </p>
+              </div>
+
+              {errorMsg && (
+                <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 text-red-500 text-xs rounded-xl text-center">
+                  {errorMsg}
+                </div>
+              )}
+
+              <form onSubmit={handleVerifyOtp} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-gray-300 mb-1.5">
+                    Verification Code{" "}
+                    <span className="text-cyan-600 dark:text-cyan-400">*</span>
+                  </label>
+                  <div className="relative">
+                    <KeyRound className="w-4 h-4 text-slate-400 dark:text-gray-400 absolute left-3.5 top-3" />
+                    <input
+                      type="text"
+                      required
+                      value={otpToken}
+                      onChange={(e) => setOtpToken(e.target.value)}
+                      placeholder="Enter the 6-digit code"
+                      className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors tracking-widest font-mono"
+                    />
+                  </div>
                 </div>
 
-                {errorMsg && (
-                  <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 text-red-500 text-xs rounded-xl text-center">
-                    {errorMsg}
-                  </div>
-                )}
-
-                <form onSubmit={handleVerifyOtp} className="space-y-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 dark:text-gray-300 mb-1.5">
-                      Verification Code <span className="text-cyan-600 dark:text-cyan-400">*</span>
-                    </label>
-                    <div className="relative">
-                      <KeyRound className="w-4 h-4 text-slate-400 dark:text-gray-400 absolute left-3.5 top-3" />
-                      <input
-                        type="text"
-                        required
-                        value={otpToken}
-                        onChange={(e) => setOtpToken(e.target.value)}
-                        placeholder="Enter the 6-digit code"
-                        className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors tracking-widest font-mono"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="pt-3">
-                    <button
-                      type="submit"
-                      disabled={loading || !otpToken}
-                      className="w-full py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 font-bold text-xs text-white shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <span>Verify Account</span>}
-                    </button>
-                  </div>
-                </form>
-             </div>
+                <div className="pt-3">
+                  <button
+                    type="submit"
+                    disabled={loading || !otpToken}
+                    className="w-full py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 font-bold text-xs text-white shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {loading ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <span>Verify Account</span>
+                    )}
+                  </button>
+                </div>
+              </form>
+            </div>
           ) : (
             <>
               <div className="text-center mb-6">
@@ -230,7 +239,10 @@ export default function Signup() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-semibold text-slate-700 dark:text-gray-300 mb-1.5">
-                      First Name <span className="text-cyan-600 dark:text-cyan-400">*</span>
+                      First Name{" "}
+                      <span className="text-cyan-600 dark:text-cyan-400">
+                        *
+                      </span>
                     </label>
                     <input
                       type="text"
@@ -245,7 +257,10 @@ export default function Signup() {
 
                   <div>
                     <label className="block text-xs font-semibold text-slate-700 dark:text-gray-300 mb-1.5">
-                      Last Name <span className="text-cyan-600 dark:text-cyan-400">*</span>
+                      Last Name{" "}
+                      <span className="text-cyan-600 dark:text-cyan-400">
+                        *
+                      </span>
                     </label>
                     <input
                       type="text"
@@ -261,7 +276,8 @@ export default function Signup() {
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 dark:text-gray-300 mb-1.5">
-                    Email Address <span className="text-cyan-600 dark:text-cyan-400">*</span>
+                    Email Address{" "}
+                    <span className="text-cyan-600 dark:text-cyan-400">*</span>
                   </label>
                   <div className="relative">
                     <Mail className="w-4 h-4 text-slate-400 dark:text-gray-400 absolute left-3.5 top-3" />
@@ -280,7 +296,10 @@ export default function Signup() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-semibold text-slate-700 dark:text-gray-300 mb-1.5">
-                      Password <span className="text-cyan-600 dark:text-cyan-400">*</span>
+                      Password{" "}
+                      <span className="text-cyan-600 dark:text-cyan-400">
+                        *
+                      </span>
                     </label>
                     <div className="relative">
                       <Lock className="w-4 h-4 text-slate-400 dark:text-gray-400 absolute left-3.5 top-3" />
@@ -298,14 +317,21 @@ export default function Signup() {
                         onClick={() => setShowPassword(!showPassword)}
                         className="absolute right-3 top-3 text-slate-400 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white"
                       >
-                        {showPassword ? <EyeOff size={14} /> : <Eye size={14} />}
+                        {showPassword ? (
+                          <EyeOff size={14} />
+                        ) : (
+                          <Eye size={14} />
+                        )}
                       </button>
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-xs font-semibold text-slate-700 dark:text-gray-300 mb-1.5">
-                      Confirm Password <span className="text-cyan-600 dark:text-cyan-400">*</span>
+                      Confirm Password{" "}
+                      <span className="text-cyan-600 dark:text-cyan-400">
+                        *
+                      </span>
                     </label>
                     <div className="relative">
                       <Lock className="w-4 h-4 text-slate-400 dark:text-gray-400 absolute left-3.5 top-3" />
@@ -320,7 +346,9 @@ export default function Signup() {
                       />
                       <button
                         type="button"
-                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                        onClick={() =>
+                          setShowConfirmPassword(!showConfirmPassword)
+                        }
                         className="absolute right-3 top-3 text-slate-400 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white"
                       >
                         {showConfirmPassword ? (
@@ -385,10 +413,22 @@ export default function Signup() {
                     className="w-full py-2.5 px-4 rounded-xl border border-slate-200 dark:border-white/15 bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 font-semibold text-xs text-slate-800 dark:text-white transition-all flex items-center justify-center gap-2 cursor-pointer"
                   >
                     <svg className="w-4 h-4" viewBox="0 0 24 24">
-                      <path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.7 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.3 9 5 12 5z" />
-                      <path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z" />
-                      <path fill="#FBBC05" d="M5.6 14.8c-.2-.7-.4-1.5-.4-2.3s.2-1.6.4-2.3L1.9 7.3C.7 9.7 0 12.3 0 15s.7 5.3 1.9 7.7l3.7-2.9c-.2-.7-.4-1.5-.4-2.3z" />
-                      <path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2.3-6.4-5.2L1.9 16c1.8 3.7 5.6 7 10.1 7z" />
+                      <path
+                        fill="#EA4335"
+                        d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.7 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.3 9 5 12 5z"
+                      />
+                      <path
+                        fill="#4285F4"
+                        d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"
+                      />
+                      <path
+                        fill="#FBBC05"
+                        d="M5.6 14.8c-.2-.7-.4-1.5-.4-2.3s.2-1.6.4-2.3L1.9 7.3C.7 9.7 0 12.3 0 15s.7 5.3 1.9 7.7l3.7-2.9c-.2-.7-.4-1.5-.4-2.3z"
+                      />
+                      <path
+                        fill="#34A853"
+                        d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2.3-6.4-5.2L1.9 16c1.8 3.7 5.6 7 10.1 7z"
+                      />
                     </svg>
                     <span>Google</span>
                   </button>
@@ -416,7 +456,7 @@ export default function Signup() {
             </>
           )}
         </div>
-      </Container>
+      </div>
     </div>
   );
 }
