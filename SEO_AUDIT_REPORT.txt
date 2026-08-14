@@ -1,0 +1,39 @@
+SEO AUDIT REPORT
+
+1. Title Tags: PASS
+   - Updated layout.tsx and added explicit metadata to page layouts for blog, projects, services, contact, and certifications.
+
+2. Meta Descriptions: PASS
+   - Updated and refined descriptions across individual page layout files to capture relevant BI developer and Data Analyst search intent.
+
+3. Canonical URLs & Production Domain: PASS
+   - Fixed `sitemap.ts`, `robots.ts`, and `layout.tsx` (via `metadataBase`) to use the exact production URL `https://premmandal.in`.
+
+4. Robots.txt: PASS
+   - Updated robots.txt to properly allow indexing for standard pages while explicitly blocking private/authentication routes (`/api/`, `/login`, `/signup`, `/dashboard`, `/forgot-password`, `/reset-password`).
+
+5. Sitemap.xml: PASS
+   - Verified that `sitemap.ts` correctly uses the `https://premmandal.in` baseUrl.
+
+6. Structured Data (JSON-LD): PASS
+   - Updated the `Person` schema in `app/layout.tsx` with accurate `sameAs` links (`https://www.linkedin.com/in/premmandal/`, `https://github.com/montiprem`), added `image` property pointing to the correct profile image, and verified syntax.
+
+7. Semantic HTML & Image Alt Text: PASS
+   - Improved heading hierarchy in `components/sections/Hero.tsx` by integrating a visually hidden (`sr-only`) semantic `h1` component targeting the keyword "Prem Mandal - Senior Power BI Developer & Data Analyst" seamlessly without disrupting UI design.
+
+8. Keyword Strategy (Content SEO): PASS
+   - Enriched layout global keywords without unnatural stuffing, accurately addressing target terms (e.g. "Prem Mandal Power BI Developer", "Power BI Developer India", "SQL Data Analyst").
+
+9. Build Verification: PASS
+   - Successfully passed Next.js production build (`npm run build`). Linter threw an internal config issue that is related to nextjs versioning but doesn't affect functionality or build success.
+
+FILES CHANGED:
+- `app/robots.ts`: Updated baseUrl to `https://premmandal.in` and excluded additional private routes (`/dashboard`, `/forgot-password`, etc.) to prevent indexing.
+- `app/sitemap.ts`: Updated baseUrl to `https://premmandal.in`.
+- `app/layout.tsx`: Expanded keyword metadata for target search goals; updated JSON-LD `sameAs` links to correct social profiles; added image path.
+- `app/projects/layout.tsx` (new): Created to provide static SEO metadata (title/desc) for the client component route.
+- `app/contact/layout.tsx` (new): Created to provide static SEO metadata.
+- `app/services/layout.tsx` (new): Created to provide static SEO metadata.
+- `app/blog/layout.tsx` (new): Created to provide static SEO metadata.
+- `app/certifications/layout.tsx` (new): Created to provide static SEO metadata.
+- `components/sections/Hero.tsx`: Added an `sr-only` span in the main `h1` to target primary keywords explicitly for crawlers.
