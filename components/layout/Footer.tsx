@@ -11,6 +11,7 @@ import {
   X,
   CheckCircle,
   Loader2,
+  MessageSquare,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -399,6 +400,15 @@ export default function Footer() {
             >
               Cookie Policy
             </Link>
+            <span className="text-slate-300 dark:text-white/20">•</span>
+            {/* Feedback Button */}
+            <a
+              href="mailto:jobs.premmandal@gmail.com?subject=Portfolio%20Feedback"
+              className="text-slate-500 dark:text-gray-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors flex items-center gap-1 font-semibold cursor-pointer"
+            >
+              <MessageSquare size={12} />
+              <span>Feedback</span>
+            </a>
             <span className="text-slate-300 dark:text-white/20">•</span>
             {/* Unsubscribe Button Trigger */}
             <button

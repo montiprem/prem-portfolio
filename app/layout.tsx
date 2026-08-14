@@ -5,6 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Preloader from "@/components/loader/Preloader";
 import ChatBot from "@/components/ChatBot";
+import AnimatedBackground from "@/components/layout/AnimatedBackground";
 import { Providers } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -115,6 +116,7 @@ export default function RootLayout({
         />
 
         <Providers>
+          <AnimatedBackground />
           {/* Startup Preloader */}
           <Preloader />
 
