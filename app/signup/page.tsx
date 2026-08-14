@@ -13,6 +13,7 @@ import {
   UserPlus,
   Loader2,
   CheckCircle,
+  KeyRound,
 } from "lucide-react";
 import Container from "@/components/ui/Container";
 
@@ -32,6 +33,8 @@ export default function Signup() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [otpToken, setOtpToken] = useState("");
+  const [verificationMode, setVerificationMode] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -70,9 +73,46 @@ export default function Signup() {
       });
 
       if (error) {
+        if (error.message.includes("already registered")) {
+           setErrorMsg("Already registered. Please login.");
+        } else {
+           setErrorMsg(error.message);
+        }
+      } else {
+        setVerificationMode(true);
+      }
+    } catch (error) {
+      console.error(error);
+      setErrorMsg("An unexpected error occurred.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleVerifyOtp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!otpToken) {
+      setErrorMsg("Please enter the verification code.");
+      return;
+    }
+
+    setLoading(true);
+    setErrorMsg("");
+
+    try {
+      const { error } = await supabase.auth.verifyOtp({
+        email: formData.email,
+        token: otpToken,
+        type: 'signup'
+      });
+
+      if (error) {
         setErrorMsg(error.message);
       } else {
         setSubmitted(true);
+        setTimeout(() => {
+          router.push("/dashboard");
+        }, 1500);
       }
     } catch (error) {
       console.error(error);
@@ -117,17 +157,58 @@ export default function Signup() {
               <div className="inline-flex p-4 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
                 <CheckCircle className="w-10 h-10" />
               </div>
-              <h2 className="text-2xl font-black text-slate-900 dark:text-white">Check Your Email</h2>
+              <h2 className="text-2xl font-black text-slate-900 dark:text-white">Account Verified!</h2>
               <p className="text-xs text-slate-600 dark:text-gray-300 max-w-xs mx-auto">
-                We've sent a confirmation link to your email address. Please verify to continue.
+                Redirecting to dashboard...
               </p>
-              <Link
-                href="/login"
-                className="inline-block px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-bold text-white transition-all shadow-lg shadow-blue-600/30"
-              >
-                Go to Login
-              </Link>
             </div>
+          ) : verificationMode ? (
+             <div className="space-y-6">
+                <div className="text-center mb-6">
+                  <h1 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white">
+                    Verify Your Email
+                  </h1>
+                  <p className="text-xs text-slate-500 dark:text-gray-400 mt-2">
+                    We've sent a verification link and a 6-digit OTP code to <strong className="text-slate-800 dark:text-white">{formData.email}</strong>.
+                    Click the link in the email or enter the code below.
+                  </p>
+                </div>
+
+                {errorMsg && (
+                  <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 text-red-500 text-xs rounded-xl text-center">
+                    {errorMsg}
+                  </div>
+                )}
+
+                <form onSubmit={handleVerifyOtp} className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 dark:text-gray-300 mb-1.5">
+                      Verification Code <span className="text-cyan-600 dark:text-cyan-400">*</span>
+                    </label>
+                    <div className="relative">
+                      <KeyRound className="w-4 h-4 text-slate-400 dark:text-gray-400 absolute left-3.5 top-3" />
+                      <input
+                        type="text"
+                        required
+                        value={otpToken}
+                        onChange={(e) => setOtpToken(e.target.value)}
+                        placeholder="Enter the 6-digit code"
+                        className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors tracking-widest font-mono"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="pt-3">
+                    <button
+                      type="submit"
+                      disabled={loading || !otpToken}
+                      className="w-full py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 font-bold text-xs text-white shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <span>Verify Account</span>}
+                    </button>
+                  </div>
+                </form>
+             </div>
           ) : (
             <>
               <div className="text-center mb-6">
