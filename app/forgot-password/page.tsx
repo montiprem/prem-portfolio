@@ -5,7 +5,6 @@ import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Mail, Loader2, CheckCircle } from "lucide-react";
-import Container from "@/components/ui/Container";
 
 export default function ForgotPassword() {
   const router = useRouter();
@@ -42,7 +41,7 @@ export default function ForgotPassword() {
     <div className="min-h-screen bg-background text-foreground flex items-center justify-center relative overflow-hidden py-16 px-4 transition-colors duration-300">
       <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-purple-500/15 rounded-full blur-[150px] pointer-events-none" />
 
-      <Container className="relative z-10 max-w-md w-full">
+      <div className="relative z-10 max-w-md w-full mx-auto px-6 lg:px-8">
         <Link
           href="/login"
           className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white transition-colors mb-6"
@@ -56,7 +55,9 @@ export default function ForgotPassword() {
               <div className="inline-flex p-4 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
                 <CheckCircle className="w-10 h-10" />
               </div>
-              <h2 className="text-2xl font-black text-slate-900 dark:text-white">Check Your Email</h2>
+              <h2 className="text-2xl font-black text-slate-900 dark:text-white">
+                Check Your Email
+              </h2>
               <p className="text-xs text-slate-600 dark:text-gray-300 max-w-xs mx-auto">
                 We've sent a password reset link to {email}.
               </p>
@@ -68,7 +69,8 @@ export default function ForgotPassword() {
                   Reset Password
                 </h1>
                 <p className="text-xs text-slate-500 dark:text-gray-400 mt-2">
-                  Enter your email address and we'll send you a link to reset your password.
+                  Enter your email address and we'll send you a link to reset
+                  your password.
                 </p>
               </div>
 
@@ -81,7 +83,8 @@ export default function ForgotPassword() {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 dark:text-gray-300 mb-1.5">
-                    Email Address <span className="text-cyan-600 dark:text-cyan-400">*</span>
+                    Email Address{" "}
+                    <span className="text-cyan-600 dark:text-cyan-400">*</span>
                   </label>
                   <div className="relative">
                     <Mail className="w-4 h-4 text-slate-400 dark:text-gray-400 absolute left-3.5 top-3" />
@@ -113,7 +116,7 @@ export default function ForgotPassword() {
             </>
           )}
         </div>
-      </Container>
+      </div>
     </div>
   );
 }

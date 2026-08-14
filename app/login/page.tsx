@@ -14,21 +14,26 @@ import {
   Loader2,
   CheckCircle,
   KeyRound,
-  RefreshCw
+  RefreshCw,
 } from "lucide-react";
-import Container from "@/components/ui/Container";
 
 export default function Login() {
   const router = useRouter();
   const supabase = useMemo(() => createClient(), []);
-  const [formData, setFormData] = useState({ identifier: "", password: "", rememberMe: false });
+  const [formData, setFormData] = useState({
+    identifier: "",
+    password: "",
+    rememberMe: false,
+  });
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
   // OTP State
-  const [loginMethod, setLoginMethod] = useState<"password" | "otp">("password");
+  const [loginMethod, setLoginMethod] = useState<"password" | "otp">(
+    "password",
+  );
   const [otpSent, setOtpSent] = useState(false);
   const [otpToken, setOtpToken] = useState("");
   const [otpCooldown, setOtpCooldown] = useState(0);
@@ -95,7 +100,7 @@ export default function Login() {
         options: {
           shouldCreateUser: false, // Optional: prevents arbitrary signups via this form if desired, though signup allows it anyway. Leaving default true is also fine.
           emailRedirectTo: `${window.location.origin}/auth/callback?next=/dashboard`,
-        }
+        },
       });
 
       if (error) {
@@ -126,7 +131,7 @@ export default function Login() {
       const { data, error } = await supabase.auth.verifyOtp({
         email: formData.identifier,
         token: otpToken,
-        type: 'email'
+        type: "email",
       });
 
       if (error) {
@@ -150,10 +155,10 @@ export default function Login() {
     setLoading(true);
     try {
       const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
+        provider: "google",
         options: {
           redirectTo: `${window.location.origin}/auth/callback?next=/dashboard`,
-        }
+        },
       });
       if (error) throw error;
     } catch (error: any) {
@@ -264,7 +269,8 @@ export default function Login() {
         <form onSubmit={handleSendOtp} className="space-y-4">
           <div>
             <label className="block text-xs font-semibold text-slate-700 dark:text-gray-300 mb-1.5">
-              Email Address <span className="text-cyan-600 dark:text-cyan-400">*</span>
+              Email Address{" "}
+              <span className="text-cyan-600 dark:text-cyan-400">*</span>
             </label>
             <div className="relative">
               <Mail className="w-4 h-4 text-slate-400 dark:text-gray-400 absolute left-3.5 top-3" />
@@ -285,7 +291,11 @@ export default function Login() {
               disabled={loading || !formData.identifier}
               className="w-full py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 font-bold text-xs text-white shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <span>Send OTP Code</span>}
+              {loading ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <span>Send OTP Code</span>
+              )}
             </button>
             <button
               type="button"
@@ -295,7 +305,7 @@ export default function Login() {
               }}
               className="w-full py-2.5 px-4 rounded-xl border border-slate-200 dark:border-white/15 bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 font-semibold text-xs text-slate-800 dark:text-white transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
-               <span>Use Password</span>
+              <span>Use Password</span>
             </button>
           </div>
         </form>
@@ -305,12 +315,14 @@ export default function Login() {
     return (
       <form onSubmit={handleVerifyOtp} className="space-y-4">
         <div className="p-3 bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs rounded-xl text-center mb-4">
-          A verification code was sent to <strong>{formData.identifier}</strong>.
+          A verification code was sent to <strong>{formData.identifier}</strong>
+          .
         </div>
 
         <div>
           <label className="block text-xs font-semibold text-slate-700 dark:text-gray-300 mb-1.5">
-            Verification Code <span className="text-cyan-600 dark:text-cyan-400">*</span>
+            Verification Code{" "}
+            <span className="text-cyan-600 dark:text-cyan-400">*</span>
           </label>
           <div className="relative">
             <KeyRound className="w-4 h-4 text-slate-400 dark:text-gray-400 absolute left-3.5 top-3" />
@@ -326,12 +338,16 @@ export default function Login() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3">
-           <button
+          <button
             type="submit"
             disabled={loading || !otpToken}
             className="w-full py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 font-bold text-xs text-white shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <span>Verify & Login</span>}
+            {loading ? (
+              <Loader2 className="w-4 h-4 animate-spin" />
+            ) : (
+              <span>Verify & Login</span>
+            )}
           </button>
 
           <button
@@ -341,28 +357,31 @@ export default function Login() {
             className="w-full py-2.5 px-4 rounded-xl border border-slate-200 dark:border-white/15 bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 font-semibold text-xs text-slate-800 dark:text-white transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {otpCooldown > 0 ? (
-               <span className="text-slate-500">Resend in {otpCooldown}s</span>
+              <span className="text-slate-500">Resend in {otpCooldown}s</span>
             ) : (
-               <>
-                 <RefreshCw size={14} className="text-cyan-600 dark:text-cyan-400" />
-                 <span>Resend Code</span>
-               </>
+              <>
+                <RefreshCw
+                  size={14}
+                  className="text-cyan-600 dark:text-cyan-400"
+                />
+                <span>Resend Code</span>
+              </>
             )}
           </button>
         </div>
 
         <div className="text-center pt-2">
-           <button
-              type="button"
-              onClick={() => {
-                setOtpSent(false);
-                setOtpToken("");
-                setErrorMsg("");
-              }}
-              className="text-xs text-slate-500 hover:text-slate-900 dark:hover:text-white underline transition-colors cursor-pointer"
-           >
-              Change Email Address
-           </button>
+          <button
+            type="button"
+            onClick={() => {
+              setOtpSent(false);
+              setOtpToken("");
+              setErrorMsg("");
+            }}
+            className="text-xs text-slate-500 hover:text-slate-900 dark:hover:text-white underline transition-colors cursor-pointer"
+          >
+            Change Email Address
+          </button>
         </div>
       </form>
     );
@@ -373,7 +392,7 @@ export default function Login() {
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-600/20 rounded-full blur-[160px] pointer-events-none" />
       <div className="absolute bottom-10 left-1/4 w-72 h-72 bg-cyan-500/15 rounded-full blur-[140px] pointer-events-none" />
 
-      <Container className="relative z-10 max-w-md w-full">
+      <div className="relative z-10 max-w-md w-full mx-auto px-6 lg:px-8">
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white transition-colors mb-6"
@@ -387,7 +406,9 @@ export default function Login() {
               <div className="inline-flex p-4 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
                 <CheckCircle className="w-10 h-10" />
               </div>
-              <h2 className="text-2xl font-black text-slate-900 dark:text-white">Login Successful!</h2>
+              <h2 className="text-2xl font-black text-slate-900 dark:text-white">
+                Login Successful!
+              </h2>
               <p className="text-xs text-slate-600 dark:text-gray-300 max-w-xs mx-auto">
                 Redirecting to dashboard...
               </p>
@@ -409,7 +430,9 @@ export default function Login() {
                 </div>
               )}
 
-              {loginMethod === "password" ? renderPasswordForm() : renderOtpForm()}
+              {loginMethod === "password"
+                ? renderPasswordForm()
+                : renderOtpForm()}
 
               <div className="relative my-6 text-center">
                 <div className="absolute inset-0 flex items-center">
@@ -421,19 +444,31 @@ export default function Login() {
               </div>
 
               <div className="grid grid-cols-1 gap-3 mb-6">
-                 <button
-                    type="button"
-                    onClick={handleGoogleSignIn}
-                    className="w-full py-2.5 px-4 rounded-xl border border-slate-200 dark:border-white/15 bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 font-semibold text-xs text-slate-800 dark:text-white transition-all flex items-center justify-center gap-2 cursor-pointer"
-                  >
-                    <svg className="w-4 h-4" viewBox="0 0 24 24">
-                      <path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.7 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.3 9 5 12 5z" />
-                      <path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z" />
-                      <path fill="#FBBC05" d="M5.6 14.8c-.2-.7-.4-1.5-.4-2.3s.2-1.6.4-2.3L1.9 7.3C.7 9.7 0 12.3 0 15s.7 5.3 1.9 7.7l3.7-2.9c-.2-.7-.4-1.5-.4-2.3z" />
-                      <path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2.3-6.4-5.2L1.9 16c1.8 3.7 5.6 7 10.1 7z" />
-                    </svg>
-                    <span>Google</span>
-                  </button>
+                <button
+                  type="button"
+                  onClick={handleGoogleSignIn}
+                  className="w-full py-2.5 px-4 rounded-xl border border-slate-200 dark:border-white/15 bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 font-semibold text-xs text-slate-800 dark:text-white transition-all flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24">
+                    <path
+                      fill="#EA4335"
+                      d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.7 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.3 9 5 12 5z"
+                    />
+                    <path
+                      fill="#4285F4"
+                      d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"
+                    />
+                    <path
+                      fill="#FBBC05"
+                      d="M5.6 14.8c-.2-.7-.4-1.5-.4-2.3s.2-1.6.4-2.3L1.9 7.3C.7 9.7 0 12.3 0 15s.7 5.3 1.9 7.7l3.7-2.9c-.2-.7-.4-1.5-.4-2.3z"
+                    />
+                    <path
+                      fill="#34A853"
+                      d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2.3-6.4-5.2L1.9 16c1.8 3.7 5.6 7 10.1 7z"
+                    />
+                  </svg>
+                  <span>Google</span>
+                </button>
               </div>
 
               <p className="text-center text-xs text-slate-500 dark:text-gray-400">
@@ -448,7 +483,7 @@ export default function Login() {
             </>
           )}
         </div>
-      </Container>
+      </div>
     </div>
   );
 }

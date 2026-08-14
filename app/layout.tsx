@@ -5,6 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Preloader from "@/components/loader/Preloader";
 import ChatBot from "@/components/ChatBot";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { Providers } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -126,6 +127,9 @@ export default function RootLayout({
 
           {/* AI Chat Assistant Widget */}
           <ChatBot />
+
+          {/* WhatsApp Floating Button */}
+          <WhatsAppButton />
 
           {/* Common Footer across all pages */}
           <Footer />
