@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { Loader2, User, Mail, LogOut, CheckCircle } from "lucide-react";
 
 export default function DashboardClient({ user, profile }: { user: any, profile: any }) {
-  const supabase = createClient();
+  const supabase = useMemo(() => createClient(), []);
   const router = useRouter();
   const [fullName, setFullName] = useState(profile?.full_name || "");
   const [loading, setLoading] = useState(false);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -20,7 +20,7 @@ import Container from "@/components/ui/Container";
 
 export default function Login() {
   const router = useRouter();
-  const supabase = createClient();
+  const supabase = useMemo(() => createClient(), []);
   const [formData, setFormData] = useState({ identifier: "", password: "", rememberMe: false });
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);

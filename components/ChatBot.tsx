@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageSquare, X, Send, Bot, User } from "lucide-react";
+import { X, Send, Bot, User } from "lucide-react";
 
 type Message = {
   role: "user" | "assistant";
@@ -34,43 +34,35 @@ export default function ChatBot() {
     setMessages(newMessages);
     setLoading(true);
 
-    // Simulate response delay without making an API request
-    setTimeout(() => {
-      const maintenanceResponse = `🤖 AI Assistant is currently being upgraded.
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: newMessages }),
+      });
 
-I'm improving its knowledge, speed, and overall experience.
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
 
-🚀 Coming back soon!`;
-
+      const data = await response.json();
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: maintenanceResponse },
+        { role: "assistant", content: data.reply },
       ]);
+    } catch (error) {
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: "Oops! I encountered an issue while thinking. Please try again." },
+      ]);
+    } finally {
       setLoading(false);
-    }, 600);
+    }
   };
 
   return (
     // Position updated to bottom-8/bottom-10 to prevent footer overlap
     <div className="fixed bottom-8 right-6 md:bottom-10 md:right-8 z-50 flex items-center gap-3">
-      {/* Animated Greeting Bubble / Sticker */}
-      {!isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: 10, scale: 0.9 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.3 }}
-          className="hidden sm:flex items-center gap-2 bg-[#0b1220]/90 border border-blue-500/30 text-white px-3.5 py-2 rounded-2xl shadow-xl backdrop-blur-md text-xs font-medium"
-        >
-          <motion.span
-            animate={{ rotate: [0, 14, -14, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-          >
-            👋
-          </motion.span>
-          <span>Ask Prem&apos;s AI Assistant!</span>
-        </motion.div>
-      )}
-
       {/* Floating Toggle Button */}
       <motion.button
         whileHover={{ scale: 1.15 }}
@@ -79,6 +71,13 @@ I'm improving its knowledge, speed, and overall experience.
         className="relative p-3.5 bg-gradient-to-tr from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white rounded-full shadow-[0_0_25px_rgba(59,130,246,0.6)] flex items-center justify-center border border-white/20 transition-all group cursor-pointer"
         aria-label="Open AI Chat"
       >
+        {/* Tooltip for desktop hover */}
+        {!isOpen && (
+          <span className="absolute right-full mr-3 whitespace-nowrap bg-[#0b1220]/90 border border-blue-500/30 text-white px-2.5 py-1.5 rounded-lg shadow-xl backdrop-blur-md text-xs font-medium opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 hidden md:block">
+            Prem&apos;s AI
+          </span>
+        )}
+
         <motion.div
           animate={{ y: [0, -3, 0] }}
           transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
@@ -118,9 +117,9 @@ I'm improving its knowledge, speed, and overall experience.
                   <h3 className="text-sm font-bold flex items-center gap-1.5">
                     Prem&apos;s AI Assistant <span className="text-sm">🤖</span>
                   </h3>
-                  <p className="text-[10px] text-amber-400 flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />{" "}
-                    Maintenance Mode
+                  <p className="text-[10px] text-cyan-400 flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />{" "}
+                    Online
                   </p>
                 </div>
               </div>

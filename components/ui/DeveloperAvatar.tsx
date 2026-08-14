@@ -44,7 +44,7 @@ export default function DeveloperAvatar() {
     };
 
     const handleScroll = () => {
-      setMood("thinking");
+      setMood((prev) => (prev !== "thinking" ? "thinking" : prev));
 
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
