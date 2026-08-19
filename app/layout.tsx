@@ -21,16 +21,23 @@ export const metadata: Metadata = {
     "Portfolio of Prem Mandal - Senior BI Developer and Data Analyst specializing in Power BI, SQL, DAX, Microsoft Fabric, and Data Analytics.",
   keywords: [
     "Prem Mandal",
+    "Prem Mandal portfolio",
     "Prem Mandal Power BI Developer",
     "Prem Mandal Data Analyst",
     "Prem Mandal BI Developer",
+    "Prem Mandal Senior BI Developer",
+    "Prem Mandal Power BI",
     "Prem Mandal Data Analytics",
     "Power BI Developer India",
     "Data Analyst India",
+    "Senior BI Developer India",
     "Senior Power BI Developer India",
     "Power BI Developer Kolkata",
     "Power BI Developer Bangalore",
-    "Microsoft Power BI Developer",
+    "Power BI Developer portfolio",
+    "Data Analyst portfolio",
+    "Power BI portfolio",
+    "Microsoft Power BI Developer India",
     "Power BI Consultant",
     "Business Intelligence Developer",
     "SQL Data Analyst",
@@ -44,6 +51,9 @@ export const metadata: Metadata = {
     shortcut: "/logopm.png?v=2",
     apple: "/logopm.png?v=2",
   },
+  alternates: {
+    canonical: "https://premmandal.in",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -54,10 +64,10 @@ export const metadata: Metadata = {
     siteName: "Prem Mandal Portfolio",
     images: [
       {
-        url: "/og-image.png",
+        url: "/images/prem.jpeg",
         width: 1200,
         height: 630,
-        alt: "Prem Mandal Portfolio Preview",
+        alt: "Prem Mandal - Senior Power BI Developer and Data Analyst India",
       },
     ],
   },
@@ -66,7 +76,7 @@ export const metadata: Metadata = {
     title: "Prem Mandal | Senior BI Developer & Data Analyst",
     description:
       "Enterprise Power BI dashboards, SQL data modeling, and Microsoft Fabric solutions.",
-    images: ["/og-image.png"],
+    images: ["/images/prem.jpeg"],
   },
   robots: {
     index: true,
@@ -96,11 +106,16 @@ export default function RootLayout({
               "@type": "Person",
               name: "Prem Mandal",
               url: "https://premmandal.in",
-              jobTitle: "Senior BI Developer & Data Analyst",
+              description: "Senior Power BI Developer and Data Analyst based in India specializing in enterprise dashboards, SQL data modeling, and Microsoft Fabric.",
+              jobTitle: "Senior BI Developer / Power BI Developer / Data Analyst",
               image: "https://premmandal.in/images/prem.jpeg",
               worksFor: {
                 "@type": "Organization",
                 name: "Freelance / Consulting",
+              },
+              address: {
+                "@type": "PostalAddress",
+                "addressCountry": "IN"
               },
               sameAs: [
                 "https://www.linkedin.com/in/premmandal/",
