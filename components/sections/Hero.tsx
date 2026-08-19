@@ -147,6 +147,7 @@ export default function Hero() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-black leading-[1.05] tracking-tighter text-slate-900 dark:text-white">
+              <span className="sr-only">Prem Mandal - </span>
               Senior BI Developer <br className="hidden sm:block" /> &amp;{" "}
               <span className="bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent inline-block pb-1 sm:pb-2 drop-shadow-sm">
                 Data Analyst
@@ -221,7 +222,8 @@ export default function Hero() {
                 <div className="relative h-full w-full overflow-hidden rounded-full">
                   <Image
                     src="/images/prem.jpeg"
-                    alt="Prem Mandal"
+                    alt="Prem Mandal - Senior Power BI Developer and Data Analyst India"
+                    title="Prem Mandal - Senior Power BI Developer"
                     fill
                     className="object-cover"
                     priority

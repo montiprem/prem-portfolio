@@ -124,7 +124,8 @@ export default function About() {
                 <div className="relative h-full w-full overflow-hidden rounded-[20px]">
                   <Image
                     src="/images/prem.jpeg"
-                    alt="Prem Mandal"
+                    alt="Prem Mandal - Senior Power BI Developer and Data Analyst India"
+                    title="Prem Mandal - Data Analyst"
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     priority
