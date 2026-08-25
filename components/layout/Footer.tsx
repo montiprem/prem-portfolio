@@ -99,7 +99,7 @@ export default function Footer() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: "YOUR_ACCESS_KEY_HERE",
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "",
           subject: "New Newsletter Subscriber",
           from_name: "Portfolio Newsletter",
           email: subEmail,
@@ -136,7 +136,7 @@ export default function Footer() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: "e1125910-94f6-40b5-9375-a504ecd93df4",
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "",
           subject: "Newsletter Unsubscribe Request",
           from_name: "Portfolio Newsletter",
           email: unsubEmail,

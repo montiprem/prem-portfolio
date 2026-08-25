@@ -74,7 +74,7 @@ export default function FAQSection() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: "e1125910-94f6-40b5-9375-a504ecd93df4",
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "",
           subject: "New Custom Question Asked on Portfolio FAQ",
           from_name: "Portfolio FAQ Inquiry",
           email: userEmail,
