@@ -4,6 +4,8 @@ import { NextResponse } from "next/server";
 // Next.js ko force karein ki is route ko statically evaluate na kare
 export const dynamic = "force-dynamic";
 
+let openaiClient: OpenAI | null = null;
+
 const systemPrompt = `
 You are Prem Mandal's AI Portfolio Assistant.
 
@@ -36,11 +38,14 @@ export async function POST(req: Request) {
       );
     }
 
-    // Function call ke andar OpenAI client initialize karein
-    const client = new OpenAI({
-      apiKey: apiKey,
-      baseURL: "https://openrouter.ai/api/v1",
-    });
+    // Initialize OpenAI client once as a singleton
+    if (!openaiClient) {
+      openaiClient = new OpenAI({
+        apiKey: apiKey,
+        baseURL: "https://openrouter.ai/api/v1",
+      });
+    }
+    const client = openaiClient;
 
     const { messages } = await req.json();
 
