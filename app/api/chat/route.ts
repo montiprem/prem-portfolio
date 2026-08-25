@@ -44,9 +44,16 @@ export async function POST(req: Request) {
 
     const { messages } = await req.json();
 
+    if (!Array.isArray(messages)) {
+      return NextResponse.json(
+        { reply: "Invalid input: messages must be an array." },
+        { status: 400 }
+      );
+    }
+
     // Clean messages array (formatting validation)
     const formattedMessages = messages.map((m: { role: string; content: string }) => ({
-      role: m.role,
+      role: m.role as "user" | "assistant" | "system",
       content: m.content,
     }));
 
