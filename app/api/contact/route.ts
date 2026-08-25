@@ -25,11 +25,7 @@ export async function POST(request: Request) {
     //   text: `Email: ${email}\n\nMessage: ${message}`,
     // });
 
-    console.log('--- NEW CONTACT FORM SUBMISSION ---');
-    console.log(`Name: ${name}`);
-    console.log(`Email: ${email}`);
-    console.log(`Message: ${message}`);
-    console.log('-----------------------------------');
+    console.log('Processed new contact form submission');
 
     return NextResponse.json({ success: true }, { status: 200 });
 
