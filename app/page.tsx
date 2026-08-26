@@ -12,7 +12,7 @@ import ScrollReveal from "@/components/animations/ScrollReveal";
 
 export default function Home() {
   return (
-    <main className="overflow-x-hidden">
+    <main>
       {/* Phone-specific layout wrapper for mobile spacing improvements */}
       <div className="mobile-optimized-container">
         <Hero />
