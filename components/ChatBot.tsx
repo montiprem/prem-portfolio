@@ -68,7 +68,7 @@ export default function ChatBot() {
         whileHover={{ scale: 1.15 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="relative p-3.5 bg-gradient-to-tr from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white rounded-full shadow-[0_0_25px_rgba(59,130,246,0.6)] flex items-center justify-center border border-white/20 transition-all group cursor-pointer"
+        className="relative p-2.5 bg-gradient-to-tr from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white rounded-full shadow-[0_0_25px_rgba(59,130,246,0.6)] flex items-center justify-center border border-white/20 transition-all group cursor-pointer"
         aria-label="Open AI Chat"
       >
         {/* Tooltip for desktop hover */}
@@ -84,13 +84,13 @@ export default function ChatBot() {
           className="flex items-center justify-center"
         >
           {isOpen ? (
-            <X className="w-6 h-6" />
+            <X className="w-5 h-5" />
           ) : (
             <div className="relative flex items-center justify-center">
-              <Bot className="w-6 h-6 text-white" />
-              <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
+              <Bot className="w-5 h-5 text-white" />
+              <span className="absolute -top-1 -right-1 flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-200 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-300" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-300" />
               </span>
             </div>
           )}
