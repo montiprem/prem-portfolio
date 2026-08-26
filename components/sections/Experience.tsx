@@ -41,12 +41,10 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      className="relative py-28 bg-background overflow-hidden text-foreground border-t border-slate-200 dark:border-white/5 transition-colors duration-300"
+      className="relative py-28 bg-transparent overflow-hidden text-foreground border-t border-slate-200 dark:border-white/5 transition-colors duration-300"
     >
       {/* Background Ambient Glows */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.1),transparent_70%)] pointer-events-none" />
-      <div className="absolute top-1/3 -left-32 h-96 w-96 rounded-full bg-blue-500/15 blur-[160px] pointer-events-none" />
-      <div className="absolute bottom-10 -right-32 h-96 w-96 rounded-full bg-cyan-500/15 blur-[160px] pointer-events-none" />
 
       <Container className="relative z-10">
         {/* Header */}
@@ -87,7 +85,7 @@ export default function Experience() {
                   <div className="absolute left-4 md:left-1/2 top-6 -translate-x-1/2 z-20 flex items-center justify-center">
                     <span className="relative flex h-5 w-5 items-center justify-center">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-60" />
-                      <span className="relative inline-flex h-4 w-4 rounded-full border-2 border-blue-500 bg-background shadow-[0_0_10px_rgba(59,130,246,0.9)]" />
+                      <span className="relative inline-flex h-4 w-4 rounded-full border-2 border-blue-500 bg-transparent shadow-[0_0_10px_rgba(59,130,246,0.9)]" />
                     </span>
                   </div>
 

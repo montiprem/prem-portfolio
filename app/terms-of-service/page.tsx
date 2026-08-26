@@ -6,7 +6,7 @@ import { ArrowLeft, FileText } from "lucide-react";
 
 export default function TermsOfServicePage() {
   return (
-    <main className="min-h-screen bg-background pt-32 pb-20 relative text-slate-700 dark:text-gray-300 transition-colors duration-300">
+    <main className="min-h-screen bg-transparent pt-32 pb-20 relative text-slate-700 dark:text-gray-300 transition-colors duration-300">
       <Container className="max-w-4xl">
         <Link
           href="/"

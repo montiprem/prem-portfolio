@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import Preloader from "@/components/loader/Preloader";
 import ChatBot from "@/components/ChatBot";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import AnimatedBackground from "@/components/animations/AnimatedBackground";
 import { Providers } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -95,7 +96,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
       <body
-        className={`${inter.className} bg-background text-foreground antialiased min-h-screen flex flex-col justify-between selection:bg-blue-500 selection:text-white`}
+        className={`${inter.className} bg-transparent text-foreground antialiased min-h-screen flex flex-col justify-between selection:bg-blue-500 selection:text-white`}
       >
         {/* Structured Data (JSON-LD for Google Rich Snippets) */}
         <script
@@ -134,23 +135,29 @@ export default function RootLayout({
         />
 
         <Providers>
-          {/* Startup Preloader */}
-          <Preloader />
+          {/* Global Animated Background System */}
+          <AnimatedBackground />
 
-          {/* Top Navigation */}
-          <Navbar />
+          {/* Wrapper to ensure content sits above the fixed background */}
+          <div className="relative z-0 flex flex-col min-h-screen">
+            {/* Startup Preloader */}
+            <Preloader />
 
-          {/* Main Route Content */}
-          <div className="grow">{children}</div>
+            {/* Top Navigation */}
+            <Navbar />
 
-          {/* AI Chat Assistant Widget */}
-          <ChatBot />
+            {/* Main Route Content */}
+            <div className="grow">{children}</div>
 
-          {/* WhatsApp Floating Button */}
-          <WhatsAppButton />
+            {/* AI Chat Assistant Widget */}
+            <ChatBot />
 
-          {/* Common Footer across all pages */}
-          <Footer />
+            {/* WhatsApp Floating Button */}
+            <WhatsAppButton />
+
+            {/* Common Footer across all pages */}
+            <Footer />
+          </div>
         </Providers>
       </body>
     </html>

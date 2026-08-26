@@ -153,10 +153,7 @@ export default function ProjectsPage() {
       : projects.filter((project) => project.category === selectedCategory);
 
   return (
-    <main className="min-h-screen bg-background text-foreground pt-32 pb-20 relative overflow-hidden transition-colors duration-300">
-      <div className="absolute inset-0 opacity-[0.03] bg-[url('/grid.svg')] pointer-events-none" />
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
-
+    <main className="min-h-screen bg-transparent text-foreground pt-32 pb-20 relative overflow-hidden transition-colors duration-300">
       <Container className="relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <motion.div

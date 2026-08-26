@@ -35,7 +35,6 @@ export default function Preloader() {
     >
       {/* Background ambient glowing gradient effects */}
       <div className="absolute w-500px h-500px bg-blue-600/15 rounded-full blur-[120px] pointer-events-none animate-pulse" />
-      <div className="absolute w-300px h-300px bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="relative flex flex-col items-center p-8 sm:p-10 rounded-3xl bg-white/[0.02] border border-white/10 backdrop-blur-2xl shadow-[0_0_60px_rgba(0,0,0,0.8)] max-w-md w-full text-center">
         

@@ -95,9 +95,8 @@ export default function FAQSection() {
   };
 
   return (
-    <section id="faq" className="py-24 bg-background relative overflow-hidden text-foreground transition-colors duration-300">
+    <section id="faq" className="py-24 bg-transparent relative overflow-hidden text-foreground transition-colors duration-300">
       {/* Background Ambient Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-600/10 rounded-full blur-[160px] pointer-events-none" />
 
       <Container className="relative z-10 max-w-4xl">
         {/* Section Header */}
@@ -182,7 +181,7 @@ export default function FAQSection() {
       {/* ASK QUESTION MODAL */}
       {modalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
-          <div className="relative w-full max-w-lg rounded-3xl border border-slate-200 dark:border-white/15 bg-background p-6 sm:p-8 shadow-2xl backdrop-blur-2xl">
+          <div className="relative w-full max-w-lg rounded-3xl border border-slate-200 dark:border-white/15 bg-transparent p-6 sm:p-8 shadow-2xl backdrop-blur-2xl">
             <button
               onClick={() => setModalOpen(false)}
               className="absolute top-4 right-4 text-slate-400 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white p-1 rounded-lg hover:bg-slate-200 dark:hover:bg-white/10 transition-colors cursor-pointer"

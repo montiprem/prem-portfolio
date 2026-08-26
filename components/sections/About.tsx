@@ -75,15 +75,12 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative py-28 bg-background overflow-hidden text-foreground transition-colors duration-300"
+      className="relative py-28 bg-transparent overflow-hidden text-foreground transition-colors duration-300"
     >
       {/* Background Lights & Mesh */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.12),transparent_70%)] pointer-events-none" />
-      <div className="absolute inset-0 opacity-[0.03] bg-[url('/grid.svg')] pointer-events-none" />
 
-      <div className="absolute -top-32 -left-32 h-96 w-96 rounded-full bg-blue-500/20 blur-[150px] pointer-events-none" />
-      <div className="absolute top-1/2 right-0 h-96 w-96 rounded-full bg-purple-500/15 blur-[160px] pointer-events-none" />
-      <div className="absolute -bottom-20 left-1/3 h-80 w-80 rounded-full bg-cyan-500/15 blur-[150px] pointer-events-none" />
+
 
       <Container className="relative z-10">
         {/* Header */}
@@ -117,7 +114,6 @@ export default function About() {
               transition={{ duration: 0.7, ease: "easeOut" }}
               className="relative flex justify-center w-full"
             >
-              <div className="absolute h-80 w-80 rounded-full bg-blue-500/30 blur-[120px] pointer-events-none" />
 
               {/* Photo Frame with Glowing Ring */}
               <div className="relative group h-72 w-72 sm:h-80 sm:w-80 overflow-hidden rounded-3xl border-2 border-blue-500/50 bg-gradient-to-br from-blue-600/30 via-purple-600/20 to-transparent p-2 shadow-[0_0_80px_rgba(59,130,246,0.35)] transition-all duration-500 hover:scale-[1.03] hover:border-cyan-400">
@@ -295,7 +291,7 @@ export default function About() {
               <div className="relative pl-2 sm:pl-4 border-l border-slate-200 dark:border-white/10 space-y-4">
                 {timelineData.map((item) => (
                   <div key={item.company} className="relative pl-6 group">
-                    <div className="absolute -left-[5px] top-4 h-2.5 w-2.5 rounded-full border border-blue-500 bg-background group-hover:bg-blue-500 group-hover:scale-150 transition-all duration-300 shadow-[0_0_10px_rgba(59,130,246,0.8)]" />
+                    <div className="absolute -left-[5px] top-4 h-2.5 w-2.5 rounded-full border border-blue-500 bg-transparent group-hover:bg-blue-500 group-hover:scale-150 transition-all duration-300 shadow-[0_0_10px_rgba(59,130,246,0.8)]" />
 
                     <div className="rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-white/5 p-4 backdrop-blur-md transition-all duration-300 hover:border-blue-500/50 hover:bg-white dark:hover:bg-white/10 hover:-translate-y-0.5 flex flex-wrap items-center justify-between gap-2 shadow-sm dark:shadow-lg">
                       <div>

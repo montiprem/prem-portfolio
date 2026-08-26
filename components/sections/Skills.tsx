@@ -113,7 +113,7 @@ const skillCategories = [
 
 export default function SkillsSection() {
   return (
-    <section id="skills" className="py-24 bg-background relative overflow-hidden transition-colors duration-300">
+    <section id="skills" className="py-24 bg-transparent relative overflow-hidden transition-colors duration-300">
       <Container>
         {/* Header */}
         <div className="text-center max-w-4xl mx-auto mb-16">

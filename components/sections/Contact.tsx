@@ -52,15 +52,13 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative py-16 sm:py-28 bg-background overflow-hidden text-foreground transition-colors duration-300"
+      className="relative py-16 sm:py-28 bg-transparent overflow-hidden text-foreground transition-colors duration-300"
     >
       {/* Background Ambient Mesh & Glows */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.12),transparent_70%)] pointer-events-none" />
-      <div className="absolute inset-0 opacity-[0.03] bg-[url('/grid.svg')] pointer-events-none" />
+
 
       {/* Decorative Blur Lights */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-64 sm:h-96 w-64 sm:w-96 rounded-full bg-blue-500/20 blur-[120px] sm:blur-[160px] pointer-events-none" />
-      <div className="absolute top-1/3 -right-32 h-60 sm:h-80 w-60 sm:w-80 rounded-full bg-purple-500/15 blur-[120px] sm:blur-[150px] pointer-events-none" />
 
       <Container className="relative z-10 px-4 sm:px-6">
         {/* Section Heading */}

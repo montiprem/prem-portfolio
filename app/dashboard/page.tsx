@@ -20,7 +20,7 @@ export default async function Dashboard() {
     .single();
 
   return (
-    <div className="min-h-screen bg-background text-foreground py-24 px-4 transition-colors duration-300">
+    <div className="min-h-screen bg-transparent text-foreground py-24 px-4 transition-colors duration-300">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-black mb-8 text-slate-900 dark:text-white">
           Dashboard

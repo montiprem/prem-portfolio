@@ -49,8 +49,7 @@ export default function ResetPassword() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex items-center justify-center relative overflow-hidden py-16 px-4 transition-colors duration-300">
-      <div className="absolute bottom-1/3 left-1/4 w-96 h-96 bg-emerald-500/15 rounded-full blur-[150px] pointer-events-none" />
+    <div className="min-h-screen bg-transparent text-foreground flex items-center justify-center relative overflow-hidden py-16 px-4 transition-colors duration-300">
 
       <div className="relative z-10 max-w-md w-full mx-auto px-6 lg:px-8">
         <div className="rounded-3xl border border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-white/5 backdrop-blur-2xl p-6 sm:p-8 shadow-xl dark:shadow-2xl">

@@ -212,10 +212,9 @@ const communityPlatforms = [
 
 export default function CertificationsPage() {
   return (
-    <main className="min-h-screen bg-background text-foreground pt-32 pb-20 relative overflow-hidden transition-colors duration-300">
+    <main className="min-h-screen bg-transparent text-foreground pt-32 pb-20 relative overflow-hidden transition-colors duration-300">
       {/* Background FX */}
-      <div className="absolute inset-0 opacity-[0.03] bg-[url('/grid.svg')] pointer-events-none" />
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-125 h-125 bg-blue-500/10 rounded-full blur-[140px] pointer-events-none" />
+
 
       <Container className="relative z-10 max-w-6xl">
         {/* Header */}
@@ -374,8 +373,6 @@ export default function CertificationsPage() {
 
         {/* SECTION 3: MY PRESENCE IN THE DATA COMMUNITY */}
         <div className="relative rounded-3xl border border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-white/5 backdrop-blur-2xl p-8 sm:p-12 text-center text-foreground shadow-sm dark:shadow-2xl overflow-hidden">
-          <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
 
           <p className="text-blue-600 dark:text-blue-400 font-semibold uppercase tracking-widest text-xs flex items-center justify-center gap-1.5 mb-2">
             <Sparkles className="w-4 h-4 text-cyan-500 dark:text-cyan-400" /> DIGITAL FOOTPRINT
