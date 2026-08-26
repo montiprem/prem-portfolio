@@ -1,11 +1,32 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { WhatsAppIcon } from "./ui/BrandIcons";
 
 export default function WhatsAppButton() {
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
+  useEffect(() => {
+    const handleChatStateChange = (e: Event) => {
+      const customEvent = e as CustomEvent<{ isOpen: boolean }>;
+      setIsChatOpen(customEvent.detail.isOpen);
+    };
+
+    window.addEventListener("ai-chat-state-change", handleChatStateChange);
+    return () => {
+      window.removeEventListener("ai-chat-state-change", handleChatStateChange);
+    };
+  }, []);
+
   return (
-    <div className="fixed bottom-24 right-6 md:bottom-28 md:right-8 z-50 flex items-center gap-3">
+    <div
+      className={`fixed z-50 flex items-center gap-3 transition-all duration-300 ease-in-out ${
+        isChatOpen
+          ? "bottom-8 right-[84px] md:bottom-10 md:right-[436px]"
+          : "bottom-24 right-6 md:bottom-28 md:right-8"
+      }`}
+    >
       <motion.a
         href="https://wa.me/917281055278"
         target="_blank"

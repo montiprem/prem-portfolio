@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Send, Bot, User } from "lucide-react";
 
@@ -20,6 +20,12 @@ export default function ChatBot() {
     },
   ]);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    window.dispatchEvent(
+      new CustomEvent("ai-chat-state-change", { detail: { isOpen } })
+    );
+  }, [isOpen]);
 
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
