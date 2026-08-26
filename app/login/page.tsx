@@ -388,9 +388,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex items-center justify-center relative overflow-hidden py-16 px-4 transition-colors duration-300">
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-600/20 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute bottom-10 left-1/4 w-72 h-72 bg-cyan-500/15 rounded-full blur-[140px] pointer-events-none" />
+    <div className="min-h-screen bg-transparent text-foreground flex items-center justify-center relative overflow-hidden py-16 px-4 transition-colors duration-300">
 
       <div className="relative z-10 max-w-md w-full mx-auto px-6 lg:px-8">
         <Link
@@ -438,7 +436,7 @@ export default function Login() {
                 <div className="absolute inset-0 flex items-center">
                   <div className="w-full border-t border-slate-200 dark:border-white/10" />
                 </div>
-                <span className="relative bg-slate-50 dark:bg-background px-3 text-[10px] uppercase tracking-widest text-slate-400 dark:text-gray-400 font-bold">
+                <span className="relative bg-slate-50 dark:bg-transparent px-3 text-[10px] uppercase tracking-widest text-slate-400 dark:text-gray-400 font-bold">
                   OR
                 </span>
               </div>

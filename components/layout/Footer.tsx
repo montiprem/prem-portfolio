@@ -158,13 +158,12 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative bg-background border-t border-slate-200 dark:border-white/10 pt-20 pb-12 overflow-hidden text-foreground transition-colors duration-300">
+    <footer className="relative bg-transparent border-t border-slate-200 dark:border-white/10 pt-20 pb-12 overflow-hidden text-foreground transition-colors duration-300">
       {/* Ambient Mesh Glows */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(59,130,246,0.1),transparent_70%)] pointer-events-none" />
-      <div className="absolute inset-0 opacity-[0.02] bg-[url('/grid.svg')] pointer-events-none" />
+
 
       {/* Decorative Blur Light */}
-      <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 h-80 w-80 rounded-full bg-blue-500/15 blur-[140px] pointer-events-none" />
 
       <Container className="relative z-10">
         {/* TOP SECTION: Brand Info & Navigation */}
@@ -311,7 +310,6 @@ export default function Footer() {
 
         {/* MIDDLE SECTION: Newsletter Subscription Box */}
         <div className="rounded-3xl border border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-white/5 backdrop-blur-xl p-6 sm:p-8 mb-12 shadow-xl dark:shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6 relative z-10">
             <div className="max-w-2xl text-center lg:text-left">

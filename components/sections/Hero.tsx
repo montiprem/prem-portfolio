@@ -48,7 +48,6 @@ function LinkedinStatsCard() {
       transition={{ duration: 0.6, delay: 0.5 }}
       className="w-full max-w-lg bg-white/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-3 sm:p-5 shadow-2xl backdrop-blur-xl relative overflow-hidden mt-4 sm:mt-6 transition-all duration-300 hover:border-blue-500/40 hover:shadow-blue-500/10"
     >
-      <div className="absolute -top-12 -right-12 w-40 h-40 bg-blue-500/20 rounded-full blur-3xl pointer-events-none" />
 
       {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-3 pb-3.5 border-b border-slate-200 dark:border-white/10">
@@ -121,13 +120,8 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen overflow-hidden bg-background flex items-center pt-24 pb-12 sm:pt-32 sm:pb-20 text-foreground transition-colors duration-300"
+      className="relative min-h-screen overflow-hidden bg-transparent flex items-center pt-24 pb-12 sm:pt-32 sm:pb-20 text-foreground transition-colors duration-300"
     >
-      {/* Background Glows */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.12),transparent_60%)] pointer-events-none" />
-      <div className="absolute -top-40 -left-40 h-96 w-96 rounded-full bg-blue-500/15 blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-cyan-500/15 blur-[140px] pointer-events-none" />
-
       <Container className="relative z-10">
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 items-center">
           
@@ -216,8 +210,6 @@ export default function Hero() {
               transition={{ duration: 0.7, ease: "easeOut" }}
               className="relative flex justify-center items-center w-full my-4 sm:my-6"
             >
-              <div className="absolute h-48 w-48 sm:h-72 sm:w-72 rounded-full bg-blue-500/20 blur-[90px] sm:blur-[100px] pointer-events-none" />
-
               <div className="relative h-44 w-44 sm:h-68 sm:w-68 lg:h-76 lg:w-76 overflow-hidden rounded-full border-2 border-blue-500/40 bg-gradient-to-br from-blue-600/30 to-purple-600/20 p-1.5 sm:p-2 shadow-[0_0_50px_rgba(59,130,246,0.3)] transition-all duration-500 hover:scale-[1.02]">
                 <div className="relative h-full w-full overflow-hidden rounded-full">
                   <Image

@@ -29,10 +29,9 @@ export default function StorePage() {
       : storeItems.filter((item) => item.category === selectedCategory);
 
   return (
-    <main className="min-h-screen bg-background text-foreground pt-24 sm:pt-32 pb-16 sm:pb-20 relative overflow-hidden transition-colors duration-300">
+    <main className="min-h-screen bg-transparent text-foreground pt-24 sm:pt-32 pb-16 sm:pb-20 relative overflow-hidden transition-colors duration-300">
       {/* Background Glows */}
-      <div className="absolute inset-0 opacity-[0.03] bg-[url('/grid.svg')] pointer-events-none" />
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-blue-500/10 rounded-full blur-[140px] pointer-events-none" />
+
 
       <Container className="relative z-10 px-4 sm:px-6">
         {/* Header */}

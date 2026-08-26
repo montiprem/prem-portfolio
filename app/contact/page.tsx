@@ -70,11 +70,9 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="min-h-screen bg-background text-foreground pt-24 sm:pt-32 pb-16 sm:pb-20 relative overflow-hidden transition-colors duration-300">
+    <main className="min-h-screen bg-transparent text-foreground pt-24 sm:pt-32 pb-16 sm:pb-20 relative overflow-hidden transition-colors duration-300">
       {/* Background Ambience */}
-      <div className="absolute inset-0 opacity-[0.03] bg-[url('/grid.svg')] pointer-events-none" />
-      <div className="absolute top-1/4 left-10 w-72 sm:w-96 h-72 sm:h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-72 sm:w-96 h-72 sm:h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+
 
       <Container className="relative z-10 px-4 sm:px-6">
         {/* Header */}
@@ -193,7 +191,7 @@ export default function ContactPage() {
                       placeholder="Rahul Sharma"
                       value={formState.name}
                       onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                      className="w-full bg-white dark:bg-background border border-slate-200 dark:border-white/10 rounded-xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-blue-500/60 transition-colors"
+                      className="w-full bg-white dark:bg-transparent border border-slate-200 dark:border-white/10 rounded-xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-blue-500/60 transition-colors"
                     />
                   </div>
                   <div>
@@ -206,7 +204,7 @@ export default function ContactPage() {
                       placeholder="rahul@company.com"
                       value={formState.email}
                       onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                      className="w-full bg-white dark:bg-background border border-slate-200 dark:border-white/10 rounded-xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-blue-500/60 transition-colors"
+                      className="w-full bg-white dark:bg-transparent border border-slate-200 dark:border-white/10 rounded-xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-blue-500/60 transition-colors"
                     />
                   </div>
                 </div>
@@ -220,7 +218,7 @@ export default function ContactPage() {
                     placeholder="Power BI Dashboard / SQL Pipeline / Consulting"
                     value={formState.subject}
                     onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
-                    className="w-full bg-white dark:bg-background border border-slate-200 dark:border-white/10 rounded-xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-blue-500/60 transition-colors"
+                    className="w-full bg-white dark:bg-transparent border border-slate-200 dark:border-white/10 rounded-xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-blue-500/60 transition-colors"
                   />
                 </div>
 
@@ -234,7 +232,7 @@ export default function ContactPage() {
                     placeholder="Describe your requirements or project details..."
                     value={formState.message}
                     onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                    className="w-full bg-white dark:bg-background border border-slate-200 dark:border-white/10 rounded-xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-blue-500/60 transition-colors resize-none"
+                    className="w-full bg-white dark:bg-transparent border border-slate-200 dark:border-white/10 rounded-xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-blue-500/60 transition-colors resize-none"
                   />
                 </div>
 

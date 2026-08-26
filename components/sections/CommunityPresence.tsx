@@ -87,11 +87,9 @@ const communityPlatforms = [
 
 export default function CommunityPresence() {
   return (
-    <section className="py-24 relative overflow-hidden bg-background text-foreground border-t border-slate-200 dark:border-white/5 transition-colors duration-300">
+    <section className="py-24 relative overflow-hidden bg-transparent text-foreground border-t border-slate-200 dark:border-white/5 transition-colors duration-300">
       {/* Background Ambient Glows */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.08),transparent_70%)] pointer-events-none" />
-      <div className="absolute -top-32 -left-32 h-96 w-96 rounded-full bg-blue-500/10 blur-[150px] pointer-events-none" />
-      <div className="absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-cyan-500/10 blur-[150px] pointer-events-none" />
 
       <Container className="relative z-10">
         {/* Header Section */}

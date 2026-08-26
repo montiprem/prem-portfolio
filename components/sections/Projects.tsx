@@ -102,11 +102,11 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="relative py-20 bg-background overflow-hidden text-foreground transition-colors duration-300"
+      className="relative py-20 bg-transparent overflow-hidden text-foreground transition-colors duration-300"
     >
       {/* Background Ambient Mesh & Glows */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.12),transparent_70%)] pointer-events-none" />
-      <div className="absolute inset-0 opacity-[0.03] bg-[url('/grid.svg')] pointer-events-none" />
+
 
       <Container className="relative z-10">
         {/* Section Heading */}
@@ -250,7 +250,7 @@ export default function Projects() {
       {/* LIVE TABLEAU EMBED MODAL */}
       {activeEmbed && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
-          <div className="relative w-full max-w-6xl h-[85vh] rounded-3xl border border-slate-300 dark:border-white/15 bg-background p-4 shadow-2xl flex flex-col justify-between">
+          <div className="relative w-full max-w-6xl h-[85vh] rounded-3xl border border-slate-300 dark:border-white/15 bg-transparent p-4 shadow-2xl flex flex-col justify-between">
             <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-white/10 px-2">
               <h3 className="text-base font-bold text-foreground flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-cyan-500 dark:text-cyan-400" /> {activeEmbed.title}

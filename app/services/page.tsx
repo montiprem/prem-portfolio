@@ -7,11 +7,9 @@ import Container from "@/components/ui/Container";
 
 export default function ServicesPage() {
   return (
-    <main className="min-h-screen bg-background text-foreground flex items-center justify-center relative overflow-hidden py-20 transition-colors duration-300">
+    <main className="min-h-screen bg-transparent text-foreground flex items-center justify-center relative overflow-hidden py-20 transition-colors duration-300">
       {/* Background Ambient Glows & Grid */}
-      <div className="absolute inset-0 opacity-[0.03] bg-[url('/grid.svg')] pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-500/15 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-[300px] h-[300px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
+
 
       <Container className="relative z-10 px-4 sm:px-6">
         <div className="max-w-2xl mx-auto text-center">

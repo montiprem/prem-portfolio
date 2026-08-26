@@ -10,14 +10,13 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative py-28 bg-background overflow-hidden text-foreground transition-colors duration-300"
+      className="relative py-28 bg-transparent overflow-hidden text-foreground transition-colors duration-300"
     >
       {/* Background Ambient Glows & Grid Mesh */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(59,130,246,0.1),transparent_70%)] pointer-events-none" />
-      <div className="absolute inset-0 opacity-[0.03] bg-[url('/grid.svg')] pointer-events-none" />
+
 
       {/* Decorative Blur Ambient */}
-      <div className="absolute -top-40 -left-40 h-96 w-96 rounded-full bg-cyan-500/15 blur-[160px] pointer-events-none" />
 
       <Container className="relative z-10">
         {/* Section Heading */}

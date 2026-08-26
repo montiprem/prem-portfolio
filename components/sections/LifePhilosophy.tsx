@@ -22,9 +22,8 @@ const philosophies = [
 
 export default function LifePhilosophy() {
   return (
-    <section className="relative py-20 bg-background overflow-hidden text-foreground transition-colors duration-300">
+    <section className="relative py-20 bg-transparent overflow-hidden text-foreground transition-colors duration-300">
       {/* Background Glows */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-blue-500/10 rounded-full blur-[140px] pointer-events-none" />
 
       <Container className="relative z-10">
         
