@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Container from "../ui/Container";
 import {
   ChevronDown,
   HelpCircle,
@@ -93,31 +94,31 @@ export default function FAQSection() {
   };
 
   return (
-    <section id="faq" className="pt-16 pb-20 md:pt-20 md:pb-24 bg-transparent relative overflow-hidden text-foreground transition-colors duration-300">
+    <section id="faq" className="py-24 bg-transparent relative overflow-hidden text-foreground transition-colors duration-300">
       {/* Background Ambient Glow */}
 
-      <div className="relative z-10 max-w-[1050px] mx-auto px-6 lg:px-8">
+      <Container className="relative z-10 max-w-[1050px]">
         {/* Section Header */}
-        <div className="text-center mb-10 md:mb-12 space-y-3">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-[11px] font-bold uppercase tracking-wider">
-            <HelpCircle size={12} />
+        <div className="text-center mb-16 space-y-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-bold uppercase tracking-wider">
+            <HelpCircle size={14} />
             <span>Got Questions?</span>
           </div>
 
-          <h2 className="text-2xl md:text-3xl font-black tracking-tight text-slate-900 dark:text-white">
+          <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-white">
             Frequently Asked{" "}
             <span className="bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600 dark:from-blue-400 dark:via-cyan-300 dark:to-indigo-400 bg-clip-text text-transparent">
               Questions
             </span>
           </h2>
 
-          <p className="text-slate-600 dark:text-gray-400 text-sm md:text-base max-w-xl mx-auto">
+          <p className="text-slate-600 dark:text-gray-400 text-sm max-w-xl mx-auto">
             Here are some common questions about my BI development background, data analytics expertise, and collaboration workflow.
           </p>
         </div>
 
         {/* FAQ Accordion List */}
-        <div className="space-y-4 md:space-y-4.5 max-w-[950px] mx-auto">
+        <div className="space-y-4 max-w-[950px] mx-auto">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
@@ -183,7 +184,7 @@ export default function FAQSection() {
             <span>Ask Your Question</span>
           </button>
         </div>
-      </div>
+      </Container>
 
       {/* ASK QUESTION MODAL */}
       {modalOpen && (
