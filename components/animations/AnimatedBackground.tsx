@@ -189,13 +189,13 @@ export default function AnimatedBackground() {
 
             if (dist > 150) {
                 // gentle flow toward center
-                this.x += dx * 0.00005 + this.vx;
-                this.y += dy * 0.00005 + this.vy;
+                this.x += dx * 0.00015 + this.vx;
+                this.y += dy * 0.00015 + this.vy;
             } else {
                 // slow orbit
                 const angle = Math.atan2(dy, dx);
-                this.x += Math.cos(angle + Math.PI/2) * 0.2;
-                this.y += Math.sin(angle + Math.PI/2) * 0.2;
+                this.x += Math.cos(angle + Math.PI/2) * 0.35;
+                this.y += Math.sin(angle + Math.PI/2) * 0.35;
             }
         } else if (variant === "experience") {
             // Pipeline flow (left to right or vertical)
@@ -419,7 +419,7 @@ export default function AnimatedBackground() {
     let pipelines: DataPipeline[] = [];
     const initPipelines = () => {
         pipelines = [];
-        for (let i=0; i < (isMobile ? 2 : 4); i++) {
+        for (let i=0; i < (isMobile ? 3 : 6); i++) {
             pipelines.push(new DataPipeline());
         }
     }
