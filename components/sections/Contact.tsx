@@ -60,7 +60,7 @@ export default function Contact() {
 
       {/* Decorative Blur Lights */}
 
-      <Container className="relative z-10 px-4 sm:px-6">
+      <Container className="relative z-10 px-4 sm:px-6 pointer-events-none">
         {/* Section Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -89,7 +89,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="lg:col-span-5 rounded-2xl sm:rounded-3xl border border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-white/5 backdrop-blur-xl p-5 sm:p-8 flex flex-col justify-between shadow-xl dark:shadow-2xl transition-all duration-300 hover:border-blue-500/30"
+            className="pointer-events-auto lg:col-span-5 rounded-2xl sm:rounded-3xl border border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-white/5 backdrop-blur-xl p-5 sm:p-6 md:p-7 flex flex-col justify-between shadow-xl dark:shadow-2xl transition-all duration-300 hover:border-blue-500/30"
           >
             <div>
               <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-[10px] sm:text-xs font-semibold text-blue-600 dark:text-blue-400 mb-3 sm:mb-4">
@@ -171,9 +171,9 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
             onSubmit={handleSubmit}
-            className="lg:col-span-7 rounded-2xl sm:rounded-3xl border border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-white/5 backdrop-blur-xl p-5 sm:p-8 space-y-4 sm:space-y-5 shadow-xl dark:shadow-2xl transition-all duration-300 hover:border-blue-500/30 flex flex-col justify-between"
+            className="pointer-events-auto lg:col-span-7 rounded-2xl sm:rounded-3xl border border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-white/5 backdrop-blur-xl p-5 sm:p-6 md:p-7 space-y-4 shadow-xl dark:shadow-2xl transition-all duration-300 hover:border-blue-500/30 flex flex-col justify-between"
           >
-            <div className="space-y-4 sm:space-y-5">
+            <div className="space-y-4">
               <div>
                 <label className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-gray-300">
                   Your Name
@@ -212,7 +212,7 @@ export default function Contact() {
                   name="message"
                   value={form.message}
                   onChange={handleChange}
-                  rows={4}
+                  rows={3}
                   className="mt-1.5 sm:mt-2 w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0b1220]/90 px-3.5 py-3 sm:px-4 sm:py-3.5 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 outline-none transition-all focus:border-blue-500 focus:ring-1 focus:ring-blue-500 resize-none shadow-sm"
                   placeholder="Tell me about your project, timeline, or requirements..."
                 />
