@@ -140,16 +140,16 @@ export default function Hero() {
               Available for work
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-black leading-[1.05] tracking-tighter text-slate-900 dark:text-white">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] xl:text-[4.5rem] font-black leading-[1.1] tracking-tighter text-slate-900 dark:text-white">
               <span className="sr-only">Prem Mandal - </span>
-              BI Developer <br className="hidden sm:block" /> &amp;{" "}
+              <span className="block">Power BI Developer</span>
               <span className="bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent inline-block pb-1 sm:pb-2 drop-shadow-sm">
-                Data Analyst
+                &amp; Data Analyst
               </span>
             </h1>
 
             <p className="mt-4 sm:mt-6 text-sm sm:text-base md:text-lg text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed font-medium">
-              I transform complex enterprise data into actionable executive insights. Specializing in Power BI, SQL, DAX, and Microsoft Fabric.
+              I transform complex <span className="relative inline-block text-slate-800 dark:text-slate-100 font-semibold"><motion.span className="absolute bottom-0 left-0 h-[2px] bg-blue-500" initial={{ width: "0%" }} animate={{ width: "100%" }} transition={{ duration: 2, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }} />enterprise data</span> into <span className="relative inline-block text-blue-600 dark:text-blue-400 font-semibold"><motion.span className="absolute inset-0 bg-blue-500/10 blur-sm rounded" animate={{ opacity: [0, 0.5, 0] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }} />actionable executive insights</span>. Specializing in <span className="font-semibold text-slate-800 dark:text-slate-200 relative overflow-hidden inline-block"><motion.span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-12" animate={{ x: ["-200%", "200%"] }} transition={{ duration: 4, repeat: Infinity, ease: "linear", delay: 0.5 }} />Power BI</span>, <span className="font-semibold text-slate-800 dark:text-slate-200 relative overflow-hidden inline-block"><motion.span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-12" animate={{ x: ["-200%", "200%"] }} transition={{ duration: 4, repeat: Infinity, ease: "linear", delay: 1 }} />SQL</span>, <span className="font-semibold text-slate-800 dark:text-slate-200 relative overflow-hidden inline-block"><motion.span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-12" animate={{ x: ["-200%", "200%"] }} transition={{ duration: 4, repeat: Infinity, ease: "linear", delay: 1.5 }} />DAX</span>, and <span className="font-semibold text-slate-800 dark:text-slate-200 relative overflow-hidden inline-block"><motion.span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-12" animate={{ x: ["-200%", "200%"] }} transition={{ duration: 4, repeat: Infinity, ease: "linear", delay: 2 }} />Microsoft Fabric</span>.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-6 sm:mt-8">
