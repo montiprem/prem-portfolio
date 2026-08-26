@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Container from "../ui/Container";
 import {
   ChevronDown,
   HelpCircle,
@@ -11,8 +12,6 @@ import {
   Loader2,
   Sparkles,
 } from "lucide-react";
-import Container from "../ui/Container";
-
 interface FAQItem {
   question: string;
   answer: string;
@@ -98,7 +97,7 @@ export default function FAQSection() {
     <section id="faq" className="py-24 bg-transparent relative overflow-hidden text-foreground transition-colors duration-300">
       {/* Background Ambient Glow */}
 
-      <Container className="relative z-10 max-w-4xl">
+      <Container className="relative z-10 max-w-[1050px]">
         {/* Section Header */}
         <div className="text-center mb-16 space-y-3">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-bold uppercase tracking-wider">
@@ -119,30 +118,39 @@ export default function FAQSection() {
         </div>
 
         {/* FAQ Accordion List */}
-        <div className="space-y-4">
+        <div className="space-y-4 max-w-[950px] mx-auto">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
               <div
                 key={index}
-                className="rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-white/5 backdrop-blur-xl overflow-hidden transition-all duration-300 hover:border-blue-500/30 shadow-sm"
+                className={`relative rounded-xl border backdrop-blur-xl overflow-hidden transition-all duration-300 shadow-sm ${
+                  isOpen
+                    ? "border-cyan-500/30 bg-slate-50 dark:bg-white/10 shadow-[0_0_15px_rgba(6,182,212,0.05)]"
+                    : "border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-white/5 hover:border-blue-500/30"
+                }`}
               >
+                {/* Active left accent line */}
+                {isOpen && (
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-cyan-500 to-blue-500" />
+                )}
+
                 <button
                   onClick={() => toggleAccordion(index)}
-                  className="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 font-semibold text-sm sm:text-base text-slate-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-white transition-colors cursor-pointer"
+                  className="w-full text-left px-5 py-4 md:px-6 md:py-5 flex items-center justify-between gap-4 font-semibold text-[15px] md:text-base text-slate-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-white transition-colors cursor-pointer group"
                 >
-                  <span>{faq.question}</span>
+                  <span className="flex-1 pr-4">{faq.question}</span>
                   <div
-                    className={`p-1.5 rounded-full border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5 transition-transform duration-300 shrink-0 ${
-                      isOpen ? "rotate-180 text-cyan-600 dark:text-cyan-400 border-cyan-500/40 bg-cyan-500/10" : "text-slate-400 dark:text-gray-400"
+                    className={`transition-transform duration-300 shrink-0 flex items-center justify-center ${
+                      isOpen ? "rotate-180 text-cyan-600 dark:text-cyan-400" : "text-slate-400 dark:text-gray-400 group-hover:text-blue-500 dark:group-hover:text-blue-400"
                     }`}
                   >
-                    <ChevronDown size={18} />
+                    <ChevronDown size={18} strokeWidth={2.5} />
                   </div>
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 sm:px-6 pb-6 text-xs sm:text-sm text-slate-600 dark:text-gray-300 leading-relaxed border-t border-slate-200 dark:border-white/5 pt-4">
+                  <div className="px-5 md:px-6 pb-5 md:pb-6 text-[14px] text-slate-600 dark:text-gray-300 leading-relaxed border-t border-slate-200/50 dark:border-white/5 pt-4 md:pt-5 ml-1">
                     {faq.answer}
                   </div>
                 )}
@@ -152,13 +160,13 @@ export default function FAQSection() {
         </div>
 
         {/* FIXED ASK QUESTION BANNER */}
-        <div className="mt-12 rounded-3xl border border-slate-200 dark:border-white/10 bg-slate-100/90 dark:bg-slate-900/80 backdrop-blur-xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left shadow-lg">
-          <div className="space-y-1">
-            <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center justify-center sm:justify-start gap-2">
+        <div className="mt-10 md:mt-12 max-w-[950px] mx-auto rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100/90 dark:bg-slate-900/80 backdrop-blur-xl p-5 sm:p-6 md:p-8 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 text-center sm:text-left shadow-lg">
+          <div className="space-y-1.5">
+            <h3 className="text-[15px] sm:text-base md:text-lg font-bold text-slate-900 dark:text-white flex items-center justify-center sm:justify-start gap-2">
               <span>Have a specific question?</span>
               <Sparkles size={16} className="text-cyan-600 dark:text-cyan-400" />
             </h3>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-gray-300">
+            <p className="text-[13px] sm:text-sm text-slate-600 dark:text-gray-300 max-w-lg">
               Can’t find the answer you are looking for? Ask your question directly to Prem!
             </p>
           </div>
@@ -170,7 +178,7 @@ export default function FAQSection() {
               setUserEmail("");
               setUserQuestion("");
             }}
-            className="px-5 py-2.5 rounded-xl bg-cyan-600 dark:bg-cyan-500 hover:bg-cyan-500 dark:hover:bg-cyan-400 text-xs font-bold text-white dark:text-black transition-all flex items-center gap-2 shadow-lg shadow-cyan-500/20 shrink-0 cursor-pointer"
+            className="w-full sm:w-auto px-5 py-2.5 md:py-3 rounded-xl bg-cyan-600 dark:bg-cyan-500 hover:bg-cyan-500 dark:hover:bg-cyan-400 text-[13px] md:text-[14px] font-bold text-white dark:text-black transition-all flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/20 shrink-0 cursor-pointer"
           >
             <MessageSquarePlus size={16} />
             <span>Ask Your Question</span>

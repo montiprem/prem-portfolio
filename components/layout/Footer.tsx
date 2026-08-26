@@ -62,7 +62,7 @@ function FooterLogo() {
           Prem Mandal<span className="text-cyan-500 dark:text-cyan-400">.</span>
         </span>
         <span className="text-[10px] font-mono font-medium text-slate-500 dark:text-gray-400 tracking-wider uppercase">
-          Senior BI Developer
+          BI Developer
         </span>
       </div>
     </Link>
@@ -173,7 +173,7 @@ export default function Footer() {
             <FooterLogo />
 
             <p className="mt-4 text-slate-600 dark:text-gray-300 text-sm leading-relaxed">
-              Senior BI Developer &amp; Data Analyst crafting enterprise
+              BI Developer &amp; Data Analyst crafting enterprise
               dashboards, scalable semantic models, and automated data
               pipelines that drive strategic decision-making.
             </p>
@@ -309,41 +309,47 @@ export default function Footer() {
         </div>
 
         {/* MIDDLE SECTION: Newsletter Subscription Box */}
-        <div className="rounded-3xl border border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-white/5 backdrop-blur-xl p-6 sm:p-8 mb-12 shadow-xl dark:shadow-2xl relative overflow-hidden">
+        <div className="rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-white/5 backdrop-blur-xl p-4 sm:p-5 md:p-6 mb-12 shadow-md relative overflow-hidden">
 
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-6 relative z-10">
-            <div className="max-w-2xl text-center lg:text-left">
-              <h3 className="text-lg font-black tracking-tight text-slate-900 dark:text-white flex items-center justify-center lg:justify-start gap-2">
-                <span>Subscribe to Newsletter</span>
-                <Sparkles size={16} className="text-cyan-600 dark:text-cyan-400" />
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-gray-300 mt-1 leading-relaxed">
-                Get notified when new Power BI templates, DAX cheat sheets, or
-                data analytics blogs are published. Zero spam.
-              </p>
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-4 sm:gap-6 relative z-10">
+            <div className="max-w-xl text-center lg:text-left flex-1">
+              <div className="flex flex-col sm:flex-row items-center lg:items-start sm:gap-4 justify-center lg:justify-start">
+                <div className="inline-flex p-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-600 dark:text-cyan-400 mb-2 sm:mb-0 shrink-0">
+                  <Mail size={16} />
+                </div>
+                <div>
+                  <h3 className="text-[16px] md:text-[17px] font-bold tracking-tight text-slate-900 dark:text-white flex items-center justify-center lg:justify-start gap-1.5">
+                    <span>Subscribe to Newsletter</span>
+                  </h3>
+                  <p className="text-[13px] text-slate-600 dark:text-gray-300 mt-1 leading-snug">
+                    Get notified when new Power BI templates, DAX cheat sheets, or
+                    data analytics blogs are published. Zero spam.
+                  </p>
+                </div>
+              </div>
             </div>
 
             <div className="w-full lg:w-auto">
               <form
                 onSubmit={handleSubscribe}
-                className="flex flex-col sm:flex-row items-center gap-2 max-w-lg w-full"
+                className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 max-w-lg w-full mx-auto lg:mx-0"
               >
                 <div className="relative w-full">
-                  <Mail className="w-4 h-4 text-slate-400 dark:text-gray-400 absolute left-3.5 top-3" />
+                  <Mail className="w-4 h-4 text-slate-400 dark:text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                   <input
                     type="email"
                     required
                     value={subEmail}
                     onChange={(e) => setSubEmail(e.target.value)}
                     placeholder="Enter your email address"
-                    className="w-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/15 rounded-xl pl-10 pr-4 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400 focus:outline-none focus:border-cyan-500 transition-colors"
+                    className="w-full h-10 sm:h-11 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/15 rounded-xl pl-10 pr-4 py-2 text-[13px] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400 focus:outline-none focus:border-cyan-500 transition-colors"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={subLoading}
-                  className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-bold text-white shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2 shrink-0 cursor-pointer"
+                  className="w-full sm:w-auto h-10 sm:h-11 px-5 rounded-xl bg-blue-600 hover:bg-blue-500 text-[13px] font-bold text-white shadow-md shadow-blue-600/30 transition-all flex items-center justify-center gap-2 shrink-0 cursor-pointer"
                 >
                   {subLoading ? (
                     <Loader2 size={14} className="animate-spin" />
