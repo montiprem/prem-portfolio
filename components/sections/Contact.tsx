@@ -9,6 +9,7 @@ import {
   Sparkles,
   CheckCircle2,
   MessageSquare,
+  Loader2,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import Container from "../ui/Container";
@@ -16,6 +17,7 @@ import Container from "../ui/Container";
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -25,6 +27,7 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
     try {
       const response = await fetch('/api/contact', {
@@ -46,6 +49,8 @@ export default function Contact() {
       }
     } catch (error) {
       console.error('Failed to submit form', error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -175,10 +180,11 @@ export default function Contact() {
           >
             <div className="space-y-4">
               <div>
-                <label className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-gray-300">
+                <label htmlFor="name" className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-gray-300">
                   Your Name
                 </label>
                 <input
+                  id="name"
                   required
                   name="name"
                   value={form.name}
@@ -189,10 +195,11 @@ export default function Contact() {
               </div>
 
               <div>
-                <label className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-gray-300">
+                <label htmlFor="email" className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-gray-300">
                   Your Email
                 </label>
                 <input
+                  id="email"
                   required
                   type="email"
                   name="email"
@@ -204,10 +211,11 @@ export default function Contact() {
               </div>
 
               <div>
-                <label className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-gray-300">
+                <label htmlFor="message" className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-gray-300">
                   Message
                 </label>
                 <textarea
+                  id="message"
                   required
                   name="message"
                   value={form.message}
@@ -222,10 +230,15 @@ export default function Contact() {
             <div className="pt-2 space-y-3">
               <button
                 type="submit"
-                className="group relative w-full flex items-center justify-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-500 transition-all duration-300 py-3 sm:py-3.5 font-semibold text-white shadow-lg shadow-blue-600/30 hover:shadow-blue-500/50 hover:scale-[1.01] active:scale-[0.98] text-xs sm:text-sm cursor-pointer"
+                disabled={isSubmitting}
+                className="group relative w-full flex items-center justify-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-300 py-3 sm:py-3.5 font-semibold text-white shadow-lg shadow-blue-600/30 hover:shadow-blue-500/50 hover:scale-[1.01] active:scale-[0.98] disabled:hover:scale-100 disabled:active:scale-100 text-xs sm:text-sm cursor-pointer"
               >
-                <Send className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                <span>Send Message</span>
+                {isSubmitting ? (
+                  <Loader2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-spin" />
+                ) : (
+                  <Send className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                )}
+                <span>{isSubmitting ? "Sending..." : "Send Message"}</span>
               </button>
 
               {sent && (
