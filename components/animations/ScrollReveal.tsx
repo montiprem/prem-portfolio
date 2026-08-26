@@ -21,7 +21,6 @@ export default function ScrollReveal({
       whileInView={{ opacity: 1, y: 0, x: 0 }}
       viewport={{ once: true, margin: "-50px" }} // Screen me aane se thoda pehle trigger hoga
       transition={{ duration: 0.5, delay, ease: [0.25, 0.1, 0.25, 1.0] }}
-      style={{ willChange: "opacity, transform" }} // Hardware Acceleration Force Karega
     >
       {children}
     </motion.div>
