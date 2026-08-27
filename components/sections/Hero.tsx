@@ -13,7 +13,7 @@ import {
   ArrowRight,
   Sparkles,
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Container from "../ui/Container";
 import { GithubIcon, LinkedinIcon } from "../ui/BrandIcons";
 
@@ -39,6 +39,67 @@ const socials = [
     icon: Mail,
   },
 ];
+
+interface SkillBadgeProps {
+  name: string;
+  className: string;
+  delay: number;
+  textColor: string;
+  shouldReduceMotion: boolean | null;
+  yOffset: number;
+  duration: number;
+  initialX: number;
+  initialY: number;
+}
+
+function SkillBadge({ name, className, delay, textColor, shouldReduceMotion, yOffset, duration, initialX, initialY }: SkillBadgeProps) {
+  // If user prefers reduced motion, skip the entrance travel animation
+  const entranceAnimation = shouldReduceMotion
+    ? { opacity: 1, scale: 1, x: 0, y: 0, filter: "blur(0px)" }
+    : {
+        opacity: [0, 0.8, 1],
+        scale: [0.5, 1.05, 1],
+        x: [initialX, 0],
+        y: [initialY, 0],
+        filter: ["blur(4px)", "blur(1px)", "blur(0px)"],
+      };
+
+  return (
+    <motion.div
+      initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.5, x: initialX, y: initialY, filter: "blur(4px)" }}
+      animate={entranceAnimation}
+      transition={{
+        duration: 0.8,
+        delay: delay,
+        ease: [0.2, 0.8, 0.2, 1],
+        times: [0, 0.7, 1],
+      }}
+      className={`absolute rounded-lg sm:rounded-xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-[#0b1220]/95 backdrop-blur-md px-2.5 py-1 sm:px-3 sm:py-1 shadow-xl z-20 ${className}`}
+    >
+      <motion.div
+        animate={{ y: [0, yOffset, 0] }}
+        transition={{
+          duration: duration,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: delay + 1, // Start float after entrance
+        }}
+        className="w-full h-full relative"
+      >
+        {/* Subtle glow pulse on arrival (only if not reduced motion) */}
+        {!shouldReduceMotion && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: [0, 0.5, 0], scale: [0.8, 1.2, 1] }}
+            transition={{ duration: 0.6, delay: delay + 0.6 }}
+            className={`absolute inset-0 rounded-lg sm:rounded-xl ${textColor.replace('text-', 'bg-').replace('-700', '-400').replace('-300', '-400')} blur-md opacity-20 pointer-events-none`}
+          />
+        )}
+        <span className={`text-[10px] sm:text-xs font-semibold ${textColor}`}>{name}</span>
+      </motion.div>
+    </motion.div>
+  );
+}
 
 function LinkedinStatsCard() {
   return (
@@ -117,6 +178,17 @@ function LinkedinStatsCard() {
 }
 
 export default function Hero() {
+  const shouldReduceMotion = useReducedMotion();
+
+  const skills = [
+    { name: "Power BI 📊", className: "-top-1 left-0 sm:top-4 sm:left-4", delay: 0.1, textColor: "text-blue-700 dark:text-blue-300", yOffset: -4, duration: 4, initialX: 80, initialY: 80 },
+    { name: "SQL 🗄️", className: "top-4 right-0 sm:top-8 sm:right-2", delay: 0.25, textColor: "text-cyan-700 dark:text-cyan-300", yOffset: -6, duration: 4.5, initialX: -60, initialY: 70 },
+    { name: "Python 🐍", className: "top-1/2 -left-2 sm:-left-4", delay: 0.4, textColor: "text-yellow-700 dark:text-yellow-300", yOffset: -3, duration: 5, initialX: 100, initialY: 0 },
+    { name: "Fabric ☁️", className: "top-1/2 -right-2 sm:-right-4", delay: 0.55, textColor: "text-indigo-700 dark:text-indigo-300", yOffset: -5, duration: 4.2, initialX: -90, initialY: 0 },
+    { name: "Azure ⚡", className: "bottom-3 left-0 sm:bottom-8 sm:left-4", delay: 0.7, textColor: "text-sky-700 dark:text-sky-300", yOffset: -4, duration: 4.8, initialX: 70, initialY: -70 },
+    { name: "DAX 📈", className: "bottom-1 right-0 sm:bottom-4 sm:right-4", delay: 0.85, textColor: "text-emerald-700 dark:text-emerald-300", yOffset: -6, duration: 5.2, initialX: -70, initialY: -80 },
+  ];
+
   return (
     <section
       id="home"
@@ -210,7 +282,47 @@ export default function Hero() {
               transition={{ duration: 0.7, ease: "easeOut" }}
               className="relative flex justify-center items-center w-full my-4 sm:my-6"
             >
-              <div className="relative h-44 w-44 sm:h-68 sm:w-68 lg:h-76 lg:w-76 overflow-hidden rounded-full border-2 border-blue-500/40 bg-gradient-to-br from-blue-600/30 to-purple-600/20 p-1.5 sm:p-2 shadow-[0_0_50px_rgba(59,130,246,0.3)] transition-all duration-500 hover:scale-[1.02]">
+              {/* Subtle expanding glow behind profile on entrance */}
+              {!shouldReduceMotion && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: [0, 0.4, 0], scale: [0.5, 1.2, 1.5] }}
+                  transition={{ duration: 1.5, ease: "easeOut" }}
+                  className="absolute inset-0 m-auto h-44 w-44 sm:h-68 sm:w-68 lg:h-76 lg:w-76 rounded-full bg-blue-500/20 blur-2xl z-0"
+                />
+              )}
+
+              {/* Ambient micro-particles (subtle dots) */}
+              {!shouldReduceMotion && (
+                <div className="absolute inset-0 z-0 pointer-events-none overflow-visible">
+                  {[...Array(6)].map((_, i) => (
+                    <motion.div
+                      key={`particle-${i}`}
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{
+                        opacity: [0, 0.5, 0],
+                        scale: [0, 1, 0],
+                        x: [0, (i % 2 === 0 ? 1 : -1) * (10 + i * 5)],
+                        y: [0, (i % 3 === 0 ? -1 : 1) * (15 + i * 4)]
+                      }}
+                      transition={{
+                        duration: 3 + i,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        ease: "easeInOut",
+                        delay: i * 0.4
+                      }}
+                      className="absolute top-1/2 left-1/2 h-1 w-1 rounded-full bg-blue-400/50"
+                      style={{
+                        marginLeft: `${(i % 2 === 0 ? 1 : -1) * (40 + i * 10)}px`,
+                        marginTop: `${(i % 3 === 0 ? -1 : 1) * (50 + i * 8)}px`,
+                      }}
+                    />
+                  ))}
+                </div>
+              )}
+
+              <div className="relative h-44 w-44 sm:h-68 sm:w-68 lg:h-76 lg:w-76 overflow-hidden rounded-full border-2 border-blue-500/40 bg-gradient-to-br from-blue-600/30 to-purple-600/20 p-1.5 sm:p-2 shadow-[0_0_50px_rgba(59,130,246,0.3)] transition-all duration-500 hover:scale-[1.02] z-10">
                 <div className="relative h-full w-full overflow-hidden rounded-full">
                   <Image
                     src="/images/prem.jpeg"
@@ -224,53 +336,20 @@ export default function Hero() {
               </div>
 
               {/* Skill Badges */}
-              <motion.div 
-                animate={{ y: [0, -4, 0] }} 
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-1 left-0 sm:top-4 sm:left-4 rounded-lg sm:rounded-xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-[#0b1220]/95 backdrop-blur-md px-2.5 py-1 sm:px-3 sm:py-1 shadow-xl"
-              >
-                <span className="text-[10px] sm:text-xs font-semibold text-blue-700 dark:text-blue-300">Power BI 📊</span>
-              </motion.div>
-
-              <motion.div 
-                animate={{ y: [0, -6, 0] }} 
-                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                className="absolute top-4 right-0 sm:top-8 sm:right-2 rounded-lg sm:rounded-xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-[#0b1220]/95 backdrop-blur-md px-2.5 py-1 sm:px-3 sm:py-1 shadow-xl"
-              >
-                <span className="text-[10px] sm:text-xs font-semibold text-cyan-700 dark:text-cyan-300">SQL 🗄️</span>
-              </motion.div>
-
-              <motion.div 
-                animate={{ y: [0, -3, 0] }} 
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute top-1/2 -left-2 sm:-left-4 rounded-lg sm:rounded-xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-[#0b1220]/95 backdrop-blur-md px-2.5 py-1 sm:px-3 sm:py-1 shadow-xl"
-              >
-                <span className="text-[10px] sm:text-xs font-semibold text-yellow-700 dark:text-yellow-300">Python 🐍</span>
-              </motion.div>
-
-              <motion.div 
-                animate={{ y: [0, -5, 0] }} 
-                transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-                className="absolute top-1/2 -right-2 sm:-right-4 rounded-lg sm:rounded-xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-[#0b1220]/95 backdrop-blur-md px-2.5 py-1 sm:px-3 sm:py-1 shadow-xl"
-              >
-                <span className="text-[10px] sm:text-xs font-semibold text-indigo-700 dark:text-indigo-300">Fabric ☁️</span>
-              </motion.div>
-
-              <motion.div 
-                animate={{ y: [0, -4, 0] }} 
-                transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                className="absolute bottom-3 left-0 sm:bottom-8 sm:left-4 rounded-lg sm:rounded-xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-[#0b1220]/95 backdrop-blur-md px-2.5 py-1 sm:px-3 sm:py-1 shadow-xl"
-              >
-                <span className="text-[10px] sm:text-xs font-semibold text-sky-700 dark:text-sky-300">Azure ⚡</span>
-              </motion.div>
-
-              <motion.div 
-                animate={{ y: [0, -6, 0] }} 
-                transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut", delay: 2.5 }}
-                className="absolute bottom-1 right-0 sm:bottom-4 sm:right-4 rounded-lg sm:rounded-xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-[#0b1220]/95 backdrop-blur-md px-2.5 py-1 sm:px-3 sm:py-1 shadow-xl"
-              >
-                <span className="text-[10px] sm:text-xs font-semibold text-emerald-700 dark:text-emerald-300">DAX 📈</span>
-              </motion.div>
+              {skills.map((skill) => (
+                <SkillBadge
+                  key={skill.name}
+                  name={skill.name}
+                  className={skill.className}
+                  delay={skill.delay}
+                  textColor={skill.textColor}
+                  shouldReduceMotion={shouldReduceMotion}
+                  yOffset={skill.yOffset}
+                  duration={skill.duration}
+                  initialX={skill.initialX}
+                  initialY={skill.initialY}
+                />
+              ))}
             </motion.div>
 
             <LinkedinStatsCard />
