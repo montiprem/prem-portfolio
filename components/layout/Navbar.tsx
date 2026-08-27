@@ -25,10 +25,10 @@ import { WhatsAppIcon } from "../ui/BrandIcons";
 
 const navLinks = [
   { name: "Home", href: "/", isHash: false },
-  { name: "Projects", href: "/projects", isHash: false },
-  { name: "Certifications", href: "/certifications", isHash: false },
   { name: "Skills", href: "/#skills", isHash: true },
   { name: "Experience", href: "/#experience", isHash: true },
+  { name: "Projects", href: "/projects", isHash: false },
+  { name: "Certifications", href: "/certifications", isHash: false },
 ];
 
 const dropdownLinks = [
@@ -110,12 +110,10 @@ export default function Navbar() {
   }, [pathname]);
 
   const handleLogoClick = (e: React.MouseEvent) => {
-    e.preventDefault();
     setActiveSection("");
     if (pathname === "/") {
+      e.preventDefault();
       window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      router.push("/");
     }
     setMobileMenuOpen(false);
   };
@@ -193,8 +191,6 @@ export default function Navbar() {
                       if (pathname === "/") {
                         e.preventDefault();
                         window.scrollTo({ top: 0, behavior: "smooth" });
-                      } else {
-                        router.push("/");
                       }
                       setActiveSection("");
                     } else if (link.isHash) {
@@ -320,8 +316,6 @@ export default function Navbar() {
                       if (pathname === "/") {
                         e.preventDefault();
                         window.scrollTo({ top: 0, behavior: "smooth" });
-                      } else {
-                        router.push("/");
                       }
                       setActiveSection("");
                       setMobileMenuOpen(false);
