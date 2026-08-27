@@ -91,10 +91,17 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-      if (window.scrollY < 300 && pathname === "/") {
-        setActiveSection("");
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 20);
+          if (window.scrollY < 300 && pathname === "/") {
+            setActiveSection("");
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
