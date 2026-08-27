@@ -1,0 +1,3 @@
+## 2025-05-18 - Added `aria-label` and `title` to password visibility toggles
+**Learning:** Icon-only buttons, especially in forms like password visibility toggles, frequently lack accessible names. Adding `aria-label` provides necessary context for screen readers, while the `title` attribute offers a helpful native tooltip for sighted users.
+**Action:** Always verify that buttons containing only icons (e.g., using lucide-react) have an explicit accessible name using `aria-label`, and consider adding a `title` for visual tooltips where it enhances clarity.
