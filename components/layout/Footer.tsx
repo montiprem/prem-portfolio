@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import {
   Mail,
   BarChart3,
@@ -71,6 +72,8 @@ function FooterLogo() {
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const pathname = usePathname();
+  const router = useRouter();
 
   // Subscription States
   const [subEmail, setSubEmail] = useState("");
@@ -415,17 +418,23 @@ export default function Footer() {
           </div>
 
           {/* Back to Top (Positioned cleanly) */}
-          <Link
-            href="/#home"
+          <button
+            onClick={() => {
+              if (pathname === "/") {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              } else {
+                router.push("/");
+              }
+            }}
             aria-label="Back to top"
-            className="group flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5 text-xs font-semibold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-300 hover:-translate-y-0.5 shadow-sm"
+            className="group flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5 text-xs font-semibold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-300 hover:-translate-y-0.5 shadow-sm cursor-pointer"
           >
             <span>Back to top</span>
             <ArrowUp
               size={14}
               className="transition-transform group-hover:-translate-y-0.5"
             />
-          </Link>
+          </button>
         </div>
       </Container>
 

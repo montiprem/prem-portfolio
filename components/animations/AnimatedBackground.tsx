@@ -111,7 +111,6 @@ export default function AnimatedBackground() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       initNetwork();
-      initPipelines();
     };
 
     window.addEventListener("resize", resizeCanvas);
@@ -299,132 +298,6 @@ export default function AnimatedBackground() {
     };
 
     // --------------------------------------------------------
-    // DATA PIPELINES (ETL Flows)
-    // --------------------------------------------------------
-    class DataPipeline {
-       path: {x: number, y: number}[];
-       progress: number;
-       speed: number;
-       length: number;
-
-       constructor() {
-           this.path = [];
-           this.progress = 0;
-           this.speed = 0.002 + Math.random() * 0.003;
-           this.length = 0.15 + Math.random() * 0.2;
-           this.generatePath();
-       }
-
-       generatePath() {
-           this.path = [];
-           const w = canvas!.width;
-           const h = canvas!.height;
-
-           // Generate right-angle paths simulating data pipeline logic
-           let cx = Math.random() * w;
-           let cy = Math.random() * h;
-           this.path.push({x: cx, y: cy});
-
-           for(let i=0; i<4; i++) {
-               if (i % 2 === 0) {
-                   cx += (Math.random() > 0.5 ? 1 : -1) * (100 + Math.random() * 200);
-               } else {
-                   cy += (Math.random() > 0.5 ? 1 : -1) * (100 + Math.random() * 200);
-               }
-               this.path.push({x: cx, y: cy});
-           }
-       }
-
-       update() {
-           this.progress += this.speed;
-           if (this.progress > 1 + this.length) {
-               this.progress = 0;
-               this.generatePath();
-           }
-       }
-
-       getPointAt(t: number) {
-           if (t < 0) t = 0;
-           if (t > 1) t = 1;
-
-           const segments = this.path.length - 1;
-           const scaledT = t * segments;
-           const index = Math.min(Math.floor(scaledT), segments - 1);
-           const frac = scaledT - index;
-
-           const p1 = this.path[index];
-           const p2 = this.path[index + 1];
-
-           return {
-               x: p1.x + (p2.x - p1.x) * frac,
-               y: p1.y + (p2.y - p1.y) * frac
-           };
-       }
-
-       draw(ctx: CanvasRenderingContext2D, isDark: boolean) {
-           if (this.progress === 0 || this.path.length < 2) return;
-
-           const startT = Math.max(0, this.progress - this.length);
-           const endT = Math.min(1, this.progress);
-           if (startT >= endT) return;
-
-           ctx.beginPath();
-
-           // Draw path
-           for (let t = startT; t <= endT; t += 0.01) {
-               const pt = this.getPointAt(t);
-               if (t === startT) ctx.moveTo(pt.x, pt.y);
-               else ctx.lineTo(pt.x, pt.y);
-           }
-
-           const startPt = this.getPointAt(startT);
-           const endPt = this.getPointAt(endT);
-
-           const grad = ctx.createLinearGradient(startPt.x, startPt.y, endPt.x, endPt.y);
-
-           // Yellow for insights, cyan/blue for raw data
-           const color = isDark ? "14, 165, 233" : "37, 99, 235";
-
-           grad.addColorStop(0, `rgba(${color}, 0)`);
-           grad.addColorStop(0.8, `rgba(${color}, 0.5)`);
-           grad.addColorStop(1, `rgba(${color}, 0.8)`);
-
-           ctx.strokeStyle = grad;
-           ctx.lineWidth = 1.5;
-           ctx.shadowBlur = 8;
-           ctx.shadowColor = `rgba(${color}, 0.5)`;
-
-           // Sometimes make it a dashed line for 'processing' feel
-           if (Math.random() < 0.05) {
-               ctx.setLineDash([5, 5]);
-           } else {
-               ctx.setLineDash([]);
-           }
-
-           ctx.stroke();
-           ctx.shadowBlur = 0;
-           ctx.setLineDash([]);
-
-           // Draw a glowing data packet at the head
-           ctx.beginPath();
-           ctx.arc(endPt.x, endPt.y, 2.5, 0, Math.PI * 2);
-           ctx.fillStyle = isDark ? `rgba(250, 204, 21, 0.9)` : `rgba(202, 138, 4, 0.9)`;
-           ctx.shadowBlur = 10;
-           ctx.shadowColor = isDark ? `rgba(250, 204, 21, 0.8)` : `rgba(202, 138, 4, 0.8)`;
-           ctx.fill();
-           ctx.shadowBlur = 0;
-       }
-    }
-
-    let pipelines: DataPipeline[] = [];
-    const initPipelines = () => {
-        pipelines = [];
-        for (let i=0; i < (isMobile ? 3 : 6); i++) {
-            pipelines.push(new DataPipeline());
-        }
-    }
-
-    // --------------------------------------------------------
     // ANALYTICAL TERRAIN / TREND LINES
     // --------------------------------------------------------
     const drawTrendLines = (ctx: CanvasRenderingContext2D, time: number, isDark: boolean, variant: string, mx: number) => {
@@ -593,12 +466,6 @@ export default function AnimatedBackground() {
       nodes.forEach(node => {
         node.update(time, mx, my, v);
         node.draw(ctx, isDark);
-      });
-
-      // 5. Draw Pipelines
-      pipelines.forEach(pipeline => {
-          pipeline.update();
-          pipeline.draw(ctx, isDark);
       });
 
       animationFrameId = requestAnimationFrame(animate);

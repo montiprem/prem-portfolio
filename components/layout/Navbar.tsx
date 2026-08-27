@@ -189,7 +189,15 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => {
-                    if (link.isHash) {
+                    if (link.name === "Home") {
+                      if (pathname === "/") {
+                        e.preventDefault();
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      } else {
+                        router.push("/");
+                      }
+                      setActiveSection("");
+                    } else if (link.isHash) {
                       handleHashClick(e, link.href);
                     } else {
                       setActiveSection("");
@@ -308,7 +316,16 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => {
-                    if (link.isHash) {
+                    if (link.name === "Home") {
+                      if (pathname === "/") {
+                        e.preventDefault();
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      } else {
+                        router.push("/");
+                      }
+                      setActiveSection("");
+                      setMobileMenuOpen(false);
+                    } else if (link.isHash) {
                       handleHashClick(e, link.href);
                     } else {
                       setActiveSection("");
