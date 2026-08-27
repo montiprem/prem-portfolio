@@ -91,6 +91,12 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.history.scrollRestoration = 'manual';
+    }
+  }, []);
+
+  useEffect(() => {
     let ticking = false;
     const handleScroll = () => {
       if (!ticking) {
@@ -128,9 +134,8 @@ export default function Navbar() {
         if (element) {
           element.scrollIntoView({ behavior: "smooth" });
         }
-      } else {
-        router.push(href);
       }
+      // If pathname !== "/", rely on standard <Link> hash routing
       setMoreDropdownOpen(false);
       setMobileMenuOpen(false);
     }

@@ -39,7 +39,16 @@ const socials = [
 // Custom Footer Logo using logopm.png
 function FooterLogo() {
   return (
-    <Link href="/#home" className="group inline-flex items-center gap-3">
+    <Link
+      href="/"
+      onClick={(e) => {
+        if (typeof window !== "undefined" && window.location.pathname === "/") {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }}
+      className="group inline-flex items-center gap-3"
+    >
       {/* Icon Badge */}
       <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 via-cyan-500 to-indigo-600 p-[1px] shadow-lg shadow-blue-500/20 group-hover:shadow-cyan-400/40 transition-all duration-300">
         <div className="w-full h-full bg-[#0a0f1d] rounded-[11px] flex items-center justify-center relative overflow-hidden">
@@ -420,11 +429,7 @@ export default function Footer() {
           {/* Back to Top (Positioned cleanly) */}
           <button
             onClick={() => {
-              if (pathname === "/") {
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              } else {
-                router.push("/");
-              }
+              window.scrollTo({ top: 0, behavior: "smooth" });
             }}
             aria-label="Back to top"
             className="group flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5 text-xs font-semibold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-300 hover:-translate-y-0.5 shadow-sm cursor-pointer"
