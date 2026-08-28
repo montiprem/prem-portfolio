@@ -1,0 +1,3 @@
+## 2025-02-28 - ChatBot Component Accessibility Audit
+**Learning:** Found a pattern where interactive, icon-only utility components (like floating action buttons and modal close buttons) often lacked screen reader context (aria-labels and aria-expanded state). The `ChatBot` component specifically had multiple icon-only interactive states that were visually clear but inaccessible to screen readers.
+**Action:** When implementing or reviewing floating action buttons or interactive chat widgets, always ensure `aria-expanded` is bound to the open/close state, and that icon-only buttons (like Send or Close) have explicit `aria-label`s.
