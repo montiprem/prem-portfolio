@@ -258,6 +258,7 @@ export default function Projects() {
               <button
                 onClick={() => setActiveEmbed(null)}
                 className="p-1.5 rounded-xl bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-slate-300 dark:hover:bg-white/20 transition-all cursor-pointer"
+                aria-label="Close modal"
               >
                 <X className="w-5 h-5" />
               </button>
