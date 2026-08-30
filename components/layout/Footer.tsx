@@ -453,6 +453,7 @@ export default function Footer() {
                 setUnsubMessage("");
               }}
               className="absolute top-4 right-4 text-slate-400 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white p-1 rounded-lg hover:bg-slate-200 dark:hover:bg-white/10 transition-colors cursor-pointer"
+              aria-label="Close modal"
             >
               <X size={18} />
             </button>
