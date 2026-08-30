@@ -218,6 +218,8 @@ export default function Navbar() {
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setMoreDropdownOpen(!moreDropdownOpen)}
+                aria-expanded={moreDropdownOpen}
+                aria-haspopup="true"
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-yellow-500/40 bg-yellow-500/10 text-amber-600 dark:text-yellow-400 hover:bg-yellow-500/20 text-xs font-bold transition-all duration-300 cursor-pointer ${
                   moreDropdownOpen ? "ring-2 ring-yellow-500/30" : ""
                 }`}
