@@ -2,29 +2,6 @@ import { Project } from "@/types";
 
 export const projects: Project[] = [
   {
-    id: "export-performance-analysis",
-    title: "Export Performance Analysis Power BI Dashboard",
-    description:
-      "Enterprise export analytics dashboard built for Bhauram Jodhraj tracking $1.03B+ FOB trade values, shipment volumes, HS Code breakdowns, supplier & buyer performance metrics, and country-wise trade trends.",
-    tags: [
-      "Power BI",
-      "Export Analytics",
-      "DAX",
-      "Bhauram Jodhraj",
-      "Trade Intelligence",
-      "Power Query",
-    ],
-    company: "Bhauram Jodhraj Pvt Ltd",
-    category: "Power BI",
-    accent: "indigo",
-    featured: true,
-    images: [
-      "/projects/Power BI/Export/Export.png",
-    ],
-    driveUrl:
-      "https://app.powerbi.com/view?r=eyJrIjoiMWNkNDgyZjAtMjUxMC00NjdlLWFhYmEtY2I3MjFkZjNiNjgxIiwidCI6IjRmMjJjNjNiLTlkZjQtNGM4Zi1hYjQ5LTJlMTlkNjMyZmFkNiJ9",
-  },
-  {
     id: "ibm-hr-data-analytics",
     title: "IBM HR Data Analytics Tableau Dashboard",
     description:

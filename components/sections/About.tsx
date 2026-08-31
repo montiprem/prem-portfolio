@@ -34,15 +34,9 @@ const timelineData = [
   },
   {
     year: "2025",
-    company: "Bhauram Jodhraj Pvt Ltd",
-    role: "Senior BI Developer",
-    status: null,
-  },
-  {
-    year: "2026",
     company: "Utkarsh India Ltd",
-    role: "Senior BI Developer",
-    status: "Current",
+    role: "Senior Data Analyst",
+    status: null,
   },
 ];
 
