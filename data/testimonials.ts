@@ -17,12 +17,4 @@ export const testimonials: Testimonial[] = [
     role: "Analytics & Operations",
     company: "Utkarsh India Limited",
   },
-  {
-    id: "2",
-    quote:
-      "Extremely skilled in SQL and Data Integration. Prem delivered automated auction insights that gave us a huge strategic edge.",
-    name: "Business Head",
-    role: "Strategy & Procurement",
-    company: "Bhauram Jodhraj Pvt Ltd",
-  },
 ];

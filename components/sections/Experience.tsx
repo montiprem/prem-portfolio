@@ -6,32 +6,24 @@ import Container from "../ui/Container";
 
 const experienceData = [
   {
-    year: "2026 - Present",
+    year: "2025 – 2026",
     company: "Utkarsh India Ltd",
     companyUrl: "https://utkarshindia.in/",
-    role: "Senior BI Developer",
-    location: "Kolkata, India",
-    status: "Current",
-    description:
-      "Leading enterprise Power BI & Microsoft Fabric architecture, building scalable semantic models, and driving data-driven decisions across departments.",
-  },
-  {
-    year: "2025 - 2026",
-    company: "Bhauram Jodhraj Pvt Ltd",
-    companyUrl: "https://www.bhauramjodhraj.com/",
-    role: "Senior BI Developer",
+    role: "Senior Data Analyst",
     location: "Kolkata, India",
     status: null,
     description:
-      "Designed and deployed executive dashboards, optimized DAX queries for performance, and built automated data pipelines using Power Query and SQL.",
+      "Professional Senior Data Analyst responsibilities involving Power BI, SQL, data analysis, KPI reporting, data modeling, and business insights.",
   },
   {
-    year: "2024 - 2025",
+    year: "Jun 2024 to Jan 2026",
     company: "Super Smelters Ltd",
     companyUrl: "https://supershakti.in/",
     role: "Power BI Developer",
     location: "Kolkata, India",
     status: null,
+    employmentType: "Full-time",
+    duration: "1 year 8 months",
     description:
       "Created operational BI solutions, star schema data modeling, and automated KPI reporting for manufacturing and steel analytics.",
   },
@@ -146,12 +138,26 @@ export default function Experience() {
                               <span>{item.location}</span>
                               <span className="text-xs">🇮🇳</span>
                             </span>
+
+                            {/* Employment Type Tag */}
+                            {item.employmentType && (
+                              <span className="text-xs text-slate-600 dark:text-gray-400 flex items-center gap-1 bg-slate-200/60 dark:bg-white/5 px-2.5 py-0.5 rounded-md border border-slate-300 dark:border-white/5">
+                                <span>{item.employmentType}</span>
+                              </span>
+                            )}
                           </div>
                         </div>
 
-                        <div className="flex items-center gap-1.5 text-xs font-semibold text-cyan-700 dark:text-cyan-300 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20 shrink-0">
-                          <Calendar className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
-                          <span>{item.year}</span>
+                        <div className="flex flex-col gap-1.5 shrink-0 items-end">
+                          <div className="flex items-center gap-1.5 text-xs font-semibold text-cyan-700 dark:text-cyan-300 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+                            <Calendar className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
+                            <span>{item.year}</span>
+                          </div>
+                          {item.duration && (
+                            <div className="flex items-center gap-1.5 text-[10px] font-medium text-slate-500 dark:text-slate-400 px-1">
+                              <span>{item.duration}</span>
+                            </div>
+                          )}
                         </div>
                       </div>
 
