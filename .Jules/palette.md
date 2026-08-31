@@ -1,0 +1,3 @@
+## 2024-09-01 - Floating Widgets & Modals Icon-Only Accessibility
+**Learning:** Floating action widgets (like the ChatBot) and small overlay modals (like the unsubscribe modal) often rely heavily on icon-only buttons (like 'X' for close or 'Send' for submit) to save space. Without explicit `aria-label` and `title` attributes, screen readers cannot identify their function, leading to a confusing or broken experience for visually impaired users. Adding `title` also provides a native tooltip on hover, helping all users understand ambiguous icons.
+**Action:** Always audit floating UI components and modals to ensure every icon-only button and unlabelled input has both an `aria-label` (for screen readers) and a `title` (for visual tooltips on hover).
