@@ -296,7 +296,9 @@ export default function Navbar() {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="lg:hidden p-2 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-slate-700 dark:text-gray-300 hover:text-black dark:hover:text-white cursor-pointer flex items-center gap-2"
-            aria-label="Toggle Menu"
+            aria-expanded={mobileMenuOpen}
+            aria-label={mobileMenuOpen ? "Close Menu" : "Open Menu"}
+            title={mobileMenuOpen ? "Close Menu" : "Open Menu"}
           >
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>

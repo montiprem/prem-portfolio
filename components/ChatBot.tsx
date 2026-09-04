@@ -69,7 +69,9 @@ export default function ChatBot() {
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(!isOpen)}
         className="relative p-2.5 bg-gradient-to-tr from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white rounded-full shadow-[0_0_25px_rgba(59,130,246,0.6)] flex items-center justify-center border border-white/20 transition-all group cursor-pointer"
-        aria-label="Open AI Chat"
+        aria-expanded={isOpen}
+        aria-label={isOpen ? "Close AI Chat" : "Open AI Chat"}
+        title={isOpen ? "Close AI Chat" : "Open AI Chat"}
       >
         {/* Tooltip for desktop hover */}
         {!isOpen && (
@@ -126,6 +128,8 @@ export default function ChatBot() {
               <button
                 onClick={() => setIsOpen(false)}
                 className="text-gray-400 hover:text-white p-1 transition-colors cursor-pointer"
+                aria-label="Close chat window"
+                title="Close chat window"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -182,11 +186,14 @@ export default function ChatBot() {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask about my skills or projects..."
                 className="flex-1 bg-white/5 border border-white/10 rounded-xl px-3.5 py-2 text-xs sm:text-sm text-white focus:outline-none focus:border-blue-500 transition-colors"
+                aria-label="Chat input message"
               />
               <button
                 type="submit"
                 disabled={loading}
                 className="p-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl transition-all disabled:opacity-50 shrink-0 shadow-md cursor-pointer"
+                aria-label="Send message"
+                title="Send message"
               >
                 <Send className="w-4 h-4" />
               </button>
