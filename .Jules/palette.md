@@ -1,0 +1,3 @@
+## 2026-09-03 - Dual Accessibility Labels for Floating UI Elements
+**Learning:** Icon-only floating buttons and modal toggles often require both `aria-label` (for screen readers) and `title` (for native visual tooltips on hover) to be fully accessible. Additionally, for elements that toggle state (like modals or menus), explicitly managing the `aria-expanded` attribute and dynamically updating the `aria-label`/`title` provides necessary context about the component's current state to assistive technologies.
+**Action:** When adding accessibility to interactive components like menus or modals, always ensure both `aria-label` and `title` are used, dynamically updated based on state, and accompanied by `aria-expanded`.
