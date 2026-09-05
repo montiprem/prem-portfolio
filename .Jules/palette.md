@@ -1,0 +1,3 @@
+## 2026-09-05 - Accessibility for Floating Icon-Only Buttons
+**Learning:** In interactive floating components (like `ChatBot` and `WhatsAppButton`), icon-only buttons need both `aria-label` (for screen readers) and `title` (for native visual tooltips) to ensure they are fully accessible to all users. Relying purely on icons can cause confusion for screen reader users and users navigating with keyboards or seeking additional context via mouse hover.
+**Action:** Always ensure that any `<button>` or `<a>` tag containing only an icon (e.g., `<X />`, `<Send />`) has appropriate `aria-label` and `title` attributes added during development.
