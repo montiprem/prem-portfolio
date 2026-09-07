@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/", "/login", "/signup", "/dashboard", "/forgot-password", "/reset-password"], // Private routes exclude karein
+      disallow: ["/api/", "/auth/", "/login", "/signup", "/dashboard", "/forgot-password", "/reset-password"], // Private routes exclude
     },
     sitemap: `${baseUrl}/sitemap.xml`,
   };

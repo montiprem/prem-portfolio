@@ -4,12 +4,12 @@ export const metadata: Metadata = {
   title: "Certifications",
   description: "Professional certifications in Data Science, C Language, and other skills earned by Prem Mandal.",
   alternates: {
-    canonical: "https://premmandal.in/certifications",
+    canonical: "https://prem-portfolio-drab.vercel.app/certifications",
   },
   openGraph: {
     title: "Certifications | Prem Mandal",
     description: "Professional certifications in Data Science, C Language, and other skills earned by Prem Mandal.",
-    url: "https://premmandal.in/certifications",
+    url: "https://prem-portfolio-drab.vercel.app/certifications",
   },
 };
 

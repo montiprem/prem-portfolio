@@ -4,12 +4,12 @@ export const metadata: Metadata = {
   title: "Data Analytics Projects",
   description: "Explore enterprise Power BI dashboards, SQL databases, and data analysis case studies by Prem Mandal.",
   alternates: {
-    canonical: "https://premmandal.in/projects",
+    canonical: "https://prem-portfolio-drab.vercel.app/projects",
   },
   openGraph: {
     title: "Data Analytics Projects | Prem Mandal",
     description: "Explore enterprise Power BI dashboards, SQL databases, and data analysis case studies by Prem Mandal.",
-    url: "https://premmandal.in/projects",
+    url: "https://prem-portfolio-drab.vercel.app/projects",
   },
 };
 
