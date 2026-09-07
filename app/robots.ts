@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = "https://premmandal.in";
+  const baseUrl = "https://prem-portfolio-drab.vercel.app";
 
   return {
     rules: {

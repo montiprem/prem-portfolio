@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://premmandal.in";
+  const baseUrl = "https://prem-portfolio-drab.vercel.app";
 
   const routes = [
     "",
@@ -11,6 +11,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/contact",
     "/blog",
     "/services",
+    "/privacy-policy",
+    "/terms-of-service",
+    "/cookie-policy",
   ];
 
   return routes.map((route) => ({
