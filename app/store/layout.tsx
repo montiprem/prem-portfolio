@@ -4,12 +4,12 @@ export const metadata: Metadata = {
   title: "Store",
   description: "Download Power BI templates, DAX cheat sheets, Excel workbooks, and datasets by Prem Mandal.",
   alternates: {
-    canonical: "https://premmandal.in/store",
+    canonical: "https://prem-portfolio-drab.vercel.app/store",
   },
   openGraph: {
     title: "Store | Prem Mandal",
     description: "Download Power BI templates, DAX cheat sheets, Excel workbooks, and datasets by Prem Mandal.",
-    url: "https://premmandal.in/store",
+    url: "https://prem-portfolio-drab.vercel.app/store",
   },
 };
 

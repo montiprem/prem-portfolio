@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   // Production URL setup
-  metadataBase: new URL("https://premmandal.in"),
+  metadataBase: new URL("https://prem-portfolio-drab.vercel.app"),
   title: {
     default: "Prem Mandal | Senior BI Developer & Data Analyst",
     template: "%s | Prem Mandal",
@@ -53,12 +53,12 @@ export const metadata: Metadata = {
     apple: "/logopm.png?v=2",
   },
   alternates: {
-    canonical: "https://premmandal.in",
+    canonical: "https://prem-portfolio-drab.vercel.app",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://premmandal.in",
+    url: "https://prem-portfolio-drab.vercel.app",
     title: "Prem Mandal | Senior BI Developer & Data Analyst",
     description:
       "Enterprise Power BI dashboards, SQL data modeling, and Microsoft Fabric solutions by Prem Mandal.",
@@ -102,35 +102,44 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Prem Mandal",
-              url: "https://premmandal.in",
-              description: "Senior Power BI Developer and Data Analyst based in India specializing in enterprise dashboards, SQL data modeling, and Microsoft Fabric.",
-              jobTitle: "Senior BI Developer / Power BI Developer / Data Analyst",
-              image: "https://premmandal.in/images/prem.jpeg",
-              worksFor: {
-                "@type": "Organization",
-                name: "Freelance / Consulting",
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "Person",
+                name: "Prem Mandal",
+                url: "https://prem-portfolio-drab.vercel.app",
+                description: "Senior Power BI Developer and Data Analyst based in India specializing in enterprise dashboards, SQL data modeling, and Microsoft Fabric.",
+                jobTitle: "Senior BI Developer / Power BI Developer / Data Analyst",
+                image: "https://prem-portfolio-drab.vercel.app/images/prem.jpeg",
+                worksFor: {
+                  "@type": "Organization",
+                  name: "Freelance / Consulting",
+                },
+                address: {
+                  "@type": "PostalAddress",
+                  "addressCountry": "IN"
+                },
+                sameAs: [
+                  "https://www.linkedin.com/in/premmandal/",
+                  "https://github.com/montiprem",
+                ],
+                knowsAbout: [
+                  "Power BI",
+                  "SQL",
+                  "DAX",
+                  "Data Analytics",
+                  "Microsoft Fabric",
+                  "Business Intelligence",
+                ],
               },
-              address: {
-                "@type": "PostalAddress",
-                "addressCountry": "IN"
-              },
-              sameAs: [
-                "https://www.linkedin.com/in/premmandal/",
-                "https://github.com/montiprem",
-              ],
-              knowsAbout: [
-                "Power BI",
-                "SQL",
-                "DAX",
-                "Data Analytics",
-                "Microsoft Fabric",
-                "Business Intelligence",
-              ],
-            }),
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                name: "Prem Mandal Portfolio",
+                url: "https://prem-portfolio-drab.vercel.app",
+                description: "Portfolio of Prem Mandal - Senior BI Developer and Data Analyst specializing in Power BI, SQL, DAX, Microsoft Fabric, and Data Analytics.",
+              }
+            ]),
           }}
         />
 
