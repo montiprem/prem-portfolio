@@ -15,11 +15,11 @@ export const metadata: Metadata = {
   // Production URL setup
   metadataBase: new URL("https://prem-portfolio-drab.vercel.app"),
   title: {
-    default: "Prem Mandal | Senior BI Developer & Data Analyst",
+    default: "Prem Mandal - Power BI Developer & Data Analyst Portfolio",
     template: "%s | Prem Mandal",
   },
   description:
-    "Portfolio of Prem Mandal - Senior BI Developer and Data Analyst specializing in Power BI, SQL, DAX, Microsoft Fabric, and Data Analytics.",
+    "Portfolio of Prem Mandal, a Power BI Developer and Data Analyst specializing in enterprise dashboards, SQL data modeling, DAX, and Microsoft Fabric.",
   keywords: [
     "Prem Mandal",
     "Prem Mandal portfolio",
@@ -108,8 +108,8 @@ export default function RootLayout({
                 "@type": "Person",
                 name: "Prem Mandal",
                 url: "https://prem-portfolio-drab.vercel.app",
-                description: "Senior Power BI Developer and Data Analyst based in India specializing in enterprise dashboards, SQL data modeling, and Microsoft Fabric.",
-                jobTitle: "Senior BI Developer / Power BI Developer / Data Analyst",
+                description: "Prem Mandal is a Power BI Developer and Data Analyst based in India, specializing in enterprise dashboards, SQL data modeling, DAX, and Microsoft Fabric.",
+                jobTitle: "Power BI Developer & Data Analyst",
                 image: "https://prem-portfolio-drab.vercel.app/images/prem.jpeg",
                 worksFor: {
                   "@type": "Organization",
@@ -137,7 +137,7 @@ export default function RootLayout({
                 "@type": "WebSite",
                 name: "Prem Mandal Portfolio",
                 url: "https://prem-portfolio-drab.vercel.app",
-                description: "Portfolio of Prem Mandal - Senior BI Developer and Data Analyst specializing in Power BI, SQL, DAX, Microsoft Fabric, and Data Analytics.",
+                description: "Portfolio of Prem Mandal, a Power BI Developer and Data Analyst specializing in enterprise dashboards, SQL, and DAX.",
               }
             ]),
           }}
