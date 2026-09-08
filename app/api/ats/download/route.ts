@@ -46,7 +46,10 @@ export async function GET(req: Request) {
     headers.set("Content-Type", contentType);
     headers.set("Content-Disposition", `attachment; filename="Optimized_Resume_${order.name.replace(/\s+/g, '_')}.${extension}"`);
 
-    return new NextResponse(fileBuffer, { headers });
+    // We must pass the buffer as a Blob, string, or Uint8Array.
+    // Buffer is essentially a Uint8Array in modern Node, but Next.js/Fetch API Response
+    // handles Uint8Array or Blob more reliably for binary data.
+    return new NextResponse(new Uint8Array(fileBuffer), { headers });
 
   } catch (error: any) {
     console.error("[ATS Download Error]:", error);
