@@ -24,11 +24,11 @@ export async function POST(req: Request) {
     let finalResumeDocxPath = undefined;
 
     if (pdfFile) {
-      finalResumePdfPath = await uploadToDrive(pdfFile, "Optimized_Resumes");
+      finalResumePdfPath = await uploadToDrive(pdfFile, "Final Resumes");
     }
 
     if (docxFile) {
-      finalResumeDocxPath = await uploadToDrive(docxFile, "Optimized_Resumes");
+      finalResumeDocxPath = await uploadToDrive(docxFile, "Final Resumes");
     }
 
     // Update the sheet record and move status to READY_FOR_PAYMENT

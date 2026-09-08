@@ -103,3 +103,33 @@ To actually send emails to yourself from this form, you will need to add a trans
 1. Sign up for Resend (or a similar provider) and get an API key.
 2. Add `RESEND_API_KEY=your_key` to your Vercel environment variables.
 3. In `app/api/contact/route.ts`, uncomment the example code and install the necessary package (`npm install resend`).
+
+## 5. Google Drive & Sheets Integration
+
+The application uses Google Drive for resume file storage and Google Sheets for order tracking. To enable this, configure an OAuth2 application in the Google Cloud Console.
+
+### Environment Variables
+
+Add the following environment variables to your Vercel project:
+
+```env
+GOOGLE_CLIENT_ID=your-google-oauth-client-id
+GOOGLE_CLIENT_SECRET=your-google-oauth-client-secret
+GOOGLE_REDIRECT_URI=https://prem-portfolio-drab.vercel.app/api/auth/google/callback
+GOOGLE_REFRESH_TOKEN=your-google-oauth-refresh-token
+GOOGLE_DRIVE_FOLDER_ID=your-private-google-drive-folder-id
+GOOGLE_SHEETS_SPREADSHEET_ID=your-google-sheets-spreadsheet-id
+```
+
+### Setup Steps
+1. Create a project in [Google Cloud Console](https://console.cloud.google.com).
+2. Enable the **Google Drive API** and **Google Sheets API**.
+3. Create OAuth 2.0 Client IDs under Credentials. Set the redirect URI to exactly `https://prem-portfolio-drab.vercel.app/api/auth/google/callback` (or your local equivalent for testing).
+4. Obtain your `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`.
+5. Visit `https://prem-portfolio-drab.vercel.app/api/auth/google` (or your local equivalent) to initiate the OAuth flow and authorize the application. This flow explicitly requests two scopes:
+   - `https://www.googleapis.com/auth/drive` (Required to dynamically create and find specific subfolders within your provided Drive folder).
+   - `https://www.googleapis.com/auth/spreadsheets`
+6. After authorizing, you will be redirected to the callback URL, which will securely display the `GOOGLE_REFRESH_TOKEN` (the access token is intentionally hidden for security).
+7. Add all these values to Vercel Environment Variables.
+8. **Drive Setup:** Create a private Google Drive folder and get its ID from the URL (`GOOGLE_DRIVE_FOLDER_ID`). Ensure this folder is owned by or shared with the account that authenticated the OAuth flow. The application will automatically create the required subfolders (`Original Resumes`, `Job Descriptions`, and `Final Resumes`) inside this root folder when files are uploaded.
+9. **Sheets Setup:** Create a new Google Sheet and get its ID from the URL (`GOOGLE_SHEETS_SPREADSHEET_ID`). Name the first tab exactly `Orders` (or leave it as default and rename it to `Orders`). The application will automatically create headers (`A1:T1`) in this sheet upon the first order creation.
