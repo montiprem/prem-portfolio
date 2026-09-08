@@ -18,11 +18,10 @@ export async function GET(req: Request) {
     return NextResponse.json({
       message: "Authorization successful! Add this refresh token to your Vercel Environment Variables as GOOGLE_REFRESH_TOKEN",
       refresh_token: tokens.refresh_token || "No refresh token returned. Try revoking app access and authorizing again with prompt=consent.",
-      access_token: tokens.access_token,
-      expiry_date: tokens.expiry_date,
     });
-  } catch (error: any) {
-    console.error("[Google Auth Callback Error]:", error);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown error";
+    console.error("[Google Auth Callback Error]:", message);
     return NextResponse.json({ error: "Failed to exchange authorization code for tokens" }, { status: 500 });
   }
 }

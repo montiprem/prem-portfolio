@@ -28,14 +28,14 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Only PDF and DOCX files are allowed." }, { status: 400 });
     }
 
-    const originalResumePath = await uploadToDrive(resumeFile, "Original_Resumes");
+    const originalResumePath = await uploadToDrive(resumeFile, "Original Resumes");
 
     let jobDescriptionFilePath;
     if (jdFile && jdFile.size > 0) {
       if (jdFile.size > 5 * 1024 * 1024) {
         return NextResponse.json({ error: "Job description file must be under 5MB." }, { status: 400 });
       }
-      jobDescriptionFilePath = await uploadToDrive(jdFile, "Job_Descriptions");
+      jobDescriptionFilePath = await uploadToDrive(jdFile, "Job Descriptions");
     }
 
     const order = await createOrder({

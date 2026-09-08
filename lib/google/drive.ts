@@ -4,17 +4,53 @@ import { Readable } from "stream";
 
 const drive = google.drive({ version: "v3", auth: oauth2Client });
 
+async function getOrCreateFolder(folderName: string, parentFolderId: string): Promise<string> {
+  // Try to find the folder first
+  const query = `name = '${folderName}' and '${parentFolderId}' in parents and mimeType = 'application/vnd.google-apps.folder' and trashed = false`;
+
+  const res = await drive.files.list({
+    q: query,
+    spaces: "drive",
+    fields: "files(id, name)",
+  });
+
+  const files = res.data.files;
+  if (files && files.length > 0 && files[0].id) {
+    return files[0].id;
+  }
+
+  // Create the folder if it doesn't exist
+  const folderMetadata = {
+    name: folderName,
+    mimeType: "application/vnd.google-apps.folder",
+    parents: [parentFolderId],
+  };
+
+  const createRes = await drive.files.create({
+    requestBody: folderMetadata,
+    fields: "id",
+  });
+
+  if (!createRes.data.id) {
+    throw new Error(`Failed to create subfolder ${folderName}`);
+  }
+
+  return createRes.data.id;
+}
+
 export async function uploadToDrive(file: File, folderName: string): Promise<string> {
   try {
-    // If a specific parent folder ID is set via env var, use it. Otherwise, upload to root.
-    // Assuming folderName here is just a descriptive prefix since we can't easily query/create folders synchronously without extra logic.
-    // If GOOGLE_DRIVE_FOLDER_ID is provided, it acts as the root folder for all uploads.
     const parentFolderId = process.env.GOOGLE_DRIVE_FOLDER_ID;
-    const parents = parentFolderId ? [parentFolderId] : [];
+    if (!parentFolderId) {
+      throw new Error("GOOGLE_DRIVE_FOLDER_ID is not defined.");
+    }
+
+    // Ensure the specific subfolder exists
+    const subfolderId = await getOrCreateFolder(folderName, parentFolderId);
 
     const fileMetadata = {
-      name: `${folderName}_${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.-]/g, "_")}`,
-      parents: parents,
+      name: `${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.-]/g, "_")}`,
+      parents: [subfolderId],
     };
 
     const arrayBuffer = await file.arrayBuffer();
@@ -40,11 +76,12 @@ export async function uploadToDrive(file: File, folderName: string): Promise<str
       throw new Error("Upload successful but no ID returned from Google Drive.");
     }
 
-    console.log(`[Google Drive] Uploaded ${file.name} to Drive. ID: ${res.data.id}`);
+    console.log(`[Google Drive] Uploaded ${file.name} to Drive folder ${folderName}. ID: ${res.data.id}`);
     return res.data.id;
-  } catch (error: any) {
-    console.error("[Google Drive Upload Error]:", error);
-    throw new Error(`Failed to upload file to Google Drive: ${error.message}`);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown error";
+    console.error("[Google Drive Upload Error]:", message);
+    throw new Error(`Failed to upload file to Google Drive: ${message}`);
   }
 }
 
@@ -60,8 +97,9 @@ export async function downloadFromDrive(fileId: string): Promise<Buffer> {
 
     console.log(`[Google Drive] Downloaded file ${fileId}`);
     return Buffer.from(arrayBuffer);
-  } catch (error: any) {
-    console.error(`[Google Drive Download Error] for fileId ${fileId}:`, error);
-    throw new Error(`Failed to download file from Google Drive: ${error.message}`);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown error";
+    console.error(`[Google Drive Download Error] for fileId ${fileId}:`, message);
+    throw new Error(`Failed to download file from Google Drive: ${message}`);
   }
 }

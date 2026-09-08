@@ -3,7 +3,7 @@ import { oauth2Client } from "@/lib/google/auth";
 
 export async function GET() {
   const scopes = [
-    "https://www.googleapis.com/auth/drive.file",
+    "https://www.googleapis.com/auth/drive",
     "https://www.googleapis.com/auth/spreadsheets",
   ];
 

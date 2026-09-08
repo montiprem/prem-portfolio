@@ -29,11 +29,18 @@ export interface ResumeOrder {
 }
 
 const sheets = google.sheets({ version: "v4", auth: oauth2Client });
-const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
+// The getter uses a non-null assertion since we'll validate it at runtime in functions
+const getSpreadsheetId = () => {
+  const id = process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
+  if (!id) throw new Error("GOOGLE_SHEETS_SPREADSHEET_ID is not defined in environment variables.");
+  return id;
+};
 const RANGE = "Orders!A:T"; // Assuming sheet is named Orders and has 20 columns
 
 // Helper to convert sheet row array to ResumeOrder object
-function rowToOrder(row: any[]): ResumeOrder {
+function rowToOrder(row: string[] | undefined | null): ResumeOrder | null {
+  if (!row || row.length === 0 || !row[0]) return null;
+
   return {
     id: row[0] || "",
     name: row[1] || "",
@@ -59,7 +66,7 @@ function rowToOrder(row: any[]): ResumeOrder {
 }
 
 // Helper to convert ResumeOrder object to sheet row array
-function orderToRow(order: ResumeOrder): any[] {
+function orderToRow(order: ResumeOrder): (string | number)[] {
   return [
     order.id,
     order.name,
@@ -85,12 +92,14 @@ function orderToRow(order: ResumeOrder): any[] {
 }
 
 async function ensureHeaders() {
-  if (!SPREADSHEET_ID) throw new Error("GOOGLE_SHEETS_SPREADSHEET_ID is not defined.");
+  const spreadsheetId = getSpreadsheetId();
   try {
     const res = await sheets.spreadsheets.values.get({
-      spreadsheetId: SPREADSHEET_ID,
+      spreadsheetId: spreadsheetId,
       range: "Orders!A1:T1",
     });
+
+    // Check if headers are missing or sheet is empty
     if (!res.data.values || res.data.values.length === 0) {
       const headers = [
         "id", "name", "email", "phone", "targetRole", "yearsOfExperience", "jobDescription",
@@ -99,22 +108,23 @@ async function ensureHeaders() {
         "secureTokenExpiresAt", "createdAt", "updatedAt"
       ];
       await sheets.spreadsheets.values.update({
-        spreadsheetId: SPREADSHEET_ID,
+        spreadsheetId: spreadsheetId,
         range: "Orders!A1:T1",
         valueInputOption: "RAW",
         requestBody: { values: [headers] },
       });
     }
-  } catch (error: any) {
-    // If sheet doesn't exist, this might fail, but let's assume it exists or fails gracefully.
-    console.error("[Google Sheets] Error ensuring headers:", error.message);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown error";
+    // Bubble up error to fail explicitly rather than silently ignoring if sheet 'Orders' doesn't exist or permission denied
+    throw new Error(`[Google Sheets] Failed to verify or create headers. Make sure a sheet named "Orders" exists. Details: ${message}`);
   }
 }
 
 export async function createOrder(
   order: Omit<ResumeOrder, 'id' | 'status' | 'paymentStatus' | 'createdAt' | 'updatedAt' | 'price' | 'currency' | 'secureToken' | 'secureTokenExpiresAt'>
 ): Promise<ResumeOrder> {
-  if (!SPREADSHEET_ID) throw new Error("GOOGLE_SHEETS_SPREADSHEET_ID is not defined.");
+  const spreadsheetId = getSpreadsheetId();
   await ensureHeaders();
 
   const id = `ORD-${Math.random().toString(36).substring(2, 9).toUpperCase()}`;
@@ -137,7 +147,7 @@ export async function createOrder(
   const row = orderToRow(newOrder);
 
   await sheets.spreadsheets.values.append({
-    spreadsheetId: SPREADSHEET_ID,
+    spreadsheetId: spreadsheetId,
     range: RANGE,
     valueInputOption: "USER_ENTERED",
     requestBody: { values: [row] },
@@ -148,9 +158,9 @@ export async function createOrder(
 }
 
 export async function getOrder(id: string): Promise<ResumeOrder | null> {
-  if (!SPREADSHEET_ID) return null;
+  const spreadsheetId = getSpreadsheetId();
   const res = await sheets.spreadsheets.values.get({
-    spreadsheetId: SPREADSHEET_ID,
+    spreadsheetId: spreadsheetId,
     range: RANGE,
   });
 
@@ -158,17 +168,17 @@ export async function getOrder(id: string): Promise<ResumeOrder | null> {
   if (!rows || rows.length === 0) return null;
 
   for (let i = 1; i < rows.length; i++) { // Skip header row
-    if (rows[i][0] === id) {
-      return rowToOrder(rows[i]);
+    if (rows[i] && rows[i][0] === id) {
+      return rowToOrder(rows[i] as string[]);
     }
   }
   return null;
 }
 
 export async function getOrderByToken(token: string): Promise<ResumeOrder | null> {
-  if (!SPREADSHEET_ID) return null;
+  const spreadsheetId = getSpreadsheetId();
   const res = await sheets.spreadsheets.values.get({
-    spreadsheetId: SPREADSHEET_ID,
+    spreadsheetId: spreadsheetId,
     range: RANGE,
   });
 
@@ -176,17 +186,17 @@ export async function getOrderByToken(token: string): Promise<ResumeOrder | null
   if (!rows || rows.length === 0) return null;
 
   for (let i = 1; i < rows.length; i++) { // Skip header row
-    if (rows[i][16] === token) { // secureToken is at index 16
-      return rowToOrder(rows[i]);
+    if (rows[i] && rows[i][16] === token) { // secureToken is at index 16
+      return rowToOrder(rows[i] as string[]);
     }
   }
   return null;
 }
 
 export async function updateOrder(id: string, updates: Partial<ResumeOrder>): Promise<ResumeOrder | null> {
-  if (!SPREADSHEET_ID) return null;
+  const spreadsheetId = getSpreadsheetId();
   const res = await sheets.spreadsheets.values.get({
-    spreadsheetId: SPREADSHEET_ID,
+    spreadsheetId: spreadsheetId,
     range: RANGE,
   });
 
@@ -197,9 +207,9 @@ export async function updateOrder(id: string, updates: Partial<ResumeOrder>): Pr
   let currentOrder: ResumeOrder | null = null;
 
   for (let i = 1; i < rows.length; i++) {
-    if (rows[i][0] === id) {
-      rowIndex = i + 1; // +1 because rows array is 0-indexed, Sheets is 1-indexed (and we started fetching from A1 typically, though A:T fetches all. If row[0] is A1, rowIndex is 1)
-      currentOrder = rowToOrder(rows[i]);
+    if (rows[i] && rows[i][0] === id) {
+      rowIndex = i + 1; // +1 because arrays are 0-indexed and Sheets rows are 1-indexed (A1 is row 1)
+      currentOrder = rowToOrder(rows[i] as string[]);
       break;
     }
   }
@@ -215,7 +225,7 @@ export async function updateOrder(id: string, updates: Partial<ResumeOrder>): Pr
   const updatedRow = orderToRow(updatedOrder);
 
   await sheets.spreadsheets.values.update({
-    spreadsheetId: SPREADSHEET_ID,
+    spreadsheetId: spreadsheetId,
     range: `Orders!A${rowIndex}:T${rowIndex}`,
     valueInputOption: "USER_ENTERED",
     requestBody: { values: [updatedRow] },
@@ -226,9 +236,9 @@ export async function updateOrder(id: string, updates: Partial<ResumeOrder>): Pr
 }
 
 export async function getAllOrders(): Promise<ResumeOrder[]> {
-  if (!SPREADSHEET_ID) return [];
+  const spreadsheetId = getSpreadsheetId();
   const res = await sheets.spreadsheets.values.get({
-    spreadsheetId: SPREADSHEET_ID,
+    spreadsheetId: spreadsheetId,
     range: RANGE,
   });
 
@@ -237,9 +247,9 @@ export async function getAllOrders(): Promise<ResumeOrder[]> {
 
   const orders: ResumeOrder[] = [];
   for (let i = 1; i < rows.length; i++) {
-    // Basic validation to skip empty rows
-    if (rows[i][0]) {
-      orders.push(rowToOrder(rows[i]));
+    const order = rowToOrder(rows[i] as string[]);
+    if (order) {
+      orders.push(order);
     }
   }
 
