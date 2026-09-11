@@ -1,0 +1,3 @@
+## 2024-05-18 - ChatBot Buttons ARIA labels
+**Learning:** Icon-only buttons without inner text need explicit aria-labels, and toggle buttons specifically benefit from an aria-expanded attribute so that screen readers correctly interpret the element state. The title attribute can serve double duty providing native visual tooltips and aiding screen reader users depending on the reader/browser combination.
+**Action:** When creating new components that contain buttons with icons, always add appropriate aria-label and title attributes, and ensure any button that controls a toggleable region includes aria-expanded.
