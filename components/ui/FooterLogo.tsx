@@ -18,6 +18,7 @@ export default function FooterLogo() {
               src="/logopm.png"
               alt="Prem Mandal Logo"
               fill
+              sizes="28px"
               unoptimized
               className="object-contain group-hover:scale-110 transition-transform duration-300"
             />

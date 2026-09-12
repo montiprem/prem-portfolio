@@ -217,6 +217,7 @@ export default function Hero() {
                     alt="Prem Mandal - Senior Power BI Developer and Data Analyst India"
                     title="Prem Mandal - Senior Power BI Developer"
                     fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover"
                     priority
                   />
