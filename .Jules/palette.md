@@ -1,0 +1,3 @@
+## 2024-05-18 - [ChatBot Accessibility Improvements]
+**Learning:** Icon-only buttons within interactive overlay components (like chat widgets) frequently lack accessible names, making them invisible or confusing for screen reader users.
+**Action:** When working on floating widgets or interactive modules, always ensure icon-only control buttons (like "Close" and "Send") include descriptive `aria-label`s.
