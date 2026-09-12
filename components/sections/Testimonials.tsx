@@ -73,6 +73,7 @@ export default function Testimonials() {
                       src={item.avatar}
                       alt={item.name}
                       fill
+                      sizes="48px"
                       unoptimized
                       className="object-cover rounded-xl"
                     />

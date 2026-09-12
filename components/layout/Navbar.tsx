@@ -25,10 +25,12 @@ import { WhatsAppIcon } from "../ui/BrandIcons";
 
 const navLinks = [
   { name: "Home", href: "/", isHash: false },
+  { name: "About", href: "/#about", isHash: true },
   { name: "Skills", href: "/#skills", isHash: true },
-  { name: "Experience", href: "/#experience", isHash: true },
   { name: "Projects", href: "/projects", isHash: false },
-  { name: "Certifications", href: "/certifications", isHash: false },
+  { name: "Experience", href: "/#experience", isHash: true },
+  { name: "What I Do", href: "/#whatido", isHash: true },
+  { name: "Contact", href: "/contact", isHash: false },
 ];
 
 const dropdownLinks = [
@@ -172,6 +174,7 @@ export default function Navbar() {
                   src="/logopm.png"
                   alt="Prem Mandal Logo"
                   fill
+                  sizes="36px"
                   unoptimized
                   className="object-contain group-hover:scale-110 transition-transform duration-300"
                 />

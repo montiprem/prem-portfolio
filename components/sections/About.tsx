@@ -117,6 +117,7 @@ export default function About() {
                     alt="Prem Mandal - Senior Power BI Developer and Data Analyst India"
                     title="Prem Mandal - Data Analyst"
                     fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     priority
                   />
