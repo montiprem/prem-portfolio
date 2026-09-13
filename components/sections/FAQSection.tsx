@@ -137,6 +137,7 @@ export default function FAQSection() {
 
                 <button
                   onClick={() => toggleAccordion(index)}
+                  aria-expanded={openIndex === index}
                   className="w-full text-left px-5 py-4 md:px-6 md:py-5 flex items-center justify-between gap-4 font-semibold text-[15px] md:text-base text-slate-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-white transition-colors cursor-pointer group"
                 >
                   <span className="flex-1 pr-4">{faq.question}</span>
@@ -193,6 +194,8 @@ export default function FAQSection() {
             <button
               onClick={() => setModalOpen(false)}
               className="absolute top-4 right-4 text-slate-400 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white p-1 rounded-lg hover:bg-slate-200 dark:hover:bg-white/10 transition-colors cursor-pointer"
+              aria-label="Close Modal"
+              title="Close"
             >
               <X size={18} />
             </button>
