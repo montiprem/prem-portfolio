@@ -7,6 +7,7 @@ import Preloader from "@/components/loader/Preloader";
 import ChatBot from "@/components/ChatBot";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import AnimatedBackground from "@/components/animations/AnimatedBackground";
+import GaneshChaturthiPopup from "@/components/GaneshChaturthiPopup";
 import { Providers } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -167,6 +168,9 @@ export default function RootLayout({
             {/* Common Footer across all pages */}
             <Footer />
           </div>
+
+          {/* Festival Popup - Only shows on Sep 14, 2026 */}
+          <GaneshChaturthiPopup />
         </Providers>
       </body>
     </html>
