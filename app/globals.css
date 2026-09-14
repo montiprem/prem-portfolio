@@ -115,3 +115,69 @@
   animation: pulseGlow 3s ease-in-out infinite;
   will-change: opacity;
 }
+/* Ganesh Festival Theme Support */
+html.ganesh-festival-theme {
+  --background: #050b14;
+  --foreground: #fef3c7;
+  --primary: #f59e0b;
+  --secondary: #d97706;
+  --muted: #fbbf24;
+  --card: rgba(245, 158, 11, 0.05);
+}
+
+html.ganesh-festival-theme.light {
+  --background: #fffbeb;
+  --foreground: #451a03;
+  --card: rgba(245, 158, 11, 0.1);
+}
+
+/* Make sure header positions correctly when banner is shown */
+body.ganesh-festival-theme {
+  /* Using pseudo-element to add subtle gradient backdrop */
+}
+
+body.ganesh-festival-theme header {
+  /* The banner will take space, navbar needs to be adjusted */
+  /* We'll handle this in Navbar.tsx instead of CSS to avoid flickering */
+}
+
+/* Festive glowing effects for certain components */
+.ganesh-festival-theme .festive-glow {
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+}
+
+.ganesh-festival-theme .bg-blue-600 {
+  background-color: #d97706 !important;
+}
+
+.ganesh-festival-theme .text-blue-600 {
+  color: #f59e0b !important;
+}
+
+.ganesh-festival-theme .from-blue-600 {
+  --tw-gradient-from: #ea580c !important;
+}
+
+.ganesh-festival-theme .to-indigo-600 {
+  --tw-gradient-to: #d97706 !important;
+}
+
+.ganesh-festival-theme .via-cyan-500 {
+  --tw-gradient-via: #fbbf24 !important;
+}
+
+.ganesh-festival-theme .bg-blue-500 {
+  background-color: #f59e0b !important;
+}
+
+.ganesh-festival-theme .text-blue-500 {
+  color: #f59e0b !important;
+}
+
+.ganesh-festival-theme .border-blue-500\/30 {
+  border-color: rgba(245, 158, 11, 0.3) !important;
+}
+
+.ganesh-festival-theme .bg-blue-500\/10 {
+  background-color: rgba(245, 158, 11, 0.1) !important;
+}

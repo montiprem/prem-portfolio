@@ -8,6 +8,7 @@ import ChatBot from "@/components/ChatBot";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import AnimatedBackground from "@/components/animations/AnimatedBackground";
 import GaneshChaturthiPopup from "@/components/GaneshChaturthiPopup";
+import GaneshFestivalTheme from "@/components/theme/GaneshFestivalTheme";
 import { Providers } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -145,6 +146,8 @@ export default function RootLayout({
         />
 
         <Providers>
+          <GaneshFestivalTheme />
+
           {/* Global Animated Background System */}
           <AnimatedBackground />
 

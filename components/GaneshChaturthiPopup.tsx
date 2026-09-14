@@ -36,6 +36,13 @@ export default function GaneshChaturthiPopup() {
   const handleClose = () => {
     setShow(false);
     sessionStorage.setItem(STORAGE_KEY, "true");
+
+    // Explicitly set the theme to active in storage
+    sessionStorage.setItem("ganesh-chaturthi-theme-2026", "true");
+
+    // Dispatch an event so the theme component can update immediately
+    window.dispatchEvent(new Event("ganesh-theme-update"));
+
     document.body.style.overflow = ""; // Restore scrolling
   };
 
