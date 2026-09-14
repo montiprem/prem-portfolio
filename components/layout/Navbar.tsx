@@ -149,9 +149,35 @@ export default function Navbar() {
     return pathname === link.href && (!activeSection || pathname !== "/");
   };
 
+  const [hasBanner, setHasBanner] = useState(false);
+  useEffect(() => {
+    const checkBanner = () => {
+      const now = new Date();
+      const indiaDate = new Intl.DateTimeFormat("en-CA", {
+        timeZone: "Asia/Kolkata",
+      }).format(now);
+      const isGaneshChaturthi = indiaDate === "2026-09-14";
+      const hasEnabledTheme = sessionStorage.getItem("ganesh-chaturthi-theme-2026") === "true";
+      setHasBanner(isGaneshChaturthi && hasEnabledTheme);
+    };
+
+    checkBanner();
+
+    const handleStorageChange = () => checkBanner();
+    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener("ganesh-theme-update", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("ganesh-theme-update", handleStorageChange);
+    };
+  }, []);
+
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-black/10 dark:border-white/10 ${
+      className={`fixed left-0 right-0 z-50 transition-all duration-300 border-b border-black/10 dark:border-white/10 ${
+        hasBanner ? "top-[40px] sm:top-[44px]" : "top-0"
+      } ${
         scrolled
           ? "bg-background/80 backdrop-blur-xl py-3 shadow-lg"
           : "bg-background/40 backdrop-blur-md py-4"
