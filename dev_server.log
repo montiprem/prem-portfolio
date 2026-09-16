@@ -1,0 +1,29 @@
+
+> prem-portfolio@0.1.0 dev /app
+> next dev
+
+▲ Next.js 16.3.4 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.2:3000
+✓ Ready in 567ms
+✓ Running next.config.ts took 53ms
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead.
+
+  To migrate automatically, run:
+  npx @next/codemod@canary middleware-to-proxy .
+
+  Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+
+ GET / 200 in 1305ms (next.js: 331ms, proxy.ts: 211ms, application-code: 762ms)
+[browser] Image with src "/images/prem.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+ GET / 200 in 226ms (next.js: 9ms, proxy.ts: 13ms, application-code: 205ms)
+[browser] Image with src "/images/prem.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+ GET / 200 in 194ms (next.js: 8ms, proxy.ts: 8ms, application-code: 178ms)
+[browser] Image with src "/images/prem.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+ GET / 200 in 202ms (next.js: 5ms, proxy.ts: 7ms, application-code: 190ms)
+[browser] Image with src "/images/prem.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+ GET / 200 in 203ms (next.js: 7ms, proxy.ts: 8ms, application-code: 188ms)
+[browser] Image with src "/images/prem.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+ GET / 200 in 153ms (next.js: 5ms, proxy.ts: 6ms, application-code: 142ms)
+ GET / 200 in 161ms (next.js: 4ms, proxy.ts: 8ms, application-code: 149ms)
+[browser] Image with src "/images/prem.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
