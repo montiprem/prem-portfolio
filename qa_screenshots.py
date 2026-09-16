@@ -1,64 +1,43 @@
-import asyncio
-from playwright.async_api import async_playwright
-import subprocess
-import time
-import os
+from playwright.sync_api import sync_playwright
 
-async def main():
-    process = subprocess.Popen(["/home/jules/.nvm/versions/node/v20.20.1/bin/node", "node_modules/.bin/next", "dev"],
-                               env={
-                                   **os.environ,
-                                   "NEXT_PUBLIC_SUPABASE_URL": "https://dummy.supabase.co",
-                                   "NEXT_PUBLIC_SUPABASE_ANON_KEY": "dummy",
-                               })
+def run_cuj(page):
+    page.goto("http://localhost:3000")
+    page.wait_for_timeout(3000)
 
-    time.sleep(5)
+    # Click on the Chatbot button
+    page.locator('button[aria-label="Open AI Chat"]').click(force=True)
+    page.wait_for_timeout(1000)
+    page.screenshot(path="qa_chatbot_open.png")
 
-    async with async_playwright() as p:
-        browser = await p.chromium.launch()
+    try:
+        # Type a message
+        page.locator('input[aria-label="Type your message"]').fill("Hello")
+        page.wait_for_timeout(1000)
 
-        # --- MOBILE PORTRAIT ---
-        mobile_context = await browser.new_context(
-            viewport={'width': 375, 'height': 812},
-            device_scale_factor=2,
-            is_mobile=True,
-            has_touch=True
-        )
+        # Send message
+        page.locator('button[aria-label="Send message"]').click(force=True)
+        page.wait_for_timeout(2000)
+        page.screenshot(path="qa_chatbot_sent.png")
 
-        routes = [
-            ('/', 'hero'),
-            ('/projects', 'projects'),
-            ('/skills', 'skills'),
-            ('/experience', 'experience'),
-            ('/contact', 'contact')
-        ]
+        # Close chat
+        page.locator('button[aria-label="Close chat"]').click(force=True)
+        page.wait_for_timeout(1000)
 
-        for route, name in routes:
-            page = await mobile_context.new_page()
-
-            # Dark mode
-            await page.goto(f'http://localhost:3000{route}')
-            await page.evaluate("document.documentElement.classList.add('dark')")
-
-            # Use Playwright to remove the preloader element
-            await page.evaluate('''
-                const preloader = document.querySelector('.fixed.inset-0.z-99999');
-                if (preloader) preloader.remove();
-
-                // Hide any other potential loading overlays
-                document.querySelectorAll('div').forEach(d => {
-                    if(window.getComputedStyle(d).zIndex > 50 && d.innerText.includes("Loading")) d.style.display = 'none';
-                });
-            ''')
-
-            time.sleep(3)
-            await page.screenshot(path=f'/home/jules/verification/mobile_{name}_dark_unblocked.png')
-
-            await page.close()
-
-        await browser.close()
-
-    process.terminate()
+        page.screenshot(path="qa_chatbot_closed.png")
+        page.wait_for_timeout(1000)
+    except Exception as e:
+        print(f"Error executing chat script: {e}")
+        page.screenshot(path="qa_chatbot_error.png")
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        context = browser.new_context(
+            record_video_dir="qa_videos"
+        )
+        page = context.new_page()
+        try:
+            run_cuj(page)
+        finally:
+            context.close()
+            browser.close()
