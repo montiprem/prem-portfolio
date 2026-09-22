@@ -125,7 +125,9 @@ export default function ChatBot() {
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="text-gray-400 hover:text-white p-1 transition-colors cursor-pointer"
+                className="text-gray-400 hover:text-white p-1 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:outline-none rounded"
+                aria-label="Close Chat"
+                title="Close Chat"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -186,7 +188,9 @@ export default function ChatBot() {
               <button
                 type="submit"
                 disabled={loading}
-                className="p-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl transition-all disabled:opacity-50 shrink-0 shadow-md cursor-pointer"
+                className="p-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl transition-all disabled:opacity-50 shrink-0 shadow-md cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
+                aria-label="Send Message"
+                title="Send Message"
               >
                 <Send className="w-4 h-4" />
               </button>
