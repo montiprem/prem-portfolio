@@ -12,8 +12,9 @@ export default function WhatsAppButton() {
         rel="noopener noreferrer"
         whileHover={{ scale: 1.15 }}
         whileTap={{ scale: 0.9 }}
-        className="relative p-2.5 bg-gradient-to-tr from-green-500 to-emerald-400 hover:from-green-400 hover:to-emerald-300 text-white rounded-full shadow-[0_0_25px_rgba(34,197,94,0.6)] flex items-center justify-center border border-white/20 transition-all group cursor-pointer"
+        className="relative p-2.5 bg-gradient-to-tr from-green-500 to-emerald-400 hover:from-green-400 hover:to-emerald-300 text-white rounded-full shadow-[0_0_25px_rgba(34,197,94,0.6)] flex items-center justify-center border border-white/20 transition-all group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white/50 focus-visible:ring-offset-[#0b1220]"
         aria-label="Chat on WhatsApp"
+        title="Chat on WhatsApp"
       >
         <span className="absolute right-full mr-3 whitespace-nowrap bg-[#0b1220]/90 border border-green-500/30 text-white px-2.5 py-1.5 rounded-lg shadow-xl backdrop-blur-md text-xs font-medium opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 hidden md:block">
           Chat with me
