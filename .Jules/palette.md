@@ -1,0 +1,3 @@
+## 2024-09-25 - Improve floating AI Chat accessibility
+**Learning:** For floating, interactive UI widgets like chatbots that function as popovers, using `aria-expanded` and `aria-controls` on the toggle button is critical for screen reader users to understand the state and relationship of the widget. Additionally, `focus-visible` must be styled clearly (with appropriate offsets) to ensure keyboard navigability isn't lost against complex backgrounds.
+**Action:** Always add `aria-expanded`, `aria-controls`, and `focus-visible` styles with offsets when implementing floating toggle buttons or popovers in the application.
