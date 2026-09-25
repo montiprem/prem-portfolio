@@ -1,0 +1,3 @@
+## 2026-09-25 - Floating Widget Accessibility
+**Learning:** Floating action buttons (like Chat or WhatsApp) against dark backgrounds need explicit `focus-visible` offset classes (e.g., `focus-visible:ring-offset-[#0b1220]`) to ensure the focus ring isn't lost visually. Toggle buttons also require dynamic `aria-label`, `title`, and `aria-expanded` attributes to accurately reflect their state to screen readers.
+**Action:** Always include offset colors matching the background when styling `focus-visible` rings for floating components, and ensure state-dependent buttons dynamically update their ARIA labels.
