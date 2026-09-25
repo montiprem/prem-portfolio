@@ -68,8 +68,11 @@ export default function ChatBot() {
         whileHover={{ scale: 1.15 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="relative p-2.5 bg-gradient-to-tr from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white rounded-full shadow-[0_0_25px_rgba(59,130,246,0.6)] flex items-center justify-center border border-white/20 transition-all group cursor-pointer"
-        aria-label="Open AI Chat"
+        className="relative p-2.5 bg-gradient-to-tr from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white rounded-full shadow-[0_0_25px_rgba(59,130,246,0.6)] flex items-center justify-center border border-white/20 transition-all group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0b1220] focus-visible:ring-blue-500"
+        aria-expanded={isOpen}
+        aria-controls="chatbot-window"
+        aria-label={isOpen ? "Close AI Chat" : "Open AI Chat"}
+        title={isOpen ? "Close AI Chat" : "Open AI Chat"}
       >
         {/* Tooltip for desktop hover */}
         {!isOpen && (
@@ -105,6 +108,7 @@ export default function ChatBot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
+            id="chatbot-window"
             className="absolute bottom-16 right-0 w-[90vw] sm:w-[380px] h-[480px] sm:h-[500px] bg-[#0b1220]/95 border border-white/15 rounded-3xl shadow-2xl backdrop-blur-2xl flex flex-col overflow-hidden text-white"
           >
             {/* Header */}
@@ -125,7 +129,9 @@ export default function ChatBot() {
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="text-gray-400 hover:text-white p-1 transition-colors cursor-pointer"
+                className="text-gray-400 hover:text-white p-1 transition-colors cursor-pointer rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                aria-label="Close Chat Window"
+                title="Close Chat Window"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -186,7 +192,9 @@ export default function ChatBot() {
               <button
                 type="submit"
                 disabled={loading}
-                className="p-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl transition-all disabled:opacity-50 shrink-0 shadow-md cursor-pointer"
+                className="p-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl transition-all disabled:opacity-50 shrink-0 shadow-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                aria-label="Send message"
+                title="Send message"
               >
                 <Send className="w-4 h-4" />
               </button>
