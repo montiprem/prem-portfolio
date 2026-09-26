@@ -244,6 +244,8 @@ export default function Navbar() {
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setMoreDropdownOpen(!moreDropdownOpen)}
+                aria-expanded={moreDropdownOpen}
+                aria-haspopup="true"
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-yellow-500/40 bg-yellow-500/10 text-amber-600 dark:text-yellow-400 hover:bg-yellow-500/20 text-xs font-bold transition-all duration-300 cursor-pointer ${
                   moreDropdownOpen ? "ring-2 ring-yellow-500/30" : ""
                 }`}
@@ -321,6 +323,8 @@ export default function Navbar() {
 
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu-drawer"
             className="lg:hidden p-2 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-slate-700 dark:text-gray-300 hover:text-black dark:hover:text-white cursor-pointer flex items-center gap-2"
             aria-label="Toggle Menu"
           >
@@ -330,7 +334,7 @@ export default function Navbar() {
 
         {/* MOBILE DRAWER (THEME ADAPTIVE) */}
         {mobileMenuOpen && (
-          <div className="lg:hidden mt-4 bg-slate-50/95 dark:bg-slate-900/95 border border-slate-200 dark:border-white/10 rounded-2xl p-4 backdrop-blur-2xl shadow-2xl space-y-2 text-slate-800 dark:text-white transition-colors duration-300">
+          <div id="mobile-menu-drawer" className="lg:hidden mt-4 bg-slate-50/95 dark:bg-slate-900/95 border border-slate-200 dark:border-white/10 rounded-2xl p-4 backdrop-blur-2xl shadow-2xl space-y-2 text-slate-800 dark:text-white transition-colors duration-300">
             <div className="flex items-center justify-between pb-3 mb-1 border-b border-slate-200 dark:border-white/10">
               <span className="text-xs font-bold text-slate-600 dark:text-gray-400 uppercase tracking-wider">Theme</span>
               <ThemeToggle />
