@@ -137,6 +137,8 @@ export default function FAQSection() {
 
                 <button
                   onClick={() => toggleAccordion(index)}
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-answer-${index}`}
                   className="w-full text-left px-5 py-4 md:px-6 md:py-5 flex items-center justify-between gap-4 font-semibold text-[15px] md:text-base text-slate-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-white transition-colors cursor-pointer group"
                 >
                   <span className="flex-1 pr-4">{faq.question}</span>
@@ -150,7 +152,7 @@ export default function FAQSection() {
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 md:px-6 pb-5 md:pb-6 text-[14px] text-slate-600 dark:text-gray-300 leading-relaxed border-t border-slate-200/50 dark:border-white/5 pt-4 md:pt-5 ml-1">
+                  <div id={`faq-answer-${index}`} className="px-5 md:px-6 pb-5 md:pb-6 text-[14px] text-slate-600 dark:text-gray-300 leading-relaxed border-t border-slate-200/50 dark:border-white/5 pt-4 md:pt-5 ml-1">
                     {faq.answer}
                   </div>
                 )}
